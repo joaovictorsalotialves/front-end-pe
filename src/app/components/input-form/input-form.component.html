@@ -1,0 +1,12 @@
+<div class="relative mt-2 mb-2">
+  <input [attr.type]="type" [attr.id]="id" [attr.name]="name" [attr.placeholder]="placeholder"
+    class="
+    w-full p-3 pl-6 pr-12 h-12
+    border border-gray-300 rounded-[100px] shadow-sm
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+  ">
+  <span *ngIf="icon !== undefined"
+    class="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+    <img class="h5 w-5" [attr.src]="icon">
+  </span>
+</div>
