@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { ISupplement } from '../interfaces/supplements-response/supplement.interface';
 import { ISupplementsResponse } from '../interfaces/supplements-response/supplements-response.interface';
 import { SupplementsList } from '../types/supplements-list';
 import { API_URL } from '../utils/api-url';
@@ -13,39 +14,51 @@ export class SupplementsService {
     private readonly _httpClient: HttpClient
   ) { }
 
-  getSupplements(nameSupplement: string | undefined = undefined): Observable<SupplementsList | undefined> {
+  getSupplements(
+    nameSupplement: string | undefined = undefined, nameSupplementCategory: string | undefined = undefined,
+    typeMensure: string | undefined = undefined
+  ): Observable<SupplementsList | undefined> {
     let url = API_URL + 'supplement';
-    if (nameSupplement) url += '?nameSupplement=' + nameSupplement;
+    if (nameSupplement) {
+      url += '?nameSupplement=' + nameSupplement;
+      if (nameSupplementCategory) url += '&nameSupplementCategory' + nameSupplementCategory;
+      if (typeMensure) url += '&typeMensure' + typeMensure;
+    } else if (nameSupplementCategory) {
+      url += '?nameSupplementCategory' + nameSupplementCategory;
+      if (typeMensure) url += '&typeMensure' + typeMensure;
+    } else if (typeMensure) {
+      url += '?typeMensure' + typeMensure;
+    }
     return this._httpClient.get<ISupplementsResponse>(url).pipe(
       map((supplementsResponse) => supplementsResponse.values)
     );
   }
 
   getSupplement(idSupplement: number): Observable<SupplementsList | undefined> {
-    let url = API_URL + 'expense/' + idExpense;
-    return this._httpClient.get<IExpensesResponse>(url).pipe(
-      map((expensesResponse) => expensesResponse.values)
+    let url = API_URL + 'supplement/' + idSupplement;
+    return this._httpClient.get<ISupplementsResponse>(url).pipe(
+      map((supplementsResponse) => supplementsResponse.values)
     );
   }
 
-  postExpense(objExpense: IExpense): Observable<IExpensesResponse> {
-    let url = API_URL + 'expense';
-    return this._httpClient.post<IExpensesResponse>(url, objExpense).pipe(
-      map((expenseResponse) => expenseResponse)
+  postSupplement(objSupplement: ISupplement): Observable<ISupplementsResponse> {
+    let url = API_URL + 'supplement';
+    return this._httpClient.post<ISupplementsResponse>(url, objSupplement).pipe(
+      map((supplementsResponse) => supplementsResponse)
     );
   }
 
-  putExpense(idExpense: number, objExpense: IExpense): Observable<IExpensesResponse> {
-    let url = API_URL + 'expense/' + idExpense;
-    return this._httpClient.put<IExpensesResponse>(url, objExpense).pipe(
-      map((expenseResponse) => expenseResponse)
+  putSupplement(idSupplement: number, objSupplement: ISupplement): Observable<ISupplementsResponse> {
+    let url = API_URL + 'supplement/' + idSupplement;
+    return this._httpClient.put<ISupplementsResponse>(url, objSupplement).pipe(
+      map((supplementsResponse) => supplementsResponse)
     );
   }
 
-  deleteExpense(idExpense: number): Observable<IExpensesResponse> {
-    let url = API_URL + 'expense/' + idExpense;
-    return this._httpClient.delete<IExpensesResponse>(url).pipe(
-      map((expenseResponse) => expenseResponse)
+  deleteSupplement(idSupplement: number): Observable<ISupplementsResponse> {
+    let url = API_URL + 'supplement/' + idSupplement;
+    return this._httpClient.delete<ISupplementsResponse>(url).pipe(
+      map((supplementsResponse) => supplementsResponse)
     );
   }
 }
