@@ -1,5 +1,5 @@
 export interface ISupplementInput {
-  idSupplementOutput?: number,
+  idSupplementInput?: number,
   description?: string,
   amount: number,
   inputDate?: string,

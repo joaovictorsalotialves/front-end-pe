@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DonationsService } from './services/donations.service';
 import { EmployeesService } from './services/employees.service';
-import { SupplementOutputsService } from './services/supplement-outputs.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { SupplementOutputsService } from './services/supplement-outputs.service'
 export class AppComponent implements OnInit {
   constructor(
     private readonly _employeesService: EmployeesService,
-    private readonly _Service: SupplementOutputsService,
+    private readonly _Service: DonationsService,
   ) { }
 
   ngOnInit() {
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
       console.log(employeesResponse)
     });
 
-    this._Service.deleteSupplementOutput(2).subscribe((response) => {
+    this._Service.deleteDonation(4).subscribe((response) => {
       console.log(response)
     });
   }
