@@ -1,7 +1,8 @@
 export interface ISupplement {
-  idSupplement: number,
+  idSupplement?: number,
   nameSupplement: string,
   stock: number,
   typeMensure: string,
-  nameSupplementCategory: string,
+  idSupplementCategory?: number,
+  nameSupplementCategory?: string,
 }

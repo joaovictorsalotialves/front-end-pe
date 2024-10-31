@@ -1,9 +1,11 @@
 export interface IAddress {
-  idAddress: number,
+  idAddress?: number,
   publicPlace: string,
   neighborhood: string,
-  number: number,
-  complement: string,
-  nameState: string,
-  nameCity: string,
+  number: string,
+  complement?: string,
+  idState?: number,
+  nameState?: string,
+  idCity?: number,
+  nameCity?: string,
 }
