@@ -1,3 +1,3 @@
-import { IEmployee } from "../interfaces/employees-response/employee.interface";
+import { IEmployee } from "../interfaces/employees/employee.interface";
 
 export type EmployeesList = IEmployee[];

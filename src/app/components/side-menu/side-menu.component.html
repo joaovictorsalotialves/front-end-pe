@@ -1,0 +1,56 @@
+<aside
+  class="hidden sm:block h-full overflow-y-scroll scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-300">
+  <header class="
+    _bg-color-blue text-white
+    rounded-tr-3xl
+    p-4
+  ">
+    <div class="flex justify-end">
+      <img class="h-10 w-10" src="../../../assets/icons/icon_arrow_back.png">
+    </div>
+    <span class="block text-xl font-medium">{{ 'Nome Usuario' }}</span>
+    <span class="block text-sm">{{ 'user@gmail.com' }}</span>
+  </header>
+  <menu>
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_home.icon" [title]="item_menu_home.title"></app-item-menu>
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_registration_employee.icon"
+      [title]="item_menu_registration_employee.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_view_employee.icon"
+      [title]="item_menu_view_employee.title"></app-item-menu>
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_registration_user.icon"
+      [title]="item_menu_registration_user.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_view_user.icon"
+      [title]="item_menu_view_user.title"></app-item-menu>
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_registration_donation.icon"
+      [title]="item_menu_registration_donation.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_view_donation.icon"
+      [title]="item_menu_view_donation.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_report_donation.icon"
+      [title]="item_menu_report_donation.title"></app-item-menu>
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_registration_animal.icon"
+      [title]="item_menu_registration_animal.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_view_animal.icon"
+      [title]="item_menu_view_animal.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_report_animal.icon"
+      [title]="item_menu_report_animal.title"></app-item-menu>
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_registration_adoption.icon"
+      [title]="item_menu_registration_adoption.title"></app-item-menu>
+
+
+    <app-title-section-menu></app-title-section-menu>
+    <app-item-menu [icon]="item_menu_view_profile.icon"
+      [title]="item_menu_view_profile.title"></app-item-menu>
+    <app-item-menu [icon]="item_menu_logout.icon" [title]="item_menu_logout.title"></app-item-menu>
+  </menu>
+</aside>

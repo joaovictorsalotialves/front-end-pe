@@ -15,14 +15,13 @@ export class DonationsService {
   ) { }
 
   getDonations(
-    donationDate: string | undefined = undefined, nameDonation: string | undefined = undefined
+    donationDate: string | undefined = undefined, nameUser: string | undefined = undefined
   ): Observable<DonationsList | undefined> {
     let url = API_URL + 'donation';
     if (donationDate) {
       url += '?donationDate=' + donationDate;
-      if (nameDonation) url += '?nameDonation=' + nameDonation;
-
-    } else if (nameDonation) url += '?nameDonation=' + nameDonation;
+      if (nameUser) url += '&nameUser=' + nameUser;
+    } else if (nameUser) url += '?nameUser=' + nameUser;
     return this._httpClient.get<IDonationsResponse>(url).pipe(
       map((donationsResponse) => donationsResponse.values)
     );

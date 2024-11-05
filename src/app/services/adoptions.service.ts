@@ -26,7 +26,7 @@ export class AdoptionsService {
     } else if (nameAnimal) {
       url += '?nameAnimal=' + nameAnimal;
       if (dateAdoption) url += '&dateAdoption=' + dateAdoption;
-    } else if (dateAdoption) url += '&dateAdoption=' + dateAdoption;
+    } else if (dateAdoption) url += '?dateAdoption=' + dateAdoption;
     return this._httpClient.get<IAdoptionsResponse>(url).pipe(
       map((adoptionsResponse) => adoptionsResponse.values)
     );

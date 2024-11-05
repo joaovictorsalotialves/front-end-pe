@@ -1,4 +1,4 @@
-<main class="grid grid-rows-[auto,1fr] h-screen">
+<main class="_bg-color-blue grid grid-rows-[auto,1fr] h-screen">
   <app-auth-flow-header [text]="textHeader"></app-auth-flow-header>
   <app-auth-flow-content>
     <div class="mb-4">
@@ -7,10 +7,11 @@
     <div class="mb-6 text-end">
       <form class="mb-3">
         <app-input-form [type]="inputEmail.type" [id]="inputEmail.id" [name]="inputEmail.name"
-          [placeholder]="inputEmail.placeholder" [icon]="inputEmail.icon"></app-input-form>
+          [placeholder]="inputEmail.placeholder" [icon]="inputEmail.icon"
+          (onBlur)="onBlurInputEmail($event)"></app-input-form>
         <app-input-form [type]="inputPassword.type" [id]="inputPassword.id"
           [name]="inputPassword.name" [placeholder]="inputPassword.placeholder"
-          [icon]="inputPassword.icon"></app-input-form>
+          [icon]="inputPassword.icon" (onBlur)="onBlurInputPassword($event)"></app-input-form>
       </form>
       <a class="cursor-pointer" (click)="redirectToRecoverPassword()">Esqueceu a senha?</a>
     </div>

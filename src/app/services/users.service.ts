@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { IAdoptionsResponse } from '../interfaces/adoptions-response/adoptions-response.interface';
+import { IDonationsResponse } from '../interfaces/donations-response/donations-response.interface';
 import { IUser } from '../interfaces/users-response/user.interface';
 import { IUsersResponse } from '../interfaces/users-response/users-reponse';
+import { AdoptionsList } from '../types/adoptions-list';
+import { DonationsList } from '../types/donations-list';
 import { UsersList } from '../types/users-list';
 import { API_URL } from '../utils/api-url';
 
@@ -29,22 +33,19 @@ export class UsersService {
     );
   }
 
-  //
-  // TODO: TESTAR APOS A CRIAÇÃO DO SERVICES DE ADOPTIONS E DONATIONS
-  //
-  // getAdoptionUser(idUser: number, dateAdoption: string): Observable<AdoptionsList | undefined> {
-  //   let url = API_URL + 'user/' + idUser + '/adoption';
-  //   return this._httpClient.get<IAdoptionsResponse>(url).pipe(
-  //     map((usersResponse) => usersResponse.values)
-  //   );
-  // }
+  getAdoptionUser(idUser: number, dateAdoption: string | undefined = undefined): Observable<AdoptionsList | undefined> {
+    let url = API_URL + 'user/' + idUser + '/adoption';
+    return this._httpClient.get<IAdoptionsResponse>(url).pipe(
+      map((usersResponse) => usersResponse.values)
+    );
+  }
 
-  // getDonationUser(idUser: number, donationDate: string): Observable<DonationsList | undefined> {
-  //   let url = API_URL + 'user/' + idUser + '/donation';
-  //   return this._httpClient.get<IDonationsResponse>(url).pipe(
-  //     map((usersResponse) => usersResponse.values)
-  //   );
-  // }
+  getDonationUser(idUser: number, donationDate: string | undefined = undefined): Observable<DonationsList | undefined> {
+    let url = API_URL + 'user/' + idUser + '/donation';
+    return this._httpClient.get<IDonationsResponse>(url).pipe(
+      map((usersResponse) => usersResponse.values)
+    );
+  }
 
   postUser(objUser: IUser): Observable<IUsersResponse> {
     let url = API_URL + 'user/';
