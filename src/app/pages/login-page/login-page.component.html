@@ -4,19 +4,32 @@
     <div class="mb-4">
       <p class="text-center font-black text-2xl">Sing In</p>
     </div>
-    <div class="mb-6 text-end">
-      <form class="mb-3">
-        <app-input-form [type]="inputEmail.type" [id]="inputEmail.id" [name]="inputEmail.name"
-          [placeholder]="inputEmail.placeholder" [icon]="inputEmail.icon"
-          (onBlur)="onBlurInputEmail($event)"></app-input-form>
-        <app-input-form [type]="inputPassword.type" [id]="inputPassword.id"
-          [name]="inputPassword.name" [placeholder]="inputPassword.placeholder"
-          [icon]="inputPassword.icon" (onBlur)="onBlurInputPassword($event)"></app-input-form>
-      </form>
-      <a class="cursor-pointer" (click)="redirectToRecoverPassword()">Esqueceu a senha?</a>
-    </div>
-    <div class="text-center" (click)="login()">
-      <app-general-button [text]="textButton"></app-general-button>
-    </div>
+    <form [formGroup]="loginForm" class="mb-3">
+      <div class="mb-6 text-end">
+        <app-input-form formControlName="email" (onBlur)="onBlurInputEmail($event)"
+          [type]="inputEmail.type" [id]="inputEmail.id" [name]="inputEmail.name"
+          [placeholder]="inputEmail.placeholder" [icon]="inputEmail.icon"></app-input-form>
+        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Informe um email!
+        </div>
+        <div *ngIf="loginForm.get('email')?.hasError('pattern') && loginForm.get('email')?.touched"
+          class="text-red-500 text-start ml-4">
+          Email inválido!
+        </div>
+        <app-input-form formControlName="password" (onBlur)="onBlurInputPassword($event)"
+          [type]="inputPassword.type" [id]="inputPassword.id" [name]="inputPassword.name"
+          [placeholder]="inputPassword.placeholder" [icon]="inputPassword.icon"></app-input-form>
+        <div
+          *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('email')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Informe a senha!
+        </div>
+        <a class="cursor-pointer" (click)="redirectToRecoverPassword()">Esqueceu a senha?</a>
+      </div>
+      <div class="text-center">
+        <button appBlueButton (click)="login()">{{ textButton }}</button>
+      </div>
+    </form>
   </app-auth-flow-content>
 </main>

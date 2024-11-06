@@ -8,6 +8,8 @@ import { ILoginResponse } from '../interfaces/employees/login-response.interface
 import { EmployeesList } from '../types/employees-list';
 import { API_URL } from '../utils/api-url';
 import { handleError } from '../utils/handleError';
+import { ForgotPasswordHandleError } from '../utils/handleError/forgot-password-handleError';
+import { loginHandleError } from '../utils/handleError/login-handleError';
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +85,7 @@ export class EmployeesService {
       password: password,
     }).pipe(
       map((loginResponse) => loginResponse.token),
-      catchError(handleError)
+      catchError(loginHandleError)
     );
   }
 
@@ -93,7 +95,7 @@ export class EmployeesService {
       email: email
     }).pipe(
       map((forgotPasswordResponse) => forgotPasswordResponse.token),
-      catchError(handleError)
+      catchError(ForgotPasswordHandleError)
     );
   }
 

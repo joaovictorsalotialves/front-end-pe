@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { ComponentsModule } from '../components/components.module';
+import { DirectivesModule } from '../directives/directives.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './recover-password-page/recover-password-page.component';
@@ -20,12 +21,14 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
   imports: [
     CommonModule,
     ComponentsModule,
+    DirectivesModule,
     AngularMaterialModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
   exports: [
     ComponentsModule,
+    DirectivesModule,
     AngularMaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
