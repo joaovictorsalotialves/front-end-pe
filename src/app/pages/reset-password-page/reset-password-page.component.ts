@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { EmployeesService } from '../../services/employees.service';
@@ -45,14 +45,32 @@ export class ResetPasswordPageComponent implements OnInit {
   private readonly _employeesService = inject(EmployeesService);
   private readonly _fb = inject(FormBuilder);
 
-  private passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  private passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   constructor() {
     this.resetPasswordForm = this._fb.group({
       newPassword: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
-      passwordCheck: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+      passwordCheck: ['', Validators.required],
       code: ['', Validators.required],
-    })
+    }, { validators: [this.passwordsMatchValidator, this.codeLengthValidator, this.onlyNumbersValidator] }
+    );
+  }
+
+  passwordsMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const newPassword = control.get('newPassword')?.value;
+    const passwordCheck = control.get('passwordCheck')?.value;
+    return newPassword === passwordCheck ? null : { passwordsMatchValidator: true };
+  };
+
+  codeLengthValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const code = control.get('code')?.value;
+    return code.length === 6 ? null : { codeValidator: true };
+  }
+
+  onlyNumbersValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const code = control.get('code')?.value;
+    const isValid = /^[0-9]+$/.test(code);
+    return isValid ? null : { onlyNumbersValidator: true };
   }
 
   token: string | null = null;

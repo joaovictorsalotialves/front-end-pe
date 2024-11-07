@@ -21,7 +21,7 @@
           [type]="inputPassword.type" [id]="inputPassword.id" [name]="inputPassword.name"
           [placeholder]="inputPassword.placeholder" [icon]="inputPassword.icon"></app-input-form>
         <div
-          *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('email')?.touched"
+          *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
           class="text-red-500 text-start ml-4">
           Por favor! Informe a senha!
         </div>

@@ -1,30 +1,14 @@
+// handleError.js
 import { HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { throwError } from "rxjs";
 
-export const handleError = (error: HttpErrorResponse): Observable<never> => {
-  let errorMessage = 'An unknown error occurred!';
-  if (error.error instanceof ErrorEvent) {
-    // Erro no lado do cliente
-    errorMessage = `Client-side error: ${error.error.message}`;
-  } else {
-    // Erro no lado do servidor
-    switch (error.status) {
-      case 400:
-        errorMessage = 'Bad request: Verifique os dados de entrada.';
-        break;
-      case 404:
-        errorMessage = 'Erro: Recurso não encontrado.';
-        break;
-      case 401:
-        errorMessage = 'Unauthorized: Credenciais inválidas.';
-        break;
-      case 500:
-        errorMessage = 'Internal server error: Tente novamente mais tarde.';
-        break;
-      default:
-        errorMessage = `Erro: ${error.status} - ${error.message}`;
-    }
+export const handleError = (error: HttpErrorResponse) => {
+  let errorMessage = 'An unknown error has occurred';
+
+  if (error instanceof HttpErrorResponse) {
+    errorMessage = `${error.status}: ${error.error?.message}` || `Error ${error.status}: ${error.statusText}`;
   }
-  console.error('Error details:', error);
+
+  console.error('ERROR:', error);
   return throwError(() => new Error(errorMessage));
-}
+};

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-title-section-menu',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './title-section-menu.component.scss'
 })
 export class TitleSectionMenuComponent {
-
+  @Input() title: string = '';
 }
