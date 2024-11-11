@@ -10,6 +10,8 @@ import { API_URL } from '../utils/api-url';
   providedIn: 'root'
 })
 export class RacesService {
+  authToken: string = localStorage.getItem('authToken') as string;
+
   constructor(
     private readonly _httpClient: HttpClient
   ) { }
@@ -17,7 +19,9 @@ export class RacesService {
   getRaces(nameRace: string | undefined = undefined): Observable<RacesList | undefined> {
     let url = API_URL + 'race';
     if (nameRace) url += '?nameRace=' + nameRace;
-    return this._httpClient.get<IRacesResponse>(url).pipe(
+    return this._httpClient.get<IRacesResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((racesResponse) => racesResponse.values)
     );
   }

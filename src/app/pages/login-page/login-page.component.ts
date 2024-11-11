@@ -58,8 +58,9 @@ export class LoginPageComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this._employeesService.loginEmployee(email, password).pipe(take(1)).subscribe({
-        next: (token) => {
-          localStorage.setItem('authToken', token!);
+        next: (loginResponse) => {
+          localStorage.setItem('authToken', loginResponse!.token!);
+          localStorage.setItem('user', JSON.stringify(loginResponse!.user!));
           this._router.navigate(['/home']);
         },
         error: (error) => {

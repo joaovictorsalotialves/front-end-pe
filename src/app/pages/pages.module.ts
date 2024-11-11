@@ -7,16 +7,22 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { HomePageComponent } from './home-page/home-page.component';
+import { LayoutPageComponent } from './layout-page/layout-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './recover-password-page/recover-password-page.component';
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { LogoutPageComponent } from './logout-page/logout-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
     LoginPageComponent,
     RecoverPasswordPageComponent,
     ResetPasswordPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    LayoutPageComponent,
+    LogoutPageComponent,
+    ProfilePageComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +42,8 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
     RecoverPasswordPageComponent,
     ResetPasswordPageComponent,
     HomePageComponent,
+    LogoutPageComponent,
+    ProfilePageComponent,
   ]
 })
 export class PagesModule { }

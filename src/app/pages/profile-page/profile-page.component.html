@@ -1,0 +1,39 @@
+<app-layout-page (checkLogin)="getUser($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="EDITAR PERFIL"></app-main-header>
+    <form [formGroup]="profileForm">
+      <app-subheader title="Informações Pessoais"></app-subheader>
+      <div class="grid sm:grid-cols-2 sm:gap-x-4">
+        <div class="mb-4">
+          <label class="font-semibold text-sm"
+            for="{{inputFullName.id}}">{{inputFullName.placeholder}}:</label>
+          <app-input-form formControlName="nameEmployee" (onBlur)="onBlurFullName($event)"
+            [type]="inputFullName.type" [id]="inputFullName.id" [name]="inputFullName.name"
+            [placeholder]="inputFullName.placeholder"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm"
+            for="{{inputEmail.id}}">{{inputEmail.placeholder}}:</label>
+          <app-input-form formControlName="email" [type]="inputEmail.type" [id]="inputEmail.id"
+            [name]="inputEmail.name" [placeholder]="inputEmail.placeholder"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm"
+            for="{{inputCellPhone.id}}">{{inputCellPhone.placeholder}}:</label>
+          <app-input-form formControlName="cellPhoneNumber" [type]="inputCellPhone.type"
+            [id]="inputCellPhone.id" [name]="inputCellPhone.name"
+            [placeholder]="inputCellPhone.placeholder"></app-input-form>
+        </div>
+      </div>
+      <app-subheader title="Informações do Endereço"></app-subheader>
+      <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      </div>
+      <app-subheader title="Informações Profissionais"></app-subheader>
+      <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      </div>
+      <div class="text-center">
+        <button appBlueButton>Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-item-menu-mobile',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './item-menu-mobile.component.scss'
 })
 export class ItemMenuMobileComponent {
-
+  @Input({ required: true }) icon: string = '';
 }

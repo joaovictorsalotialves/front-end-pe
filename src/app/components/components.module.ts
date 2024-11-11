@@ -5,13 +5,17 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { PipesModule } from '../pipes/pipes.module';
 import { AuthFlowContentComponent } from './auth-flow-content/auth-flow-content.component';
 import { AuthFlowHeaderComponent } from './auth-flow-header/auth-flow-header.component';
+import { CardComponent } from './card/card.component';
 import { GeneralButtonComponent } from './general-button/general-button.component';
 import { InputFormComponent } from './input-form/input-form.component';
+import { MainHeaderComponent } from './main-header/main-header.component';
 import { ItemMenuMobileComponent } from './side-menu-mobile/components/item-menu-mobile/item-menu-mobile.component';
+import { LineMenuMobileComponent } from './side-menu-mobile/components/line-menu-mobile/line-menu-mobile.component';
 import { SideMenuMobileComponent } from './side-menu-mobile/side-menu-mobile.component';
 import { ItemMenuComponent } from './side-menu/components/item-menu/item-menu.component';
 import { TitleSectionMenuComponent } from './side-menu/components/title-section-menu/title-section-menu.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { SubheaderComponent } from './subheader/subheader.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
     ItemMenuComponent,
     TitleSectionMenuComponent,
     SideMenuMobileComponent,
-    ItemMenuMobileComponent
+    ItemMenuMobileComponent,
+    MainHeaderComponent,
+    LineMenuMobileComponent,
+    CardComponent,
+    SubheaderComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +46,10 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
     GeneralButtonComponent,
     SideMenuComponent,
     SideMenuMobileComponent,
-    ItemMenuMobileComponent
+    ItemMenuMobileComponent,
+    MainHeaderComponent,
+    CardComponent,
+    SubheaderComponent,
   ]
 })
 export class ComponentsModule { }

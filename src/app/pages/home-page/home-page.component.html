@@ -1,15 +1,51 @@
-<div class="_bg-color-gray flex h-screen">
-  <aside>
-    <header class="
-    _bg-color-blue text-white
-    rounded-tr-3xl
-    p-4
-  ">
-      <div class="flex justify-end">
-        <img class="h-10 w-10" src="../../../assets/icons/icon_arrow_forward.png">
-      </div>
-    </header>
-  </aside>
-  <div class="flex-1 bg-black">
+<app-layout-page (checkLogin)="checkLogin($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="ÁREA ADMINISTRATIVA"></app-main-header>
+    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      <app-card (click)="item_menu_registration_employee.redirection()"
+        [title]="item_menu_registration_employee.title"
+        [icon]="item_menu_registration_employee.icon"></app-card>
+      <app-card (click)="item_menu_view_employee.redirection()"
+        [title]="item_menu_view_employee.title" [icon]="item_menu_view_employee.icon"></app-card>
+    </div>
+
+    <app-main-header title="ÁREA DE USUÁRIOS"></app-main-header>
+    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      <app-card (click)="item_menu_registration_user.redirection()"
+        [title]="item_menu_registration_user.title"
+        [icon]="item_menu_registration_user.icon"></app-card>
+      <app-card (click)="item_menu_registration_user.redirection()"
+        [title]="item_menu_registration_user.title" [icon]="item_menu_view_user.icon"></app-card>
+    </div>
+
+    <app-main-header title="ÁREA DE DOAÇÕES"></app-main-header>
+    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      <app-card (click)="item_menu_registration_donation.redirection()"
+        [title]="item_menu_registration_donation.title"
+        [icon]="item_menu_registration_donation.icon"></app-card>
+      <app-card (click)="item_menu_view_donation.redirection()"
+        [title]="item_menu_view_donation.title" [icon]="item_menu_view_donation.icon"></app-card>
+      <app-card (click)="item_menu_report_donation.redirection()"
+        [title]="item_menu_report_donation.title"
+        [icon]="item_menu_report_donation.icon"></app-card>
+    </div>
+
+    <app-main-header title="ÁREA DE ANIMAIS"></app-main-header>
+    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      <app-card (click)="item_menu_registration_animal.redirection()"
+        [title]="item_menu_registration_animal.title"
+        [icon]="item_menu_registration_animal.icon"></app-card>
+      <app-card (click)="item_menu_view_animal.redirection()" [title]="item_menu_view_animal.title"
+        [icon]="item_menu_view_animal.icon"></app-card>
+      <app-card (click)="item_menu_report_animal.redirection()"
+        [title]="item_menu_report_animal.title" [icon]="item_menu_report_animal.icon"></app-card>
+    </div>
+
+    <app-main-header title="ÁREA DE ADOÇÕES"></app-main-header>
+    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+      <app-card (click)="item_menu_registration_adoption.redirection()"
+        [title]="item_menu_registration_adoption.title"
+        [icon]="item_menu_registration_adoption.icon"></app-card>
+    </div>
   </div>
-</div>
+</app-layout-page>

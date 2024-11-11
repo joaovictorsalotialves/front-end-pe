@@ -1,55 +1,66 @@
-<aside class="h-full overflow-y-scroll scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-300">
+<aside class="
+  h-full overflow-y-auto scrollbar
+  w-full sm:w-auto fixed sm:relative top-0 left-0 bg-white z-50
+  ">
   <header class="
     _bg-color-blue text-white
     rounded-tr-3xl
     p-4
   ">
     <div class="flex justify-end">
-      <img class="h-10 w-10" src="../../../assets/icons/icon_arrow_back.png">
+      <img (click)="onClickMenuSide()" class="h-10 w-10 cursor-pointer"
+        src="../../../assets/icons/icon_arrow_back.png">
     </div>
-    <span class="block text-xl font-medium">{{ 'Nome Usuario' }}</span>
-    <span class="block text-sm">{{ 'user@gmail.com' }}</span>
+    <span class="block text-xl font-medium">{{ user.nameEmployee }}</span>
+    <span class="block text-sm">{{ user.email }}</span>
   </header>
   <menu>
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_home.icon" [title]="item_menu_home.title"></app-item-menu>
+    <app-title-section-menu title="MENU DE NAVEGAÇÃO"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_home.redirection()" [icon]="item_menu_home.icon"
+      [title]="item_menu_home.title"></app-item-menu>
 
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_registration_employee.icon"
+    <app-title-section-menu title="ÁREA ADMINISTRATIVA"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_employee.redirection()"
+      [icon]="item_menu_registration_employee.icon"
       [title]="item_menu_registration_employee.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_view_employee.icon"
-      [title]="item_menu_view_employee.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_employee.redirection()"
+      [icon]="item_menu_view_employee.icon" [title]="item_menu_view_employee.title"></app-item-menu>
 
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_registration_user.icon"
+    <app-title-section-menu title="ÁREA DE USUÁRIOS"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_user.redirection()"
+      [icon]="item_menu_registration_user.icon"
       [title]="item_menu_registration_user.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_view_user.icon"
+    <app-item-menu (click)="item_menu_view_user.redirection()" [icon]="item_menu_view_user.icon"
       [title]="item_menu_view_user.title"></app-item-menu>
 
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_registration_donation.icon"
+    <app-title-section-menu title="ÁREA DE DOAÇÕES"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_donation.redirection()"
+      [icon]="item_menu_registration_donation.icon"
       [title]="item_menu_registration_donation.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_view_donation.icon"
-      [title]="item_menu_view_donation.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_report_donation.icon"
+    <app-item-menu (click)="item_menu_view_donation.redirection()"
+      [icon]="item_menu_view_donation.icon" [title]="item_menu_view_donation.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_report_donation.redirection()"
+      [icon]="item_menu_report_donation.icon"
       [title]="item_menu_report_donation.title"></app-item-menu>
 
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_registration_animal.icon"
+    <app-title-section-menu title="ÁREA DE ANIMAIS"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_animal.redirection()"
+      [icon]="item_menu_registration_animal.icon"
       [title]="item_menu_registration_animal.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_view_animal.icon"
+    <app-item-menu (click)="item_menu_view_animal.redirection()" [icon]="item_menu_view_animal.icon"
       [title]="item_menu_view_animal.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_report_animal.icon"
-      [title]="item_menu_report_animal.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_report_animal.redirection()"
+      [icon]="item_menu_report_animal.icon" [title]="item_menu_report_animal.title"></app-item-menu>
 
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_registration_adoption.icon"
+    <app-title-section-menu title="ÁREA DE ADOÇÕES"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_adoption.redirection()"
+      [icon]="item_menu_registration_adoption.icon"
       [title]="item_menu_registration_adoption.title"></app-item-menu>
 
-
-    <app-title-section-menu></app-title-section-menu>
-    <app-item-menu [icon]="item_menu_view_profile.icon"
-      [title]="item_menu_view_profile.title"></app-item-menu>
-    <app-item-menu [icon]="item_menu_logout.icon" [title]="item_menu_logout.title"></app-item-menu>
+    <app-title-section-menu title="USUÁRIO"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_view_profile.redirection()"
+      [icon]="item_menu_view_profile.icon" [title]="item_menu_view_profile.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_logout.redirection()" [icon]="item_menu_logout.icon"
+      [title]="item_menu_logout.title"></app-item-menu>
   </menu>
 </aside>

@@ -76,13 +76,13 @@ export class EmployeesService {
     );
   }
 
-  loginEmployee(email: string, password: string): Observable<string | undefined> {
+  loginEmployee(email: string, password: string): Observable<ILoginResponse> {
     let url = API_URL + 'employee/login';
     return this._httpClient.post<ILoginResponse>(url, {
       email: email,
       password: password,
     }).pipe(
-      map((loginResponse) => loginResponse.token),
+      map((loginResponse) => loginResponse),
       catchError(handleError)
     );
   }
@@ -111,10 +111,11 @@ export class EmployeesService {
     );
   }
 
-  logoutEmployee(idEmployee: number): Observable<boolean> {
+  logoutEmployee(idEmployee: number, authToken: string): Observable<boolean> {
     let url = API_URL + 'employee/logout/' + idEmployee;
-    return this._httpClient.post<IBaseResponse>(url, {}).pipe(
-      map((logoutResponse) => logoutResponse.sucess)
+    return this._httpClient.post<IBaseResponse>(url, { authToken: authToken }).pipe(
+      map((logoutResponse) => logoutResponse.sucess),
+      catchError(handleError)
     );
   }
 }

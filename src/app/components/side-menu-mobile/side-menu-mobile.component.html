@@ -1,17 +1,54 @@
-<aside>
+<aside class="bg-white h-full overflow-y-auto scrollbar">
   <header class="
     _bg-color-blue text-white
     rounded-tr-3xl
-    p-4
+    p-2 sm:p-4
   ">
-    <div class="flex justify-end">
-      <img class="h-10 w-10" src="../../../assets/icons/icon_arrow_forward.png">
+    <div class="flex justify-center">
+      <img (click)="onClickMenuSideMobile()" class="h-8 w-8 sm:h-12 sm:w-12 cursor-pointer"
+        src="../../../assets/icons/icon_arrow_forward.png">
     </div>
   </header>
   <menu>
-    <app-item-menu-mobile></app-item-menu-mobile>
-    <hr class="m-2 bg-black">
-    <app-item-menu-mobile></app-item-menu-mobile>
-    <app-item-menu-mobile></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_home.redirection()"
+      [icon]="item_menu_home.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_employee.redirection()"
+      [icon]="item_menu_registration_employee.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_employee.redirection()"
+      [icon]="item_menu_view_employee.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_user.redirection()"
+      [icon]="item_menu_registration_user.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_user.redirection()"
+      [icon]="item_menu_view_user.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_donation.redirection()"
+      [icon]="item_menu_registration_donation.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_donation.redirection()"
+      [icon]="item_menu_view_donation.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_report_donation.redirection()"
+      [icon]="item_menu_report_donation.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_animal.redirection()"
+      [icon]="item_menu_registration_animal.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_animal.redirection()"
+      [icon]="item_menu_view_animal.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_report_animal.redirection()"
+      [icon]="item_menu_report_animal.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_adoption.redirection()"
+      [icon]="item_menu_registration_adoption.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_profile.redirection()"
+      [icon]="item_menu_view_profile.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_logout.redirection()"
+      [icon]="item_menu_logout.icon"></app-item-menu-mobile>
   </menu>
 </aside>

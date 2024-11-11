@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './title-section-menu.component.scss'
 })
 export class TitleSectionMenuComponent {
-  @Input() title: string = '';
+  @Input({ required: true }) title: string = '';
 }
