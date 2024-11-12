@@ -1,14 +1,13 @@
 <main class="_bg-color-blue grid grid-rows-[auto,1fr] h-screen">
-  <app-auth-flow-header [text]="textHeader"></app-auth-flow-header>
+  <app-auth-flow-header text="Bem Vindo de Volta!"></app-auth-flow-header>
   <app-auth-flow-content>
     <div class="mb-4">
       <p class="text-center font-black text-2xl">Sing In</p>
     </div>
     <form [formGroup]="loginForm" class="mb-3">
       <div class="mb-6 text-end">
-        <app-input-form formControlName="email" (onBlur)="onBlurInputEmail($event)"
-          [type]="inputEmail.type" [id]="inputEmail.id" [name]="inputEmail.name"
-          [placeholder]="inputEmail.placeholder" [icon]="inputEmail.icon"></app-input-form>
+        <app-input-form formControlName="email" (onInput)="onInputEmail($event)" type="email"
+          id="email" placeholder="Email" [icon]="routersIconsMap.email"></app-input-form>
         <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
           class="text-red-500 text-start ml-4">
           Por favor! Informe um email!
@@ -17,9 +16,9 @@
           class="text-red-500 text-start ml-4">
           Email inválido!
         </div>
-        <app-input-form formControlName="password" (onBlur)="onBlurInputPassword($event)"
-          [type]="inputPassword.type" [id]="inputPassword.id" [name]="inputPassword.name"
-          [placeholder]="inputPassword.placeholder" [icon]="inputPassword.icon"></app-input-form>
+        <app-input-form formControlName="password" (onInput)="onInputPassword($event)"
+          type="password" id="password" placeholder="Senha"
+          [icon]="routersIconsMap.lock"></app-input-form>
         <div
           *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
           class="text-red-500 text-start ml-4">
@@ -28,7 +27,7 @@
         <a class="cursor-pointer" (click)="redirectToRecoverPassword()">Esqueceu a senha?</a>
       </div>
       <div class="text-center">
-        <button appBlueButton (click)="login()">{{ textButton }}</button>
+        <button appBlueButton (click)="login()">Sing In</button>
       </div>
     </form>
   </app-auth-flow-content>

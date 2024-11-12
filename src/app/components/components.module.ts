@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { AuthFlowContentComponent } from './auth-flow-content/auth-flow-content.component';
 import { AuthFlowHeaderComponent } from './auth-flow-header/auth-flow-header.component';
@@ -36,7 +37,8 @@ import { SubheaderComponent } from './subheader/subheader.component';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   exports: [
     PipesModule,

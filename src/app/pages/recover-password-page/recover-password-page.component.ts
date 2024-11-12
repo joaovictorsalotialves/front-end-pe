@@ -14,17 +14,7 @@ import { ROUTERS_ICONS_MAP } from '../../utils/routers-icons-map';
 export class RecoverPasswordPageComponent {
   recoverPasswordForm: FormGroup;
 
-  textButton = 'Recuperar Senha';
-  textHeader = 'Recuperar Senha!';
-
-  inputEmail = {
-    type: 'email',
-    id: 'email',
-    name: 'email',
-    placeholder: 'Email',
-    icon: ROUTERS_ICONS_MAP.email,
-    value: ''
-  };
+  routersIconsMap = ROUTERS_ICONS_MAP;
 
   private readonly _router = inject(Router);
   private readonly _employeesService = inject(EmployeesService);
@@ -38,8 +28,9 @@ export class RecoverPasswordPageComponent {
     });
   }
 
-  onBlurInputEmail(value: string) {
+  onInputEmail(value: string) {
     this.recoverPasswordForm.patchValue({ email: value });
+    console.log(this.recoverPasswordForm)
   }
 
   recoverPassword() {

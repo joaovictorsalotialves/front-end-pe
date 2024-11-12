@@ -1,18 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatAutocompleteModule
   ],
   exports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
+    MatAutocompleteModule
   ]
 })
 export class AngularMaterialModule { }

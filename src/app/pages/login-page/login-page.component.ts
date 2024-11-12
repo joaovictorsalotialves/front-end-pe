@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs';
 import { EmployeesService } from '../../services/employees.service';
-import { ROUTERS_ICONS_MAP } from "../../utils/routers-icons-map";
+import { ROUTERS_ICONS_MAP } from '../../utils/routers-icons-map';
 
 @Component({
   selector: 'app-login-page',
@@ -14,24 +14,7 @@ import { ROUTERS_ICONS_MAP } from "../../utils/routers-icons-map";
 export class LoginPageComponent {
   loginForm: FormGroup;
 
-  textButton = 'Sing In';
-  textHeader = 'Bem Vindo de Volta!';
-
-  inputEmail = {
-    type: 'email',
-    id: 'email',
-    name: 'email',
-    placeholder: 'Email',
-    icon: ROUTERS_ICONS_MAP.email,
-  };
-
-  inputPassword = {
-    type: 'password',
-    id: 'password',
-    name: 'password',
-    placeholder: 'Senha',
-    icon: ROUTERS_ICONS_MAP.lock,
-  };
+  routersIconsMap = ROUTERS_ICONS_MAP;
 
   private readonly _router = inject(Router);
   private readonly _employeesService = inject(EmployeesService);
@@ -46,11 +29,11 @@ export class LoginPageComponent {
     });
   }
 
-  onBlurInputEmail(value: string) {
+  onInputEmail(value: string) {
     this.loginForm.patchValue({ email: value });
   }
 
-  onBlurInputPassword(value: string) {
+  onInputPassword(value: string) {
     this.loginForm.patchValue({ password: value });
   }
 

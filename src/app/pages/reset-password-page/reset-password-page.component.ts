@@ -14,32 +14,10 @@ import { ROUTERS_ICONS_MAP } from '../../utils/routers-icons-map';
 export class ResetPasswordPageComponent implements OnInit {
   resetPasswordForm: FormGroup;
 
+  routersIconsMap = ROUTERS_ICONS_MAP;
+
   textButton = 'Alterar Senha';
   textHeader = 'Alterar Senha!';
-
-  inputNewPassword = {
-    type: 'password',
-    id: 'newPassword',
-    name: 'newPassword',
-    placeholder: 'Senha',
-    icon: ROUTERS_ICONS_MAP.lock,
-  };
-
-  inputPasswordCheck = {
-    type: 'password',
-    id: 'passwordCheck',
-    name: 'passwordCheck',
-    placeholder: 'Repetir Senha',
-    icon: ROUTERS_ICONS_MAP.lock,
-  };
-
-  inputCode = {
-    type: 'text',
-    id: 'code',
-    name: 'code',
-    placeholder: 'Código de verificação',
-    icon: ROUTERS_ICONS_MAP.lock,
-  };
 
   private readonly _router = inject(Router);
   private readonly _employeesService = inject(EmployeesService);
@@ -94,9 +72,8 @@ export class ResetPasswordPageComponent implements OnInit {
   }
 
   resetPassword() {
-    const { newPassword, passwordCheck, code } = this.resetPasswordForm.value;
-    console.log(this.resetPasswordForm.valid)
     if (this.resetPasswordForm.valid) {
+      const { newPassword, passwordCheck, code } = this.resetPasswordForm.value;
       this._employeesService.resetPasswordEmployee(
         newPassword, passwordCheck, code, this.token!
       ).pipe(take(1)).subscribe({

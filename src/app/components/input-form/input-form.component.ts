@@ -16,11 +16,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputFormComponent implements ControlValueAccessor {
   @Input({ required: true }) type: string = '';
   @Input({ required: true }) id: string = '';
-  @Input({ required: true }) name: string = '';
   @Input({ required: true }) placeholder: string = '';
   @Input() icon?: string;
 
-  @Output('onBlur') onBlurEmiter = new EventEmitter<string>();
+  @Output('onInput') onInputEmiter = new EventEmitter<string>();
+  @Output() onBlur = new EventEmitter<void>();
 
   value: string = '';
   disabled: boolean = false;
@@ -48,10 +48,11 @@ export class InputFormComponent implements ControlValueAccessor {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
     this.onChange(this.value);
+    this.onInputEmiter.emit(this.value);
   }
 
-  onBlur(input: HTMLInputElement): void {
+  handleBlur(): void {
     this.onTouched();
-    this.onBlurEmiter.emit(input.value);
+    this.onBlur.emit();
   }
 }

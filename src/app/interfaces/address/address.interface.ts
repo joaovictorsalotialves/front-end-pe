@@ -4,6 +4,8 @@ export interface IAddress {
   neighborhood: string;
   number: string;
   complement?: string;
+  idState: number;
   nameState: string;
+  idCity: number;
   nameCity: string;
 }

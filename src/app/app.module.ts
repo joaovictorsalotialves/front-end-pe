@@ -5,6 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { DirectivesModule } from './directives/directives.module';
 import { PagesModule } from './pages/pages.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
+    DirectivesModule
   ],
   providers: [
     provideAnimationsAsync()

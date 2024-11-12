@@ -9,10 +9,11 @@ import { DirectivesModule } from '../directives/directives.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LayoutPageComponent } from './layout-page/layout-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { RecoverPasswordPageComponent } from './recover-password-page/recover-password-page.component';
-import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { RecoverPasswordPageComponent } from './recover-password-page/recover-password-page.component';
+import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { FormProfileComponent } from './profile-page/form-profile/form-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     HomePageComponent,
     LayoutPageComponent,
     LogoutPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    FormProfileComponent,
   ],
   imports: [
     CommonModule,

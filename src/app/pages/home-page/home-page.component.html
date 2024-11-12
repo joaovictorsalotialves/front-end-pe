@@ -1,7 +1,7 @@
 <app-layout-page (checkLogin)="checkLogin($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
     <app-main-header title="ÁREA ADMINISTRATIVA"></app-main-header>
-    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+    <div appGridContainerSm2>
       <app-card (click)="item_menu_registration_employee.redirection()"
         [title]="item_menu_registration_employee.title"
         [icon]="item_menu_registration_employee.icon"></app-card>
@@ -10,7 +10,7 @@
     </div>
 
     <app-main-header title="ÁREA DE USUÁRIOS"></app-main-header>
-    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+    <div appGridContainerSm2>
       <app-card (click)="item_menu_registration_user.redirection()"
         [title]="item_menu_registration_user.title"
         [icon]="item_menu_registration_user.icon"></app-card>
@@ -19,7 +19,7 @@
     </div>
 
     <app-main-header title="ÁREA DE DOAÇÕES"></app-main-header>
-    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+    <div appGridContainerSm2>
       <app-card (click)="item_menu_registration_donation.redirection()"
         [title]="item_menu_registration_donation.title"
         [icon]="item_menu_registration_donation.icon"></app-card>
@@ -31,7 +31,7 @@
     </div>
 
     <app-main-header title="ÁREA DE ANIMAIS"></app-main-header>
-    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+    <div appGridContainerSm2>
       <app-card (click)="item_menu_registration_animal.redirection()"
         [title]="item_menu_registration_animal.title"
         [icon]="item_menu_registration_animal.icon"></app-card>
@@ -42,7 +42,7 @@
     </div>
 
     <app-main-header title="ÁREA DE ADOÇÕES"></app-main-header>
-    <div class="grid sm:grid-cols-2 sm:gap-x-4">
+    <div appGridContainerSm2>
       <app-card (click)="item_menu_registration_adoption.redirection()"
         [title]="item_menu_registration_adoption.title"
         [icon]="item_menu_registration_adoption.icon"></app-card>

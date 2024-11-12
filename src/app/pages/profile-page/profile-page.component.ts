@@ -1,84 +1,55 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IEmployee } from '../../interfaces/employees/employee.interface';
+import { CitiesService } from '../../services/cities.service';
 import { EmployeesService } from '../../services/employees.service';
+import { StatesService } from '../../services/states.service';
+import { CitiesList } from '../../types/cities-list';
+import { StatesList } from '../../types/states-list';
+import { ProfileFormController } from './profile-form-controller';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
 })
-export class ProfilePageComponent {
-  profileForm: FormGroup;
+export class ProfilePageComponent extends ProfileFormController {
   userLogged = {} as IEmployee;
 
-  inputFullName = {
-    type: 'text',
-    id: 'fullName',
-    name: 'fullName',
-    placeholder: 'Nome Completo',
-  };
-
-  inputEmail = {
-    type: 'email',
-    id: 'email',
-    name: 'email',
-    placeholder: 'Email',
-  };
-
-  inputCellPhone = {
-    type: 'text',
-    id: 'cellPhoneNumber',
-    name: 'cellPhoneNumber',
-    placeholder: 'Número de Telefone',
-  };
+  statesList: StatesList = [];
+  citiesList: CitiesList = [];
 
   private readonly _router = inject(Router);
   private readonly _employeesService = inject(EmployeesService);
-  private readonly _fb = inject(FormBuilder);
-
-  private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  private cellPhonePattern = /^(0[1-9]{2})[1-9][0-9]{7,8}$/;
+  private readonly _statesService = inject(StatesService);
+  private readonly _citiesService = inject(CitiesService);
 
   constructor() {
-    this.profileForm = this._fb.group({
-      nameEmployee: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-      cellPhoneNumber: ['', [Validators.required, Validators.pattern(this.cellPhonePattern)]],
-      publicPlace: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      number: ['', Validators.required],
-      complement: [''],
-      idState: [null, Validators.required],
-      idCity: [null, Validators.required],
-    });
+    super()
   }
 
   getUser(user: IEmployee) {
     this.userLogged = user;
-    this.profileForm.patchValue({
-      nameEmployee: this.userLogged.nameEmployee,
-      email: this.userLogged.email,
-      cellPhoneNumber: this.userLogged.cellPhoneNumber,
-      publicPlace: this.userLogged.address?.publicPlace,
-      neighborhood: this.userLogged.address?.neighborhood,
-      number: this.userLogged.address?.number,
-      complement: this.userLogged.address?.complement,
-      nameState: this.userLogged.address?.nameState,
-      nameCity: this.userLogged.address?.nameCity
+    this.fulfillProfileForm(this.userLogged);
+  }
+
+  filterStatesList(nameState: string | undefined = undefined) {
+    this._statesService.getStates(nameState).pipe().subscribe({
+      next: (statesList) => {
+        this.statesList = statesList!;
+        console.log(statesList);
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
     });
   }
 
-  onBlurFullName(value: string) {
-    this.profileForm.patchValue({ nameEmployee: value });
+  updateProfileFormField(field: string, value: string) {
+    this.profileForm.patchValue({ [field]: value });
   }
 
-  onBlurEmail(value: string) {
-    this.profileForm.patchValue({ email: value });
-  }
-
-  onBlurCellPhoneNumber(value: string) {
-    this.profileForm.patchValue({ cellPhoneNumber: value });
+  save() {
+    console.log(this.profileForm)
   }
 }
