@@ -1,4 +1,4 @@
-<app-layout-page (checkLogin)="getUser($event)">
+<app-layout-page (checkLogin)="loadingPage($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
     <app-main-header title="EDITAR PERFIL"></app-main-header>
     <form class="m-1" [formGroup]="profileForm">
@@ -7,19 +7,19 @@
         <div class="mb-4">
           <label class="font-semibold text-sm" for="nameEmployee">Nome Completo:</label>
           <app-input-form #inputNameEmployee formControlName="nameEmployee"
-            (onInput)="updateProfileFormField(inputNameEmployee.id, $event)" type="text"
-            id="nameEmployee" placeholder="inputs.inputFullName.placeholder"></app-input-form>
+            (onInput)="updateFormField(inputNameEmployee.id, $event)" type="text" id="nameEmployee"
+            placeholder="Nome Completo"></app-input-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="email">Email:</label>
           <app-input-form #inputEmail formControlName="email"
-            (onInput)="updateProfileFormField(inputEmail.id,$event)" type="email" id="email"
+            (onInput)="updateFormField(inputEmail.id,$event)" type="email" id="email"
             placeholder="Email"></app-input-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="cellPhoneNumber">Número de telefone:</label>
           <app-input-form #inputCellPhoneNumber formControlName="cellPhoneNumber"
-            (onInput)="updateProfileFormField(inputCellPhoneNumber.id, $event)" type="text"
+            (onInput)="updateFormField(inputCellPhoneNumber.id, $event)" type="text"
             id="cellPhoneNumber" placeholder="Número de telefone"></app-input-form>
         </div>
       </div>
@@ -29,32 +29,34 @@
         <div class="mb-4">
           <label class="font-semibold text-sm" for="publicPlace">Logradouro:</label>
           <app-input-form #inputPublicPlace formControlName="publicPlace"
-            (onInput)="updateProfileFormField(inputPublicPlace.id,$event)" type="text"
-            id="publicPlace" placeholder="Logradouro"></app-input-form>
+            (onInput)="updateFormField(inputPublicPlace.id,$event)" type="text" id="publicPlace"
+            placeholder="Logradouro"></app-input-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="neighborhood">Bairro:</label>
           <app-input-form #inputNeighborhood formControlName="neighborhood"
-            (onInput)="updateProfileFormField(inputNeighborhood.id,$event)" type="text"
-            id="neighborhood" placeholder="Bairro"></app-input-form>
+            (onInput)="updateFormField(inputNeighborhood.id,$event)" type="text" id="neighborhood"
+            placeholder="Bairro"></app-input-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="number">Número:</label>
           <app-input-form #inputNumber formControlName="number"
-            (onInput)="updateProfileFormField(inputNumber.id, $event)" type="text" id="number"
+            (onInput)="updateFormField(inputNumber.id, $event)" type="text" id="number"
             placeholder="Número"></app-input-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="nameState">Estado:</label>
-          <app-input-form #inputNameState formControlName="nameState"
-            (onInput)="updateProfileFormField(inputNameState.id, $event)" type="texr" id="nameState"
-            placeholder="Estado"></app-input-form>
+          <app-autocomplete-form #inputNameState (onSelect)="onSelectState($event, inputNameCity)"
+            formControlName="nameState"
+            (onInput)="updateFormField(inputNameState.id, $event); filterStatesList(inputNameState.value)"
+            id="nameState" placeholder="Estado" [options]="statesList"></app-autocomplete-form>
         </div>
         <div class="mb-4">
           <label class="font-semibold text-sm" for="nameCity">Cidade:</label>
-          <app-input-form #inputNameCity formControlName="nameCity"
-            (onInput)="updateProfileFormField(inputNameCity.id, $event)" type="text" id="nameCity"
-            placeholder="Cidade"></app-input-form>
+          <app-autocomplete-form #inputNameCity (onSelect)="onSelectCity($event)"
+            formControlName="nameCity"
+            (onInput)="updateFormField(inputNameCity.id, $event); filterCitiesList(inputNameCity.value)"
+            id="nameCity" placeholder="Cidade" [options]="citiesList"></app-autocomplete-form>
         </div>
       </div>
       <app-subheader title="Informações Profissionais"></app-subheader>
@@ -62,7 +64,7 @@
         <div class="mb-4">
           <label class="font-semibold text-sm" for="position">Cargo:</label>
           <app-input-form #inputPosition formControlName="position"
-            (onInput)="updateProfileFormField(inputPosition.id, $event)" type="text" id="position"
+            (onInput)="updateFormField(inputPosition.id, $event)" type="text" id="position"
             placeholder="Cargo"></app-input-form>
         </div>
       </div>
@@ -70,8 +72,7 @@
         <button appBlueButton (click)="save()">Salvar</button>
       </div>
     </form>
-    <div
-      class="flex justify-end items-center tracking-widest mt-4 cursor-pointer hover:scale-105 hover:mr-2">
+    <div class="flex justify-end items-center tracking-widest mt-4 cursor-pointer">
       <a class="_text-blue font-semibold text-base underline">Alterar Senha</a>
       <img class="h-6 w-6" src="../../../assets/icons/icon_arrow_forward_blue.png">
     </div>

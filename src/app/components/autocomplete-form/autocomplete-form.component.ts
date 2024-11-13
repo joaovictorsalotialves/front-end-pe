@@ -1,26 +1,38 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-form',
-  templateUrl: './input-form.component.html',
-  styleUrls: ['./input-form.component.scss'],
+  selector: 'app-autocomplete-form',
+  templateUrl: './autocomplete-form.component.html',
+  styleUrl: './autocomplete-form.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputFormComponent),
+      useExisting: forwardRef(() => AutocompleteFormComponent),
       multi: true
     }
   ]
 })
-export class InputFormComponent implements ControlValueAccessor {
-  @Input({ required: true }) type: string = '';
+export class AutocompleteFormComponent {
   @Input({ required: true }) id: string = '';
   @Input({ required: true }) placeholder: string = '';
-  @Input() icon?: string;
+  @Input({ required: true }) options: any[] = [];
 
   @Output('onInput') onInputEmitter = new EventEmitter<string>();
   @Output('onBlur') onBlurEmitter = new EventEmitter<void>();
+  @Output('onSelect') onSelectEmitter = new EventEmitter<{ id: string, value: string }>();
+
+  onSelect(input: HTMLInputElement, id: string, value: string) {
+    this.value = value;
+    this.onChange(this.value);
+    input.value = value;
+    this.onSelectEmitter.emit({ id: id, value: value });
+  }
+
+  toggleMenu: boolean = false;
+  onClickToggleMenu() {
+    this.toggleMenu = !this.toggleMenu;
+  }
 
   value: string = '';
   disabled: boolean = false;

@@ -17,6 +17,7 @@ import { ItemMenuComponent } from './side-menu/components/item-menu/item-menu.co
 import { TitleSectionMenuComponent } from './side-menu/components/title-section-menu/title-section-menu.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { SubheaderComponent } from './subheader/subheader.component';
+import { AutocompleteFormComponent } from './autocomplete-form/autocomplete-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SubheaderComponent } from './subheader/subheader.component';
     LineMenuMobileComponent,
     CardComponent,
     SubheaderComponent,
+    AutocompleteFormComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { SubheaderComponent } from './subheader/subheader.component';
     MainHeaderComponent,
     CardComponent,
     SubheaderComponent,
+    AutocompleteFormComponent,
   ]
 })
 export class ComponentsModule { }

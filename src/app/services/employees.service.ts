@@ -16,6 +16,7 @@ export class EmployeesService {
   constructor(
     private readonly _httpClient: HttpClient
   ) { }
+  authToken: string = localStorage.getItem('authToken') as string;
 
   getEmployees(nameEmployee: string | undefined = undefined, position: string | undefined = undefined): Observable<EmployeesList | undefined> {
     let url = API_URL + 'employee';
@@ -23,28 +24,36 @@ export class EmployeesService {
       url += '?nameEmployee=' + nameEmployee;
       if (position) url += '&position=' + position;
     } else if (position) url += '?position=' + position;
-    return this._httpClient.get<IEmployeeResponse>(url).pipe(
+    return this._httpClient.get<IEmployeeResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeesResponse) => employeesResponse.values)
     );
   }
 
   getEmployee(idEmployee: number): Observable<EmployeesList | undefined> {
     let url = API_URL + 'employee/' + idEmployee;
-    return this._httpClient.get<IEmployeeResponse>(url).pipe(
+    return this._httpClient.get<IEmployeeResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeeResponse) => employeeResponse.values)
     );
   }
 
   postEmployee(objEmployee: IEmployeeRequest): Observable<IEmployeeResponse> {
     let url = API_URL + 'employee/';
-    return this._httpClient.post<IEmployeeResponse>(url, objEmployee).pipe(
+    return this._httpClient.post<IEmployeeResponse>(url, objEmployee, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeeResponse) => employeeResponse)
     );
   }
 
-  putEmployee(idEmployee: number, objEmployee: IEmployeeRequest): Observable<IEmployeeResponse> {
+  putEmployee(idEmployee: number, objEmployee: IEmployeeRequest): Observable<IBaseResponse> {
     let url = API_URL + 'employee/' + idEmployee;
-    return this._httpClient.put<IEmployeeResponse>(url, objEmployee).pipe(
+    return this._httpClient.put<IBaseResponse>(url, objEmployee, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeeResponse) => employeeResponse)
     );
   }
@@ -57,6 +66,8 @@ export class EmployeesService {
       oldPassword: oldPassword,
       newPassword: newPassword,
       passwordCheck: passwordCheck
+    }, {
+      headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
       map((employeeResponse) => employeeResponse)
     );
@@ -64,14 +75,18 @@ export class EmployeesService {
 
   deleteEmployee(idEmployee: number): Observable<IEmployeeResponse> {
     let url = API_URL + 'employee/' + idEmployee;
-    return this._httpClient.delete<IEmployeeResponse>(url).pipe(
+    return this._httpClient.delete<IEmployeeResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeeResponse) => employeeResponse)
     );
   }
 
   deleteEmployeeAddress(idEmployee: number): Observable<IEmployeeResponse> {
     let url = API_URL + 'employee/' + idEmployee + '/address';
-    return this._httpClient.delete<IEmployeeResponse>(url).pipe(
+    return this._httpClient.delete<IEmployeeResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((employeeResponse) => employeeResponse)
     );
   }
@@ -111,9 +126,9 @@ export class EmployeesService {
     );
   }
 
-  logoutEmployee(idEmployee: number, authToken: string): Observable<boolean> {
+  logoutEmployee(idEmployee: number): Observable<boolean> {
     let url = API_URL + 'employee/logout/' + idEmployee;
-    return this._httpClient.post<IBaseResponse>(url, { authToken: authToken }).pipe(
+    return this._httpClient.post<IBaseResponse>(url, { authToken: this.authToken }).pipe(
       map((logoutResponse) => logoutResponse.sucess),
       catchError(handleError)
     );

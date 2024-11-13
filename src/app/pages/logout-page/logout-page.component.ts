@@ -14,8 +14,7 @@ export class LogoutPageComponent {
   private readonly _employeesService = inject(EmployeesService);
 
   logout(user: IEmployee) {
-    let authToken = localStorage.getItem('authToken')
-    this._employeesService.logoutEmployee(user.idEmployee, authToken!).pipe(take(1)).subscribe({
+    this._employeesService.logoutEmployee(user.idEmployee).pipe(take(1)).subscribe({
       next: (logoutResponse) => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
