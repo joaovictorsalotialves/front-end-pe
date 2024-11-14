@@ -8,7 +8,8 @@
       <div class="mb-6 text-end">
         <app-input-form formControlName="email" (onInput)="onInputEmail($event)" type="email"
           id="email" placeholder="Email" [icon]="routersIconsMap.email"></app-input-form>
-        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+        <div
+          *ngIf="submitted && loginForm.get('email')?.hasError('required') || (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched)"
           class="text-red-500 text-start ml-4">
           Por favor! Informe um email!
         </div>
@@ -20,7 +21,7 @@
           type="password" id="password" placeholder="Senha"
           [icon]="routersIconsMap.lock"></app-input-form>
         <div
-          *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+          *ngIf="submitted && loginForm.get('password')?.hasError('required') || (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched)"
           class="text-red-500 text-start ml-4">
           Por favor! Informe a senha!
         </div>

@@ -1,7 +1,7 @@
 <app-layout-page (checkLogin)="loadingPage($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
-    <app-main-header title="EDITAR PERFIL"></app-main-header>
-    <form class="m-1" [formGroup]="profileForm">
+    <app-main-header title="Cadastrar Fúncionario"></app-main-header>
+    <form class="m-1" [formGroup]="registrationEmployeeForm">
       <app-subheader title="Informações Pessoais"></app-subheader>
       <div appGridContainerSm2>
         <div class="mb-4">
@@ -10,7 +10,7 @@
             (onInput)="updateFormField(inputNameEmployee.id, $event)" type="text" id="nameEmployee"
             placeholder="Nome Completo"></app-input-form>
           <div
-            *ngIf="profileForm.get('nameEmployee')?.hasError('required') && profileForm.get('nameEmployee')?.touched"
+            *ngIf="registrationEmployeeForm.get('nameEmployee')?.hasError('required') && registrationEmployeeForm.get('nameEmployee')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe um nome completo!
           </div>
@@ -21,12 +21,12 @@
             (onInput)="updateFormField(inputEmail.id,$event)" type="email" id="email"
             placeholder="Email"></app-input-form>
           <div
-            *ngIf="profileForm.get('email')?.hasError('required') && profileForm.get('email')?.touched"
+            *ngIf="registrationEmployeeForm.get('email')?.hasError('required') && registrationEmployeeForm.get('email')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe um email!
           </div>
           <div
-            *ngIf="profileForm.get('email')?.hasError('pattern') && profileForm.get('email')?.touched"
+            *ngIf="registrationEmployeeForm.get('email')?.hasError('pattern') && registrationEmployeeForm.get('email')?.touched"
             class="text-red-500 text-start ml-4">
             Email inválido!
           </div>
@@ -37,12 +37,12 @@
             (onInput)="updateFormField(inputCellPhoneNumber.id, $event)" type="text"
             id="cellPhoneNumber" placeholder="Número de telefone"></app-input-form>
           <div
-            *ngIf="profileForm.get('cellPhoneNumber')?.hasError('required') && profileForm.get('cellPhoneNumber')?.touched"
+            *ngIf="registrationEmployeeForm.get('cellPhoneNumber')?.hasError('required') && registrationEmployeeForm.get('cellPhoneNumber')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe um número de celular!
           </div>
           <div
-            *ngIf="profileForm.get('cellPhoneNumber')?.hasError('pattern') && profileForm.get('cellPhoneNumber')?.touched"
+            *ngIf="registrationEmployeeForm.get('cellPhoneNumber')?.hasError('pattern') && registrationEmployeeForm.get('cellPhoneNumber')?.touched"
             class="text-red-500 text-start ml-4">
             Número do celular inválido!
           </div>
@@ -57,7 +57,7 @@
             (onInput)="updateFormField(inputPublicPlace.id, $event)" type="text" id="publicPlace"
             placeholder="Logradouro"></app-input-form>
           <div
-            *ngIf="profileForm.get('publicPlace')?.hasError('required') && profileForm.get('publicPlace')?.touched"
+            *ngIf="registrationEmployeeForm.get('publicPlace')?.hasError('required') && registrationEmployeeForm.get('publicPlace')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe o logradouro!
           </div>
@@ -68,7 +68,7 @@
             (onInput)="updateFormField(inputNeighborhood.id, $event)" type="text" id="neighborhood"
             placeholder="Bairro"></app-input-form>
           <div
-            *ngIf="profileForm.get('neighborhood')?.hasError('required') && profileForm.get('neighborhood')?.touched"
+            *ngIf="registrationEmployeeForm.get('neighborhood')?.hasError('required') && registrationEmployeeForm.get('neighborhood')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe o Bairro!
           </div>
@@ -79,7 +79,7 @@
             (onInput)="updateFormField(inputNumber.id, $event)" type="text" id="number"
             placeholder="Número"></app-input-form>
           <div
-            *ngIf="profileForm.get('number')?.hasError('required') && profileForm.get('number')?.touched"
+            *ngIf="registrationEmployeeForm.get('number')?.hasError('required') && registrationEmployeeForm.get('number')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Informe o Número!
           </div>
@@ -96,7 +96,7 @@
             formControlName="nameState" (onInput)="filterStatesList(inputNameState.value)"
             id="nameState" placeholder="Estado" [options]="statesList"></app-autocomplete-form>
           <div
-            *ngIf="profileForm.get('nameState')?.hasError('required') && profileForm.get('nameState')?.touched"
+            *ngIf="registrationEmployeeForm.get('nameState')?.hasError('required') && registrationEmployeeForm.get('nameState')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Selecione um estado!
           </div>
@@ -107,7 +107,7 @@
             formControlName="nameCity" (onInput)="filterCitiesList(inputNameCity.value)"
             id="nameCity" placeholder="Cidade" [options]="citiesList"></app-autocomplete-form>
           <div
-            *ngIf="profileForm.get('nameCity')?.hasError('required') && profileForm.get('nameCity')?.touched"
+            *ngIf="registrationEmployeeForm.get('nameCity')?.hasError('required') && registrationEmployeeForm.get('nameCity')?.touched"
             class="text-red-500 text-start ml-4">
             Por favor! Selecione uma cidade!
           </div>
@@ -121,6 +121,11 @@
           <app-autocomplete-form #inputPosition (onSelect)="onSelectPosition($event)"
             formControlName="position" id="position" placeholder="Cargo"
             [options]="positionsList"></app-autocomplete-form>
+          <div
+            *ngIf="registrationEmployeeForm.get('position')?.hasError('required') && registrationEmployeeForm.get('position')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma cargo para o fúncionario!
+          </div>
         </div>
       </div>
 
@@ -128,10 +133,5 @@
         <button appBlueButton (click)="save()">Salvar</button>
       </div>
     </form>
-    <div (click)="redirectToUpdatePassword()"
-      class="flex justify-end items-center tracking-widest mt-4 cursor-pointer">
-      <a class="_text-blue font-semibold text-base underline">Alterar Senha</a>
-      <img class="h-6 w-6" src="../../../assets/icons/icon_arrow_forward_blue.png">
-    </div>
   </div>
 </app-layout-page>

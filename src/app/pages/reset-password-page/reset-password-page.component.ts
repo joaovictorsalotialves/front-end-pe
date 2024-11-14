@@ -13,11 +13,9 @@ import { ROUTERS_ICONS_MAP } from '../../utils/routers-icons-map';
 })
 export class ResetPasswordPageComponent implements OnInit {
   resetPasswordForm: FormGroup;
+  submitted = false;
 
   routersIconsMap = ROUTERS_ICONS_MAP;
-
-  textButton = 'Alterar Senha';
-  textHeader = 'Alterar Senha!';
 
   private readonly _router = inject(Router);
   private readonly _employeesService = inject(EmployeesService);
@@ -72,18 +70,21 @@ export class ResetPasswordPageComponent implements OnInit {
   }
 
   resetPassword() {
-    if (this.resetPasswordForm.valid) {
-      const { newPassword, passwordCheck, code } = this.resetPasswordForm.value;
-      this._employeesService.resetPasswordEmployee(
-        newPassword, passwordCheck, code, this.token!
-      ).pipe(take(1)).subscribe({
-        next: (response) => {
-          this._router.navigate(['/login'])
-        },
-        error: (error) => {
-          alert(error.message);
-        }
-      });
+    this.submitted = true;
+    if (this.resetPasswordForm.invalid) {
+      return;
     }
+
+    const { newPassword, passwordCheck, code } = this.resetPasswordForm.value;
+    this._employeesService.resetPasswordEmployee(
+      newPassword, passwordCheck, code, this.token!
+    ).pipe(take(1)).subscribe({
+      next: (response) => {
+        this._router.navigate(['/login'])
+      },
+      error: (error) => {
+        alert(error.message);
+      }
+    });
   }
 }

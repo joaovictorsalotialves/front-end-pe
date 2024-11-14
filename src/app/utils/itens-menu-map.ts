@@ -17,7 +17,7 @@ export class ItensMenuMap {
     title: 'Cadastrar funcionário',
     icon: ROUTERS_ICONS_MAP.person_add,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/employees/create']);
     }
   };
 

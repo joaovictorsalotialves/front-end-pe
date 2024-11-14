@@ -12,8 +12,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RecoverPasswordPageComponent } from './recover-password-page/recover-password-page.component';
+import { RegistrationEmployeePageComponent } from './registration-employee-page/registration-employee-page.component';
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
-import { FormProfileComponent } from './profile-page/form-profile/form-profile.component';
+import { UpdatePasswordPageComponent } from './update-password-page/update-password-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormProfileComponent } from './profile-page/form-profile/form-profile.c
     LayoutPageComponent,
     LogoutPageComponent,
     ProfilePageComponent,
-    FormProfileComponent,
+    UpdatePasswordPageComponent,
+    RegistrationEmployeePageComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,8 @@ import { FormProfileComponent } from './profile-page/form-profile/form-profile.c
     HomePageComponent,
     LogoutPageComponent,
     ProfilePageComponent,
+    UpdatePasswordPageComponent,
+    RegistrationEmployeePageComponent,
   ]
 })
 export class PagesModule { }

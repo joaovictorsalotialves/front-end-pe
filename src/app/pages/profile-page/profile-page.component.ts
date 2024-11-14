@@ -5,8 +5,8 @@ import { IEmployee } from '../../interfaces/employees/employee.interface';
 import { CitiesService } from '../../services/cities.service';
 import { EmployeesService } from '../../services/employees.service';
 import { StatesService } from '../../services/states.service';
+import { POSITIONS_MAP } from '../../utils/positions-map';
 import { ProfileFormController } from './profile-form-controller';
-
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -17,6 +17,7 @@ export class ProfilePageComponent extends ProfileFormController {
 
   statesList: { id: number; value: string; }[] = [];
   citiesList: { id: number; value: string; }[] = [];
+  positionsList: { id: number; value: string; }[] = POSITIONS_MAP;
 
   idStateSelect: number | undefined;
 
@@ -24,10 +25,6 @@ export class ProfilePageComponent extends ProfileFormController {
   private readonly _employeesService = inject(EmployeesService);
   private readonly _statesService = inject(StatesService);
   private readonly _citiesService = inject(CitiesService);
-
-  constructor() {
-    super()
-  }
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
@@ -90,7 +87,12 @@ export class ProfilePageComponent extends ProfileFormController {
     this.profileForm.patchValue({ 'idCity': event.id });
   }
 
+  onSelectPosition(event: { id: string, value: string }) {
+    this.profileForm.patchValue({ 'position': event.value });
+  }
+
   save() {
+    this.profileForm.get('position')?.enable();
     this._employeesService.putEmployee(this.userLogged.idEmployee, {
       nameEmployee: this.profileForm.value.nameEmployee,
       email: this.profileForm.value.email,
@@ -125,13 +127,19 @@ export class ProfilePageComponent extends ProfileFormController {
             nameCity: this.profileForm.value.nameCity,
           },
         };
+        this.profileForm.get('position')?.disable();
         localStorage.setItem('user', JSON.stringify(this.userLogged));
         alert('Perfil atualizado com sucesso!');
         this._router.navigate(['/home']);
       },
       error: (error) => {
         console.log(error);
+        alert('Falha aou atualizar o perfil!');
       }
     });
+  }
+
+  redirectToUpdatePassword() {
+    this._router.navigate(['/profile/password']);
   }
 }

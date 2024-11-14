@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { AuthFlowContentComponent } from './auth-flow-content/auth-flow-content.component';
 import { AuthFlowHeaderComponent } from './auth-flow-header/auth-flow-header.component';
+import { AutocompleteFormComponent } from './autocomplete-form/autocomplete-form.component';
 import { CardComponent } from './card/card.component';
 import { GeneralButtonComponent } from './general-button/general-button.component';
 import { InputFormComponent } from './input-form/input-form.component';
@@ -17,7 +18,6 @@ import { ItemMenuComponent } from './side-menu/components/item-menu/item-menu.co
 import { TitleSectionMenuComponent } from './side-menu/components/title-section-menu/title-section-menu.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { SubheaderComponent } from './subheader/subheader.component';
-import { AutocompleteFormComponent } from './autocomplete-form/autocomplete-form.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { AutocompleteFormComponent } from './autocomplete-form/autocomplete-form
     CardComponent,
     SubheaderComponent,
     AutocompleteFormComponent,
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComponentsModule { }

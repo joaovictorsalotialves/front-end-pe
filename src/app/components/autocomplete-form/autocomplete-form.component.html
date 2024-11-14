@@ -1,7 +1,8 @@
-<div (click)="onClickToggleMenu()" class="w-full relative mt-2">
+<div (click)="onClickToggleMenu()" class="w-full relative my-2">
   <div>
     <input appInput #input (blur)="handleBlur()" (input)="handleInput($event)" [attr.value]="value"
-      type="text" [attr.id]="id" [attr.placeholder]="placeholder" autocomplete="off">
+      type="text" [attr.id]="id" [attr.placeholder]="placeholder" [disabled]="disabled"
+      autocomplete="off">
     <span class="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
       <img class="h-6 w-6" src="../../../assets/icons/icon_keyboard_arrow_down.png">
     </span>

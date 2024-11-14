@@ -13,6 +13,7 @@ import { ROUTERS_ICONS_MAP } from '../../utils/routers-icons-map';
 })
 export class LoginPageComponent {
   loginForm: FormGroup;
+  submitted = false;
 
   routersIconsMap = ROUTERS_ICONS_MAP;
 
@@ -38,19 +39,22 @@ export class LoginPageComponent {
   }
 
   login() {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this._employeesService.loginEmployee(email, password).pipe(take(1)).subscribe({
-        next: (loginResponse) => {
-          localStorage.setItem('authToken', loginResponse!.token!);
-          localStorage.setItem('user', JSON.stringify(loginResponse!.user!));
-          this._router.navigate(['/home']);
-        },
-        error: (error) => {
-          alert(error.message);
-        }
-      });
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
     }
+
+    const { email, password } = this.loginForm.value;
+    this._employeesService.loginEmployee(email, password).pipe(take(1)).subscribe({
+      next: (loginResponse) => {
+        localStorage.setItem('authToken', loginResponse!.token!);
+        localStorage.setItem('user', JSON.stringify(loginResponse!.user!));
+        this._router.navigate(['/home']);
+      },
+      error: (error) => {
+        alert(error.message);
+      }
+    });
   }
 
   redirectToRecoverPassword() {

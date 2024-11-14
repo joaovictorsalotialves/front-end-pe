@@ -31,8 +31,6 @@ export class ProfileFormController {
       idCity: userLogged.address?.idCity,
       position: userLogged.position,
     });
-
-    console.log(this.profileForm);
   }
 
   private createForm() {
@@ -50,6 +48,6 @@ export class ProfileFormController {
       idCity: [null],
       position: ['', Validators.required],
     });
+    this.profileForm.get('position')?.disable();
   }
-
 }

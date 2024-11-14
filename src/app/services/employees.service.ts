@@ -61,7 +61,7 @@ export class EmployeesService {
   patchPasswordEmployee(
     idEmployee: number, oldPassword: string, newPassword: string, passwordCheck: string
   ): Observable<IEmployeeResponse> {
-    let url = API_URL + 'employee/' + idEmployee;
+    let url = API_URL + 'employee/' + idEmployee + '/password';
     return this._httpClient.patch<IEmployeeResponse>(url, {
       oldPassword: oldPassword,
       newPassword: newPassword,
@@ -128,7 +128,9 @@ export class EmployeesService {
 
   logoutEmployee(idEmployee: number): Observable<boolean> {
     let url = API_URL + 'employee/logout/' + idEmployee;
-    return this._httpClient.post<IBaseResponse>(url, { authToken: this.authToken }).pipe(
+    return this._httpClient.post<IBaseResponse>(url, {}, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
       map((logoutResponse) => logoutResponse.sucess),
       catchError(handleError)
     );
