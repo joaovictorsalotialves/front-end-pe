@@ -1,3 +1,3 @@
-import { ICity } from "../interfaces/cities-response/city.interface";
+import { ICity } from "../interfaces/cities/city.interface";
 
 export type CitiesList = ICity[];

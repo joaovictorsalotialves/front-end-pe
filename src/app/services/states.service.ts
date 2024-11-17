@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { IStatesResponse } from '../interfaces/states-response/states-response.interface';
+import { IStatesResponse } from '../interfaces/states/states-response.interface';
 import { StatesList } from '../types/states-list';
 import { API_URL } from '../utils/api-url';
 

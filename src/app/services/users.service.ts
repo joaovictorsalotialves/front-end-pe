@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { IAdoptionsResponse } from '../interfaces/adoptions-response/adoptions-response.interface';
+import { catchError, map, Observable } from 'rxjs';
+import { IAdoptionsResponse } from '../interfaces/adoptions/adoptions-response.interface';
+import { IBaseResponse } from '../interfaces/base-response.interface';
 import { IDonationsResponse } from '../interfaces/donations-response/donations-response.interface';
-import { IUser } from '../interfaces/users-response/user.interface';
-import { IUsersResponse } from '../interfaces/users-response/users-reponse';
+import { IUserRequest } from '../interfaces/users/user-request.interface';
+import { IUsersResponse } from '../interfaces/users/users-reponse';
 import { AdoptionsList } from '../types/adoptions-list';
 import { DonationsList } from '../types/donations-list';
 import { UsersList } from '../types/users-list';
 import { API_URL } from '../utils/api-url';
+import { handleError } from '../utils/handleError';
 
 @Injectable({
   providedIn: 'root'
@@ -17,61 +19,86 @@ export class UsersService {
   constructor(
     private readonly _httpClient: HttpClient
   ) { }
+  authToken: string = localStorage.getItem('authToken') as string;
 
   getUsers(nameUser: string | undefined = undefined): Observable<UsersList | undefined> {
     let url = API_URL + 'user';
     if (nameUser) url += '?nameUser=' + nameUser;
-    return this._httpClient.get<IUsersResponse>(url).pipe(
-      map((statesResponse) => statesResponse.values)
+    return this._httpClient.get<IUsersResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((statesResponse) => statesResponse.values),
+      catchError(handleError)
     );
   }
 
   getUser(idUser: number): Observable<UsersList | undefined> {
     let url = API_URL + 'user/' + idUser;
-    return this._httpClient.get<IUsersResponse>(url).pipe(
-      map((usersResponse) => usersResponse.values)
+    return this._httpClient.get<IUsersResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse.values),
+      catchError(handleError)
     );
   }
 
   getAdoptionUser(idUser: number, dateAdoption: string | undefined = undefined): Observable<AdoptionsList | undefined> {
     let url = API_URL + 'user/' + idUser + '/adoption';
-    return this._httpClient.get<IAdoptionsResponse>(url).pipe(
-      map((usersResponse) => usersResponse.values)
+    return this._httpClient.get<IAdoptionsResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse.values),
+      catchError(handleError)
     );
   }
 
   getDonationUser(idUser: number, donationDate: string | undefined = undefined): Observable<DonationsList | undefined> {
     let url = API_URL + 'user/' + idUser + '/donation';
-    return this._httpClient.get<IDonationsResponse>(url).pipe(
-      map((usersResponse) => usersResponse.values)
+    return this._httpClient.get<IDonationsResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse.values),
+      catchError(handleError)
     );
   }
 
-  postUser(objUser: IUser): Observable<IUsersResponse> {
+  postUser(objUser: IUserRequest): Observable<IUsersResponse> {
     let url = API_URL + 'user/';
-    return this._httpClient.post<IUsersResponse>(url, objUser).pipe(
-      map((usersResponse) => usersResponse)
+    return this._httpClient.post<IUsersResponse>(url, objUser, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse),
+      catchError(handleError)
     );
   }
 
-  putUser(idUser: number, objUser: IUser): Observable<IUsersResponse> {
+  putUser(idUser: number, objUser: IUserRequest): Observable<IBaseResponse> {
     let url = API_URL + 'user/' + idUser;
-    return this._httpClient.put<IUsersResponse>(url, objUser).pipe(
-      map((usersResponse) => usersResponse)
+    return this._httpClient.put<IBaseResponse>(url, objUser, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse),
+      catchError(handleError)
     );
   }
 
   deleteUser(idUser: number): Observable<IUsersResponse> {
     let url = API_URL + 'user/' + idUser;
-    return this._httpClient.delete<IUsersResponse>(url).pipe(
-      map((usersResponse) => usersResponse)
+    return this._httpClient.delete<IUsersResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse),
+      catchError(handleError)
     );
   }
 
   deleteAddressUser(idUser: number): Observable<IUsersResponse> {
     let url = API_URL + 'user/' + idUser + '/address';
-    return this._httpClient.delete<IUsersResponse>(url).pipe(
-      map((usersResponse) => usersResponse)
+    return this._httpClient.delete<IUsersResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((usersResponse) => usersResponse),
+      catchError(handleError)
     );
   }
 }

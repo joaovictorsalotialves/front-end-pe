@@ -1,3 +1,3 @@
-import { IRace } from "../interfaces/race-response/race.interface";
+import { IRace } from "../interfaces/race/race.interface";
 
 export type RacesList = IRace[];

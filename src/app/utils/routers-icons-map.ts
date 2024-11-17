@@ -16,4 +16,12 @@ export const ROUTERS_ICONS_MAP = {
   'search': PATH_ICONS + 'icon_search.png',
   'sound_detection_dog_barking': PATH_ICONS + 'icon_sound_detection_dog_barking.png',
   'volunteer_activism': PATH_ICONS + 'icon_volunteer_activism.png',
+  'add_circle': PATH_ICONS + 'icon_add_circle.png',
+  'wysiwyg': PATH_ICONS + 'icon_wysiwyg.png',
+  'add_card': PATH_ICONS + 'icon_add_card.png',
+  'payments': PATH_ICONS + 'icon_payments.png',
+  'input': PATH_ICONS + 'icon_input.png',
+  'inventory': PATH_ICONS + 'icon_inventory.png',
+  'output': PATH_ICONS + 'icon_output.png',
+  'set_meal': PATH_ICONS + 'icon_set_meal.png',
 }

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { IRacesResponse } from '../interfaces/race-response/race-response.interface';
-import { IRace } from '../interfaces/race-response/race.interface';
+import { catchError, map, Observable } from 'rxjs';
+import { IRaceRequest } from '../interfaces/race/race-request.interface';
+import { IRacesResponse } from '../interfaces/race/race-response.interface';
 import { RacesList } from '../types/races-list';
 import { API_URL } from '../utils/api-url';
+import { handleError } from '../utils/handleError';
 
 @Injectable({
   providedIn: 'root'
@@ -22,35 +23,48 @@ export class RacesService {
     return this._httpClient.get<IRacesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((racesResponse) => racesResponse.values)
+      map((racesResponse) => racesResponse.values),
+      catchError(handleError)
     );
   }
 
   getRace(idRace: number): Observable<RacesList | undefined> {
     let url = API_URL + 'race/' + idRace;
-    return this._httpClient.get<IRacesResponse>(url).pipe(
-      map((racesResponse) => racesResponse.values)
+    return this._httpClient.get<IRacesResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((racesResponse) => racesResponse.values),
+      catchError(handleError)
     );
   }
 
-  postRace(objRace: IRace): Observable<IRacesResponse> {
+  postRace(objRace: IRaceRequest): Observable<IRacesResponse> {
     let url = API_URL + 'race/';
-    return this._httpClient.post<IRacesResponse>(url, objRace).pipe(
-      map((racesResponse) => racesResponse)
+    return this._httpClient.post<IRacesResponse>(url, objRace, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((racesResponse) => racesResponse),
+      catchError(handleError)
     );
   }
 
-  putRace(idRace: number, objRace: IRace): Observable<IRacesResponse> {
+  putRace(idRace: number, objRace: IRaceRequest): Observable<IRacesResponse> {
     let url = API_URL + 'race/' + idRace;
-    return this._httpClient.put<IRacesResponse>(url, objRace).pipe(
-      map((racesResponse) => racesResponse)
+    return this._httpClient.put<IRacesResponse>(url, objRace, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((racesResponse) => racesResponse),
+      catchError(handleError)
     );
   }
 
   deleteRace(idRace: number): Observable<IRacesResponse> {
     let url = API_URL + 'race/' + idRace;
-    return this._httpClient.delete<IRacesResponse>(url).pipe(
-      map((racesResponse) => racesResponse)
+    return this._httpClient.delete<IRacesResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((racesResponse) => racesResponse),
+      catchError(handleError)
     );
   }
 }

@@ -8,7 +8,7 @@ import { ItensMenuMap } from '../../utils/itens-menu-map';
   styleUrl: './side-menu.component.scss'
 })
 export class SideMenuComponent extends ItensMenuMap {
-  @Input({ required: true }) user = {} as IEmployee;
+  @Input({ required: true }) userLogged = {} as IEmployee;
 
   @Output('onClickMenuSide') onClickMenuSideEmitt = new EventEmitter<void>();
 

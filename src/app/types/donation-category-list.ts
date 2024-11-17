@@ -1,3 +1,3 @@
-import { IDonationCategory } from "../interfaces/donation-category-response/donation-category.interface";
+import { IDonationCategory } from "../interfaces/donation-category/donation-category.interface";
 
 export type DonationCategoryList = IDonationCategory[];

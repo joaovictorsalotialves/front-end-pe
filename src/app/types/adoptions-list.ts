@@ -1,3 +1,3 @@
-import { IAdoption } from "../interfaces/adoptions-response/adoption.interface";
+import { IAdoption } from "../interfaces/adoptions/adoption.interface";
 
 export type AdoptionsList = IAdoption[];

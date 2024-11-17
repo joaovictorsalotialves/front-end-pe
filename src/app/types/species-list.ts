@@ -1,3 +1,3 @@
-import { ISpecies } from "../interfaces/species-response/species.interface";
+import { ISpecies } from "../interfaces/species/species.interface";
 
 export type SpeciesList = ISpecies;

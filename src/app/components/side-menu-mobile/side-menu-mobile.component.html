@@ -13,11 +13,13 @@
     <app-item-menu-mobile (click)="item_menu_home.redirection()"
       [icon]="item_menu_home.icon"></app-item-menu-mobile>
 
-    <app-line-menu-mobile></app-line-menu-mobile>
-    <app-item-menu-mobile (click)="item_menu_registration_employee.redirection()"
-      [icon]="item_menu_registration_employee.icon"></app-item-menu-mobile>
-    <app-item-menu-mobile (click)="item_menu_view_employee.redirection()"
-      [icon]="item_menu_view_employee.icon"></app-item-menu-mobile>
+    <ng-container *ngIf="userLogged.position == 'Administrador'">
+      <app-line-menu-mobile></app-line-menu-mobile>
+      <app-item-menu-mobile (click)="item_menu_registration_employee.redirection()"
+        [icon]="item_menu_registration_employee.icon"></app-item-menu-mobile>
+      <app-item-menu-mobile (click)="item_menu_view_employee.redirection()"
+        [icon]="item_menu_view_employee.icon"></app-item-menu-mobile>
+    </ng-container>
 
     <app-line-menu-mobile></app-line-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_registration_user.redirection()"
@@ -32,6 +34,10 @@
       [icon]="item_menu_view_donation.icon"></app-item-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_report_donation.redirection()"
       [icon]="item_menu_report_donation.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_donation_category.redirection()"
+      [icon]="item_menu_registration_donation_category.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_donation_category.redirection()"
+      [icon]="item_menu_view_donation_category.icon"></app-item-menu-mobile>
 
     <app-line-menu-mobile></app-line-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_registration_animal.redirection()"
@@ -40,10 +46,48 @@
       [icon]="item_menu_view_animal.icon"></app-item-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_report_animal.redirection()"
       [icon]="item_menu_report_animal.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_species.redirection()"
+      [icon]="item_menu_registration_species.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_species.redirection()"
+      [icon]="item_menu_view_species.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_race.redirection()"
+      [icon]="item_menu_registration_race.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_race.redirection()"
+      [icon]="item_menu_view_race.icon"></app-item-menu-mobile>
 
     <app-line-menu-mobile></app-line-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_registration_adoption.redirection()"
       [icon]="item_menu_registration_adoption.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_expense.redirection()"
+      [icon]="item_menu_registration_expense.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_expense.redirection()"
+      [icon]="item_menu_view_expense.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_report_expense.redirection()"
+      [icon]="item_menu_report_expense.icon"></app-item-menu-mobile>
+
+    <app-line-menu-mobile></app-line-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_supplement.redirection()"
+      [icon]="item_menu_registration_supplement.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_supplement.redirection()"
+      [icon]="item_menu_view_supplement.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_report_supplement.redirection()"
+      [icon]="item_menu_report_supplement.icon"></app-item-menu-mobile>
+
+    <app-item-menu-mobile (click)="item_menu_registration_supplement_category.redirection()"
+      [icon]="item_menu_registration_supplement_category.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_supplement_category.redirection()"
+      [icon]="item_menu_view_supplement_category.icon"></app-item-menu-mobile>
+
+    <app-item-menu-mobile (click)="item_menu_registration_supplement_input.redirection()"
+      [icon]="item_menu_registration_supplement_input.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_supplement_input.redirection()"
+      [icon]="item_menu_view_supplement_input.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_registration_supplement_output.redirection()"
+      [icon]="item_menu_registration_supplement_output.icon"></app-item-menu-mobile>
+    <app-item-menu-mobile (click)="item_menu_view_supplement_output.redirection()"
+      [icon]="item_menu_view_supplement_output.icon"></app-item-menu-mobile>
 
     <app-line-menu-mobile></app-line-menu-mobile>
     <app-item-menu-mobile (click)="item_menu_view_profile.redirection()"

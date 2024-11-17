@@ -1,3 +1,3 @@
-import { IExpense } from "../interfaces/expenses-response/expense.interface";
+import { IExpense } from "../interfaces/expenses/expense.interface";
 
 export type ExpensesList = IExpense[];

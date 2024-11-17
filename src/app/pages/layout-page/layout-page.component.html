@@ -1,8 +1,8 @@
 <div class="_bg-color-gray flex h-screen relative">
   <div>
-    <app-side-menu-mobile (onClickMenuSideMobile)="onToggleMenu()"
+    <app-side-menu-mobile (onClickMenuSideMobile)="onToggleMenu()" [userLogged]="userLogged"
       *ngIf="toggleMenu"></app-side-menu-mobile>
-    <app-side-menu (onClickMenuSide)="onToggleMenu()" [user]="userLogged"
+    <app-side-menu (onClickMenuSide)="onToggleMenu()" [userLogged]="userLogged"
       *ngIf="!toggleMenu"></app-side-menu>
   </div>
   <div class="flex justify-center flex-1">

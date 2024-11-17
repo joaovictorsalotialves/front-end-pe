@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IEmployee } from '../../interfaces/employees/employee.interface';
 import { ItensMenuMap } from '../../utils/itens-menu-map';
 
 @Component({
@@ -7,6 +8,8 @@ import { ItensMenuMap } from '../../utils/itens-menu-map';
   styleUrl: './side-menu-mobile.component.scss'
 })
 export class SideMenuMobileComponent extends ItensMenuMap {
+  @Input({ required: true }) userLogged = {} as IEmployee;
+
   @Output('onClickMenuSideMobile') onClickMenuSideMobileEmitt = new EventEmitter<void>();
 
   onClickMenuSideMobile() {

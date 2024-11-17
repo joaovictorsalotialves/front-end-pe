@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ICitiesResponse } from '../interfaces/cities-response/cities-response.interface';
+import { ICitiesResponse } from '../interfaces/cities/cities-response.interface';
 import { CitiesList } from '../types/cities-list';
 import { API_URL } from '../utils/api-url';
 

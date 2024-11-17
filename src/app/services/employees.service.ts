@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { IBaseResponse } from '../interfaces/base-response.interface';
 import { IEmployeeRequest } from '../interfaces/employees/employee-request.interface';
+import { IEmployee } from '../interfaces/employees/employee.interface';
 import { IEmployeeResponse } from '../interfaces/employees/employees-response.interface';
 import { ILoginResponse } from '../interfaces/employees/login-response.interface';
 import { EmployeesList } from '../types/employees-list';
@@ -27,16 +28,18 @@ export class EmployeesService {
     return this._httpClient.get<IEmployeeResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeesResponse) => employeesResponse.values)
+      map((employeesResponse) => employeesResponse.values as EmployeesList | undefined),
+      catchError(handleError)
     );
   }
 
-  getEmployee(idEmployee: number): Observable<EmployeesList | undefined> {
+  getEmployee(idEmployee: number): Observable<IEmployee | undefined> {
     let url = API_URL + 'employee/' + idEmployee;
     return this._httpClient.get<IEmployeeResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse.values)
+      map((employeeResponse) => employeeResponse.values as IEmployee | undefined),
+      catchError(handleError)
     );
   }
 
@@ -45,7 +48,8 @@ export class EmployeesService {
     return this._httpClient.post<IEmployeeResponse>(url, objEmployee, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse)
+      map((employeeResponse) => employeeResponse),
+      catchError(handleError)
     );
   }
 
@@ -54,7 +58,8 @@ export class EmployeesService {
     return this._httpClient.put<IBaseResponse>(url, objEmployee, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse)
+      map((employeeResponse) => employeeResponse),
+      catchError(handleError)
     );
   }
 
@@ -69,7 +74,8 @@ export class EmployeesService {
     }, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse)
+      map((employeeResponse) => employeeResponse),
+      catchError(handleError)
     );
   }
 
@@ -78,7 +84,8 @@ export class EmployeesService {
     return this._httpClient.delete<IEmployeeResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse)
+      map((employeeResponse) => employeeResponse),
+      catchError(handleError)
     );
   }
 
@@ -87,7 +94,8 @@ export class EmployeesService {
     return this._httpClient.delete<IEmployeeResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((employeeResponse) => employeeResponse)
+      map((employeeResponse) => employeeResponse),
+      catchError(handleError)
     );
   }
 

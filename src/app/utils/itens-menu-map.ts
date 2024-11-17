@@ -22,10 +22,10 @@ export class ItensMenuMap {
   };
 
   item_menu_view_employee = {
-    title: 'Visualizar funcionário',
+    title: 'Visualizar funcionários',
     icon: ROUTERS_ICONS_MAP.person_search,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/employees/view']);
     }
   };
 
@@ -33,12 +33,12 @@ export class ItensMenuMap {
     title: 'Cadastrar usuário',
     icon: ROUTERS_ICONS_MAP.person_add,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/users/create']);
     }
   };
 
   item_menu_view_user = {
-    title: 'Visualizar usuário',
+    title: 'Visualizar usuários',
     icon: ROUTERS_ICONS_MAP.person_search,
     redirection: () => {
       this._router.navigate(['/home']);
@@ -69,6 +69,22 @@ export class ItensMenuMap {
     }
   };
 
+  item_menu_registration_donation_category = {
+    title: 'Cadastrar categoria de doação',
+    icon: ROUTERS_ICONS_MAP.add_circle,
+    redirection: () => {
+      this._router.navigate(['/donation-category/create']);
+    }
+  };
+
+  item_menu_view_donation_category = {
+    title: 'Visualizar categorias doações',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
   item_menu_registration_animal = {
     title: 'Cadastrar animal',
     icon: ROUTERS_ICONS_MAP.pets,
@@ -78,7 +94,7 @@ export class ItensMenuMap {
   };
 
   item_menu_view_animal = {
-    title: 'Visualizar animal',
+    title: 'Visualizar animais',
     icon: ROUTERS_ICONS_MAP.sound_detection_dog_barking,
     redirection: () => {
       this._router.navigate(['/home']);
@@ -93,9 +109,137 @@ export class ItensMenuMap {
     }
   };
 
+  item_menu_registration_species = {
+    title: 'Cadastrar espécies',
+    icon: ROUTERS_ICONS_MAP.add_circle,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_species = {
+    title: 'Visualizar espécies',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_race = {
+    title: 'Cadastrar raça',
+    icon: ROUTERS_ICONS_MAP.add_circle,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_race = {
+    title: 'Visualizar raça',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
   item_menu_registration_adoption = {
     title: 'Adoção',
     icon: ROUTERS_ICONS_MAP.adoption,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_expense = {
+    title: 'Cadastrar despensa',
+    icon: ROUTERS_ICONS_MAP.add_card,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_expense = {
+    title: 'Visualizar despensa',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_report_expense = {
+    title: 'Relatório de despensa',
+    icon: ROUTERS_ICONS_MAP.payments,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_supplement = {
+    title: 'Cadastrar insumo',
+    icon: ROUTERS_ICONS_MAP.set_meal,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_supplement = {
+    title: 'Visualizar insumos',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_report_supplement = {
+    title: 'Relatório de insumos',
+    icon: ROUTERS_ICONS_MAP.inventory,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_supplement_category = {
+    title: 'Cadastrar categoria de insumo',
+    icon: ROUTERS_ICONS_MAP.add_circle,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_supplement_category = {
+    title: 'Visualizar categorias de insumos',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_supplement_input = {
+    title: 'Cadastrar entrada de insumos',
+    icon: ROUTERS_ICONS_MAP.input,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_supplement_input = {
+    title: 'Visualizar entrada de insumos',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_registration_supplement_output = {
+    title: 'Cadastrar saída de insumos',
+    icon: ROUTERS_ICONS_MAP.output,
+    redirection: () => {
+      this._router.navigate(['/home']);
+    }
+  };
+
+  item_menu_view_supplement_output = {
+    title: 'Visualizar saídas de insumos',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
       this._router.navigate(['/home']);
     }

@@ -11,20 +11,23 @@
       <img (click)="onClickMenuSide()" class="h-10 w-10 cursor-pointer"
         src="../../../assets/icons/icon_arrow_back.png">
     </div>
-    <span class="block text-xl font-medium">{{ user.nameEmployee }}</span>
-    <span class="block text-sm">{{ user.email }}</span>
+    <span class="block text-xl font-medium">{{ userLogged.nameEmployee }}</span>
+    <span class="block text-sm">{{ userLogged.email }}</span>
   </header>
   <menu>
     <app-title-section-menu title="MENU DE NAVEGAÇÃO"></app-title-section-menu>
     <app-item-menu (click)="item_menu_home.redirection(); onClickMenuSide()"
       [icon]="item_menu_home.icon" [title]="item_menu_home.title"></app-item-menu>
 
-    <app-title-section-menu title="ÁREA ADMINISTRATIVA"></app-title-section-menu>
-    <app-item-menu (click)="item_menu_registration_employee.redirection(); onClickMenuSide()"
-      [icon]="item_menu_registration_employee.icon"
-      [title]="item_menu_registration_employee.title"></app-item-menu>
-    <app-item-menu (click)="item_menu_view_employee.redirection(); onClickMenuSide()"
-      [icon]="item_menu_view_employee.icon" [title]="item_menu_view_employee.title"></app-item-menu>
+    <ng-container *ngIf="userLogged.position == 'Administrador'">
+      <app-title-section-menu title="ÁREA ADMINISTRATIVA"></app-title-section-menu>
+      <app-item-menu (click)="item_menu_registration_employee.redirection(); onClickMenuSide()"
+        [icon]="item_menu_registration_employee.icon"
+        [title]="item_menu_registration_employee.title"></app-item-menu>
+      <app-item-menu (click)="item_menu_view_employee.redirection(); onClickMenuSide()"
+        [icon]="item_menu_view_employee.icon"
+        [title]="item_menu_view_employee.title"></app-item-menu>
+    </ng-container>
 
     <app-title-section-menu title="ÁREA DE USUÁRIOS"></app-title-section-menu>
     <app-item-menu (click)="item_menu_registration_user.redirection(); onClickMenuSide()"
@@ -42,6 +45,13 @@
     <app-item-menu (click)="item_menu_report_donation.redirection(); onClickMenuSide()"
       [icon]="item_menu_report_donation.icon"
       [title]="item_menu_report_donation.title"></app-item-menu>
+    <app-item-menu
+      (click)="item_menu_registration_donation_category.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_donation_category.icon"
+      [title]="item_menu_registration_donation_category.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_donation_category.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_donation_category.icon"
+      [title]="item_menu_view_donation_category.title"></app-item-menu>
 
     <app-title-section-menu title="ÁREA DE ANIMAIS"></app-title-section-menu>
     <app-item-menu (click)="item_menu_registration_animal.redirection(); onClickMenuSide()"
@@ -51,11 +61,65 @@
       [icon]="item_menu_view_animal.icon" [title]="item_menu_view_animal.title"></app-item-menu>
     <app-item-menu (click)="item_menu_report_animal.redirection(); onClickMenuSide()"
       [icon]="item_menu_report_animal.icon" [title]="item_menu_report_animal.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_registration_species.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_species.icon"
+      [title]="item_menu_registration_species.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_species.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_species.icon" [title]="item_menu_view_species.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_registration_race.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_race.icon"
+      [title]="item_menu_registration_race.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_race.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_race.icon" [title]="item_menu_view_race.title"></app-item-menu>
 
     <app-title-section-menu title="ÁREA DE ADOÇÕES"></app-title-section-menu>
     <app-item-menu (click)="item_menu_registration_adoption.redirection(); onClickMenuSide()"
       [icon]="item_menu_registration_adoption.icon"
       [title]="item_menu_registration_adoption.title"></app-item-menu>
+
+    <app-title-section-menu title="ÁREA DE DESPESAS"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_expense.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_expense.icon"
+      [title]="item_menu_registration_expense.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_expense.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_expense.icon" [title]="item_menu_view_expense.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_report_expense.redirection(); onClickMenuSide()"
+      [icon]="item_menu_report_expense.icon"
+      [title]="item_menu_report_expense.title"></app-item-menu>
+
+    <app-title-section-menu title="ÁREA DE CONTROLE DE ESTOQUE"></app-title-section-menu>
+    <app-item-menu (click)="item_menu_registration_supplement.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_supplement.icon"
+      [title]="item_menu_registration_supplement.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_supplement.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_supplement.icon"
+      [title]="item_menu_view_supplement.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_report_supplement.redirection(); onClickMenuSide()"
+      [icon]="item_menu_report_supplement.icon"
+      [title]="item_menu_report_supplement.title"></app-item-menu>
+
+    <app-item-menu
+      (click)="item_menu_registration_supplement_category.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_supplement_category.icon"
+      [title]="item_menu_registration_supplement_category.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_supplement_category.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_supplement_category.icon"
+      [title]="item_menu_view_supplement_category.title"></app-item-menu>
+
+    <app-item-menu
+      (click)="item_menu_registration_supplement_input.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_supplement_input.icon"
+      [title]="item_menu_registration_supplement_input.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_supplement_input.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_supplement_input.icon"
+      [title]="item_menu_view_supplement_input.title"></app-item-menu>
+    <app-item-menu
+      (click)="item_menu_registration_supplement_output.redirection(); onClickMenuSide()"
+      [icon]="item_menu_registration_supplement_output.icon"
+      [title]="item_menu_registration_supplement_output.title"></app-item-menu>
+    <app-item-menu (click)="item_menu_view_supplement_output.redirection(); onClickMenuSide()"
+      [icon]="item_menu_view_supplement_output.icon"
+      [title]="item_menu_view_supplement_output.title"></app-item-menu>
 
     <app-title-section-menu title="USUÁRIO"></app-title-section-menu>
     <app-item-menu (click)="item_menu_view_profile.redirection(); onClickMenuSide()"
