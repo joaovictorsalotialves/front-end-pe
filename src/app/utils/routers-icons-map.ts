@@ -24,4 +24,6 @@ export const ROUTERS_ICONS_MAP = {
   'inventory': PATH_ICONS + 'icon_inventory.png',
   'output': PATH_ICONS + 'icon_output.png',
   'set_meal': PATH_ICONS + 'icon_set_meal.png',
+  'delete': PATH_ICONS + 'icon_delete.png',
+  'cruelty_free': PATH_ICONS + 'icon_cruelty_free.png'
 }

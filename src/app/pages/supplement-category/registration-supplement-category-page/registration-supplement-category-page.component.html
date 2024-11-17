@@ -1,0 +1,22 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR CATEGORIA DE INSUMO"></app-main-header>
+    <form class="m-1" [formGroup]="registrationSupplementCategoriesForm">
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameSupplementCategory">Nome da Categoria de
+          Insumo:</label>
+        <app-input-form #inputNameSupplementCategory formControlName="nameSupplementCategory"
+          (onInput)="updateFormField(inputNameSupplementCategory.id, $event)" type="text"
+          id="nameSupplementCategory" placeholder="Categoria de Insumo"></app-input-form>
+        <div
+          *ngIf="submitted && registrationSupplementCategoriesForm.get('nameSupplementCategory')?.hasError('required') || registrationSupplementCategoriesForm.get('nameSupplementCategory')?.hasError('required') && registrationSupplementCategoriesForm.get('nameSupplementCategory')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Informe um nome da categoria de insumo!
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

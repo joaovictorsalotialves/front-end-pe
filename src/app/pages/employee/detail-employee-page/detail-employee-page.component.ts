@@ -152,4 +152,16 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
       }
     });
   }
+
+  del() {
+    this._employeesService.deleteEmployee(Number(this.employeeId)).pipe().subscribe({
+      next: (response) => {
+        alert('Fúncionario deletado com sucesso!');
+        this._router.navigate(['/employees/view']);
+      },
+      error: (error) => {
+        alert(error);
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
 export interface IExpenseCategory {
-  idExpenseCategory?: number;
+  idExpenseCategory: number;
   nameExpenseCategory: string;
 }

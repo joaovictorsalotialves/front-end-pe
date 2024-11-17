@@ -41,7 +41,7 @@ export class ItensMenuMap {
     title: 'Visualizar usuários',
     icon: ROUTERS_ICONS_MAP.person_search,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/users/view']);
     }
   };
 
@@ -73,7 +73,7 @@ export class ItensMenuMap {
     title: 'Cadastrar categoria de doação',
     icon: ROUTERS_ICONS_MAP.add_circle,
     redirection: () => {
-      this._router.navigate(['/donation-category/create']);
+      this._router.navigate(['/donation-categories/create']);
     }
   };
 
@@ -81,7 +81,7 @@ export class ItensMenuMap {
     title: 'Visualizar categorias doações',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/donation-categories/view']);
     }
   };
 
@@ -113,7 +113,7 @@ export class ItensMenuMap {
     title: 'Cadastrar espécies',
     icon: ROUTERS_ICONS_MAP.add_circle,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/species/create']);
     }
   };
 
@@ -121,7 +121,7 @@ export class ItensMenuMap {
     title: 'Visualizar espécies',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/species/view']);
     }
   };
 
@@ -129,7 +129,7 @@ export class ItensMenuMap {
     title: 'Cadastrar raça',
     icon: ROUTERS_ICONS_MAP.add_circle,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/races/create']);
     }
   };
 
@@ -137,7 +137,7 @@ export class ItensMenuMap {
     title: 'Visualizar raça',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/races/view']);
     }
   };
 
@@ -173,6 +173,22 @@ export class ItensMenuMap {
     }
   };
 
+  item_menu_registration_expense_category = {
+    title: 'Cadastrar categoria de despensa',
+    icon: ROUTERS_ICONS_MAP.add_circle,
+    redirection: () => {
+      this._router.navigate(['/expense-categories/create']);
+    }
+  };
+
+  item_menu_view_expense_category = {
+    title: 'Visualizar categoria de despensa',
+    icon: ROUTERS_ICONS_MAP.wysiwyg,
+    redirection: () => {
+      this._router.navigate(['/expense-categories/view']);
+    }
+  };
+
   item_menu_registration_supplement = {
     title: 'Cadastrar insumo',
     icon: ROUTERS_ICONS_MAP.set_meal,
@@ -201,7 +217,7 @@ export class ItensMenuMap {
     title: 'Cadastrar categoria de insumo',
     icon: ROUTERS_ICONS_MAP.add_circle,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-categories/create']);
     }
   };
 
@@ -209,7 +225,7 @@ export class ItensMenuMap {
     title: 'Visualizar categorias de insumos',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-categories/view']);
     }
   };
 

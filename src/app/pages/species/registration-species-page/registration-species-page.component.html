@@ -1,0 +1,21 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR ESPÉCIE"></app-main-header>
+    <form class="m-1" [formGroup]="registrationSpeciesForm">
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameSpecies">Nome da Espécie:</label>
+        <app-input-form #inputNameSpecies formControlName="nameSpecies"
+          (onInput)="updateFormField(inputNameSpecies.id, $event)" type="text" id="nameSpecies"
+          placeholder="Espécie"></app-input-form>
+        <div
+          *ngIf="submitted && registrationSpeciesForm.get('nameSpecies')?.hasError('required') || registrationSpeciesForm.get('nameSpecies')?.hasError('required') && registrationSpeciesForm.get('nameSpecies')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Informe um nome da espécie!
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

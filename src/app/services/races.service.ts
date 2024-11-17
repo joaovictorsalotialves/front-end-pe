@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { IRaceRequest } from '../interfaces/race/race-request.interface';
 import { IRacesResponse } from '../interfaces/race/race-response.interface';
+import { IRace } from '../interfaces/race/race.interface';
 import { RacesList } from '../types/races-list';
 import { API_URL } from '../utils/api-url';
 import { handleError } from '../utils/handleError';
@@ -23,17 +24,17 @@ export class RacesService {
     return this._httpClient.get<IRacesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((racesResponse) => racesResponse.values),
+      map((racesResponse) => racesResponse.values as RacesList),
       catchError(handleError)
     );
   }
 
-  getRace(idRace: number): Observable<RacesList | undefined> {
+  getRace(idRace: number): Observable<IRace | undefined> {
     let url = API_URL + 'race/' + idRace;
     return this._httpClient.get<IRacesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((racesResponse) => racesResponse.values),
+      map((racesResponse) => racesResponse.values as IRace),
       catchError(handleError)
     );
   }

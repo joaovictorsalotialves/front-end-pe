@@ -21,6 +21,23 @@ import { ViewEmployeePageComponent } from './employee/view-employee-page/view-em
 import { DetailEmployeePageComponent } from './employee/detail-employee-page/detail-employee-page.component';
 import { DetailUserPageComponent } from './user/detail-user-page/detail-user-page.component';
 import { ViewUserPageComponent } from './user/view-user-page/view-user-page.component';
+import { ViewDonationCategoryPageComponent } from './donation-category/view-donation-category-page/view-donation-category-page.component';
+import { DetailDonationCategoryPageComponent } from './donation-category/detail-donation-category-page/detail-donation-category-page.component';
+import { DetailExpenseCategoryPageComponent } from './expense-category/detail-expense-category-page/detail-expense-category-page.component';
+import { ViewExpenseCategoryPageComponent } from './expense-category/view-expense-category-page/view-expense-category-page.component';
+import { RegistrationExpenseCategoryPageComponent } from './expense-category/registration-expense-category-page/registration-expense-category-page.component';
+import { RegistrationRacePageComponent } from './race/registration-race-page/registration-race-page.component';
+import { ViewRacePageComponent } from './race/view-race-page/view-race-page.component';
+import { DetailRacePageComponent } from './race/detail-race-page/detail-race-page.component';
+import { DetailSpeciesPageComponent } from './species/detail-species-page/detail-species-page.component';
+import { ViewSpeciesPageComponent } from './species/view-species-page/view-species-page.component';
+import { RegistrationSpeciesPageComponent } from './species/registration-species-page/registration-species-page.component';
+import { RegistrationSupplementCategoryPageComponent } from './supplement-category/registration-supplement-category-page/registration-supplement-category-page.component';
+import { ViewSupplementCategoryPageComponent } from './supplement-category/view-supplement-category-page/view-supplement-category-page.component';
+import { DetailSupplementCategoryPageComponent } from './supplement-category/detail-supplement-category-page/detail-supplement-category-page.component';
+import { DetailAdoptionPageComponent } from './adoption/detail-adoption-page/detail-adoption-page.component';
+import { ViewAdoptionPageComponent } from './adoption/view-adoption-page/view-adoption-page.component';
+import { RegistrationAdoptionPageComponent } from './adoption/registration-adoption-page/registration-adoption-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +56,23 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     DetailEmployeePageComponent,
     DetailUserPageComponent,
     ViewUserPageComponent,
+    ViewDonationCategoryPageComponent,
+    DetailDonationCategoryPageComponent,
+    DetailExpenseCategoryPageComponent,
+    ViewExpenseCategoryPageComponent,
+    RegistrationExpenseCategoryPageComponent,
+    RegistrationRacePageComponent,
+    ViewRacePageComponent,
+    DetailRacePageComponent,
+    DetailSpeciesPageComponent,
+    ViewSpeciesPageComponent,
+    RegistrationSpeciesPageComponent,
+    RegistrationSupplementCategoryPageComponent,
+    ViewSupplementCategoryPageComponent,
+    DetailSupplementCategoryPageComponent,
+    DetailAdoptionPageComponent,
+    ViewAdoptionPageComponent,
+    RegistrationAdoptionPageComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +102,23 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     DetailEmployeePageComponent,
     DetailUserPageComponent,
     ViewUserPageComponent,
+    ViewDonationCategoryPageComponent,
+    DetailDonationCategoryPageComponent,
+    DetailExpenseCategoryPageComponent,
+    ViewExpenseCategoryPageComponent,
+    RegistrationExpenseCategoryPageComponent,
+    RegistrationRacePageComponent,
+    ViewRacePageComponent,
+    DetailRacePageComponent,
+    DetailSpeciesPageComponent,
+    ViewSpeciesPageComponent,
+    RegistrationSpeciesPageComponent,
+    RegistrationSupplementCategoryPageComponent,
+    ViewSupplementCategoryPageComponent,
+    DetailSupplementCategoryPageComponent,
+    DetailAdoptionPageComponent,
+    ViewAdoptionPageComponent,
+    RegistrationAdoptionPageComponent,
   ]
 })
 export class PagesModule { }

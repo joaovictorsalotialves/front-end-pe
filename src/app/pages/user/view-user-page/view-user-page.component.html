@@ -1,1 +1,13 @@
-<p>view-user-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR USÚARIOS"></app-main-header>
+    <div class="m-1">
+      <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
+        placeholder="Nome do Usúario" [icon]="routersIconsMap.search"></app-input-form>
+      <div class="grid xl:grid-cols-2 xl:gap-x-4">
+        <app-card-view *ngFor="let user of usersList" [icon]="routersIconsMap.person"
+          [item]="user.values" [id]="user.id" urlDetail="/users"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

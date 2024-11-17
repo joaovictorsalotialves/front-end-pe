@@ -1,0 +1,14 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR CATEGORIAS DE INSUMOS"></app-main-header>
+    <div class="m-1">
+      <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
+        placeholder="Nome da Categoria" [icon]="routersIconsMap.search"></app-input-form>
+      <div class="grid xl:grid-cols-2 xl:gap-x-4">
+        <app-card-view *ngFor="let supplementCategory of supplementCategoriesList"
+          [icon]="routersIconsMap.wysiwyg" [item]="supplementCategory.values"
+          [id]="supplementCategory.id" urlDetail="/supplement-categories"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

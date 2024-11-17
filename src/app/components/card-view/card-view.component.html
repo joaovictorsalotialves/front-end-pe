@@ -1,14 +1,22 @@
-<div class="_card cursor-pointer
-  flex flex-col sm:flex-row justify-center items-center gap-y-4 sm:gap-x-16 md:gap-6
-  rounded-3xl border py-4 px-8 mt-4 hover:bg-gray-200
-" [attr.id]="id" (click)="onClick()">
-  <img class="block h-20 w-20" [attr.src]="icon">
-  <div class="md:flex-1 grid md:grid-cols-2 gap-y-4">
-    <div class="md:mx-4" *ngFor="let property of item">
-      <span class="text-sm">
-        <strong class="text-base">{{ property.key }}:</strong>
-        {{ property.value }}
-      </span>
+<div class="
+  _card cursor-pointer flex flex-col sm:flex-row items-center
+  sm:items-start gap-y-4 sm:gap-x-8 md:gap-6 rounded-3xl border
+  py-6 px-8 mt-4 hover:bg-gray-200 transition-all duration-200" [attr.id]="id" (click)="onClick()">
+  <div class="flex-shrink-0">
+    <img class="block h-20 w-20 object-cover" [attr.src]="icon" alt="Icon">
+  </div>
+
+  <div class="flex flex-col sm:flex-1 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+      <div *ngFor="let property of item" class="flex items-center">
+        <span class="text-sm flex flex-wrap items-center">
+          <strong class="text-base font-semibold mr-1">{{ property.key }}:</strong>
+          <span
+            class="text-gray-600 inline-block max-w-40 whitespace-nowrap overflow-hidden text-ellipsis">
+            {{ property.value }}
+          </span>
+        </span>
+      </div>
     </div>
   </div>
 </div>

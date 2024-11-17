@@ -1,1 +1,125 @@
-<p>detail-user-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="EDITAR USÚARIO"></app-main-header>
+    <form class="m-1" [formGroup]="detailUserForm">
+      <app-subheader title="Informações Pessoais"></app-subheader>
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameUser">Nome Completo:</label>
+          <app-input-form #inputNameUser formControlName="nameUser"
+            (onInput)="updateFormField(inputNameUser.id, $event)" type="text" id="nameUser"
+            placeholder="Nome Completo"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('nameUser')?.hasError('required') || detailUserForm.get('nameUser')?.hasError('required') && detailUserForm.get('nameUser')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um nome completo!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="email">Email:</label>
+          <app-input-form #inputEmail formControlName="email"
+            (onInput)="updateFormField(inputEmail.id,$event)" type="email" id="email"
+            placeholder="Email"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('email')?.hasError('required') || detailUserForm.get('email')?.hasError('required') && detailUserForm.get('email')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um email!
+          </div>
+          <div
+            *ngIf="detailUserForm.get('email')?.hasError('pattern') && detailUserForm.get('email')?.touched"
+            class="text-red-500 text-start ml-4">
+            Email inválido!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="cellPhoneNumber">Número de telefone:</label>
+          <app-input-form #inputCellPhoneNumber formControlName="cellPhoneNumber"
+            (onInput)="updateFormField(inputCellPhoneNumber.id, $event)" type="text"
+            id="cellPhoneNumber" placeholder="Número de telefone"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('cellPhoneNumber')?.hasError('required') || detailUserForm.get('cellPhoneNumber')?.hasError('required') && detailUserForm.get('cellPhoneNumber')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um número de celular!
+          </div>
+          <div
+            *ngIf="detailUserForm.get('cellPhoneNumber')?.hasError('pattern') && detailUserForm.get('cellPhoneNumber')?.touched"
+            class="text-red-500 text-start ml-4">
+            Número do celular inválido!
+          </div>
+        </div>
+      </div>
+
+      <app-subheader title="Informações do Endereço"></app-subheader>
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="publicPlace">Logradouro:</label>
+          <app-input-form #inputPublicPlace formControlName="publicPlace"
+            (onInput)="updateFormField(inputPublicPlace.id, $event)" type="text" id="publicPlace"
+            placeholder="Logradouro"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('publicPlace')?.hasError('required') || detailUserForm.get('publicPlace')?.hasError('required') && detailUserForm.get('publicPlace')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe o logradouro!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="neighborhood">Bairro:</label>
+          <app-input-form #inputNeighborhood formControlName="neighborhood"
+            (onInput)="updateFormField(inputNeighborhood.id, $event)" type="text" id="neighborhood"
+            placeholder="Bairro"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('neighborhood')?.hasError('required') || detailUserForm.get('neighborhood')?.hasError('required') && detailUserForm.get('neighborhood')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe o Bairro!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="number">Número:</label>
+          <app-input-form #inputNumber formControlName="number"
+            (onInput)="updateFormField(inputNumber.id, $event)" type="text" id="number"
+            placeholder="Número"></app-input-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('number')?.hasError('required') || detailUserForm.get('number')?.hasError('required') && detailUserForm.get('number')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe o Número!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="complement">Complemento:</label>
+          <app-input-form #inputComplement formControlName="complement"
+            (onInput)="updateFormField(inputComplement.id, $event)" type="text" id="complement"
+            placeholder="Complemento"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameState">Estado:</label>
+          <app-autocomplete-form #inputNameState (onSelect)="onSelectState($event, inputNameCity)"
+            formControlName="nameState" (onInput)="filterStatesList(inputNameState.value)"
+            id="nameState" placeholder="Estado" [options]="statesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('nameState')?.hasError('required') || detailUserForm.get('nameState')?.hasError('required') && detailUserForm.get('nameState')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione um estado!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameCity">Cidade:</label>
+          <app-autocomplete-form #inputNameCity (onSelect)="onSelectCity($event)"
+            formControlName="nameCity" (onInput)="filterCitiesList(inputNameCity.value)"
+            id="nameCity" placeholder="Cidade" [options]="citiesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailUserForm.get('nameCity')?.hasError('required') || detailUserForm.get('nameCity')?.hasError('required') && detailUserForm.get('nameCity')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma cidade!
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+      <div class="text-center mt-4">
+        <button appButton="red" (click)="del()">Deletar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

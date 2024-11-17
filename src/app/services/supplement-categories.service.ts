@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { ISupplementCategoryRequest } from '../interfaces/supplement-category/supplement-category-request.interface';
 import { ISupplementCategoryResponse } from '../interfaces/supplement-category/supplement-category-response.interface';
 import { ISupplementCategory } from '../interfaces/supplement-category/supplement-category.interface';
 import { SupplementCategoryList } from '../types/supplement-category-list';
@@ -22,22 +23,22 @@ export class SupplementCategoriesService {
     return this._httpClient.get<ISupplementCategoryResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((supplementCategoriesResponse) => supplementCategoriesResponse.values),
+      map((supplementCategoriesResponse) => supplementCategoriesResponse.values as SupplementCategoryList),
       catchError(handleError)
     );
   }
 
-  getSupplementCategory(idSupplementCategory: number): Observable<SupplementCategoryList | undefined> {
+  getSupplementCategory(idSupplementCategory: number): Observable<ISupplementCategory | undefined> {
     let url = API_URL + 'supplement-category/' + idSupplementCategory;
     return this._httpClient.get<ISupplementCategoryResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((supplementCategoriesResponse) => supplementCategoriesResponse.values),
+      map((supplementCategoriesResponse) => supplementCategoriesResponse.values as ISupplementCategory),
       catchError(handleError)
     );
   }
 
-  postSupplementCategory(objSupplementCategory: ISupplementCategory): Observable<ISupplementCategoryResponse> {
+  postSupplementCategory(objSupplementCategory: ISupplementCategoryRequest): Observable<ISupplementCategoryResponse> {
     let url = API_URL + 'supplement-category/';
     return this._httpClient.post<ISupplementCategoryResponse>(url, objSupplementCategory, {
       headers: { authorization: `Bearer ${this.authToken}` }
@@ -47,7 +48,7 @@ export class SupplementCategoriesService {
     );
   }
 
-  putSupplementCategory(idSupplementCategory: number, objSupplementCategory: ISupplementCategory): Observable<ISupplementCategoryResponse> {
+  putSupplementCategory(idSupplementCategory: number, objSupplementCategory: ISupplementCategoryRequest): Observable<ISupplementCategoryResponse> {
     let url = API_URL + 'supplement-category/' + idSupplementCategory;
     return this._httpClient.put<ISupplementCategoryResponse>(url, objSupplementCategory, {
       headers: { authorization: `Bearer ${this.authToken}` }

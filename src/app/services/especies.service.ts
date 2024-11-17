@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { ISpeciesRequest } from '../interfaces/species/species-request.interface';
 import { ISpeciesResponse } from '../interfaces/species/species-response.interface';
+import { ISpecies } from '../interfaces/species/species.interface';
 import { SpeciesList } from '../types/species-list';
 import { API_URL } from '../utils/api-url';
 import { handleError } from '../utils/handleError';
@@ -22,17 +23,17 @@ export class SpeciesService {
     return this._httpClient.get<ISpeciesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((speciesResponse) => speciesResponse.values),
+      map((speciesResponse) => speciesResponse.values as SpeciesList),
       catchError(handleError)
     );
   }
 
-  getOneSpecies(idSpecies: number): Observable<SpeciesList | undefined> {
+  getOneSpecies(idSpecies: number): Observable<ISpecies | undefined> {
     let url = API_URL + 'species/' + idSpecies;
     return this._httpClient.get<ISpeciesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((speciesResponse) => speciesResponse.values),
+      map((speciesResponse) => speciesResponse.values as ISpecies),
       catchError(handleError)
     );
   }

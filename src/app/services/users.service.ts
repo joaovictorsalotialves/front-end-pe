@@ -5,6 +5,7 @@ import { IAdoptionsResponse } from '../interfaces/adoptions/adoptions-response.i
 import { IBaseResponse } from '../interfaces/base-response.interface';
 import { IDonationsResponse } from '../interfaces/donations-response/donations-response.interface';
 import { IUserRequest } from '../interfaces/users/user-request.interface';
+import { IUser } from '../interfaces/users/user.interface';
 import { IUsersResponse } from '../interfaces/users/users-reponse';
 import { AdoptionsList } from '../types/adoptions-list';
 import { DonationsList } from '../types/donations-list';
@@ -27,17 +28,17 @@ export class UsersService {
     return this._httpClient.get<IUsersResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((statesResponse) => statesResponse.values),
+      map((statesResponse) => statesResponse.values as UsersList),
       catchError(handleError)
     );
   }
 
-  getUser(idUser: number): Observable<UsersList | undefined> {
+  getUser(idUser: number): Observable<IUser | undefined> {
     let url = API_URL + 'user/' + idUser;
     return this._httpClient.get<IUsersResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((usersResponse) => usersResponse.values),
+      map((usersResponse) => usersResponse.values as IUser),
       catchError(handleError)
     );
   }

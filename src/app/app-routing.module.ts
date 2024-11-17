@@ -4,29 +4,71 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/auth-flow/login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './pages/auth-flow/recover-password-page/recover-password-page.component';
 import { ResetPasswordPageComponent } from './pages/auth-flow/reset-password-page/reset-password-page.component';
+import { DetailDonationCategoryPageComponent } from './pages/donation-category/detail-donation-category-page/detail-donation-category-page.component';
 import { RegistrationDonationCategoryPageComponent } from './pages/donation-category/registration-donation-category-page/registration-donation-category-page.component';
+import { ViewDonationCategoryPageComponent } from './pages/donation-category/view-donation-category-page/view-donation-category-page.component';
 import { DetailEmployeePageComponent } from './pages/employee/detail-employee-page/detail-employee-page.component';
 import { RegistrationEmployeePageComponent } from './pages/employee/registration-employee-page/registration-employee-page.component';
 import { ViewEmployeePageComponent } from './pages/employee/view-employee-page/view-employee-page.component';
+import { DetailExpenseCategoryPageComponent } from './pages/expense-category/detail-expense-category-page/detail-expense-category-page.component';
+import { RegistrationExpenseCategoryPageComponent } from './pages/expense-category/registration-expense-category-page/registration-expense-category-page.component';
+import { ViewExpenseCategoryPageComponent } from './pages/expense-category/view-expense-category-page/view-expense-category-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LogoutPageComponent } from './pages/profile/logout-page/logout-page.component';
 import { ProfilePageComponent } from './pages/profile/profile-page/profile-page.component';
 import { UpdatePasswordPageComponent } from './pages/profile/update-password-page/update-password-page.component';
+import { DetailRacePageComponent } from './pages/race/detail-race-page/detail-race-page.component';
+import { RegistrationRacePageComponent } from './pages/race/registration-race-page/registration-race-page.component';
+import { ViewRacePageComponent } from './pages/race/view-race-page/view-race-page.component';
+import { DetailSpeciesPageComponent } from './pages/species/detail-species-page/detail-species-page.component';
+import { RegistrationSpeciesPageComponent } from './pages/species/registration-species-page/registration-species-page.component';
+import { ViewSpeciesPageComponent } from './pages/species/view-species-page/view-species-page.component';
+import { DetailSupplementCategoryPageComponent } from './pages/supplement-category/detail-supplement-category-page/detail-supplement-category-page.component';
+import { RegistrationSupplementCategoryPageComponent } from './pages/supplement-category/registration-supplement-category-page/registration-supplement-category-page.component';
+import { ViewSupplementCategoryPageComponent } from './pages/supplement-category/view-supplement-category-page/view-supplement-category-page.component';
+import { DetailUserPageComponent } from './pages/user/detail-user-page/detail-user-page.component';
 import { RegistrationUserPageComponent } from './pages/user/registration-user-page/registration-user-page.component';
+import { ViewUserPageComponent } from './pages/user/view-user-page/view-user-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'logout', component: LogoutPageComponent },
   { path: 'recover-password', component: RecoverPasswordPageComponent },
   { path: 'reset-password', component: ResetPasswordPageComponent },
+
   { path: 'home', component: HomePageComponent },
+
   { path: 'profile', component: ProfilePageComponent },
   { path: 'profile/password', component: UpdatePasswordPageComponent },
+
   { path: 'employees/create', component: RegistrationEmployeePageComponent },
   { path: 'employees/view', component: ViewEmployeePageComponent },
   { path: 'employees/detail/:idEmployee', component: DetailEmployeePageComponent },
+
   { path: 'users/create', component: RegistrationUserPageComponent },
-  { path: 'donation-category/create', component: RegistrationDonationCategoryPageComponent },
+  { path: 'users/view', component: ViewUserPageComponent },
+  { path: 'users/detail/:idUser', component: DetailUserPageComponent },
+
+  { path: 'donation-categories/create', component: RegistrationDonationCategoryPageComponent },
+  { path: 'donation-categories/view', component: ViewDonationCategoryPageComponent },
+  { path: 'donation-categories/detail/:idDonationCategory', component: DetailDonationCategoryPageComponent },
+
+  { path: 'species/create', component: RegistrationSpeciesPageComponent },
+  { path: 'species/view', component: ViewSpeciesPageComponent },
+  { path: 'species/detail/:idSpecies', component: DetailSpeciesPageComponent },
+
+  { path: 'races/create', component: RegistrationRacePageComponent },
+  { path: 'races/view', component: ViewRacePageComponent },
+  { path: 'races/detail/:idRace', component: DetailRacePageComponent },
+
+  { path: 'expense-categories/create', component: RegistrationExpenseCategoryPageComponent },
+  { path: 'expense-categories/view', component: ViewExpenseCategoryPageComponent },
+  { path: 'expense-categories/detail/:idExpenseCategory', component: DetailExpenseCategoryPageComponent },
+
+  { path: 'supplement-categories/create', component: RegistrationSupplementCategoryPageComponent },
+  { path: 'supplement-categories/view', component: ViewSupplementCategoryPageComponent },
+  { path: 'supplement-categories/detail/:idSupplementCategory', component: DetailSupplementCategoryPageComponent },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redireciona para login por padrão
   { path: '**', redirectTo: '/login' }  // Lida com rotas não encontradas
 ];

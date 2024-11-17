@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { IDonationCategoryRequest } from '../interfaces/donation-category/donation-category-request.interface';
 import { IDonationCategoryResponse } from '../interfaces/donation-category/donation-category-response.interface';
+import { IDonationCategory } from '../interfaces/donation-category/donation-category.interface';
 import { DonationCategoryList } from '../types/donation-category-list';
 import { API_URL } from '../utils/api-url';
 import { handleError } from '../utils/handleError';
@@ -22,17 +23,17 @@ export class DonationCategoriesService {
     return this._httpClient.get<IDonationCategoryResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((donationCategoriesResponse) => donationCategoriesResponse.values),
+      map((donationCategoriesResponse) => donationCategoriesResponse.values as DonationCategoryList),
       catchError(handleError)
     );
   }
 
-  getDonationCategory(idDonationCategory: number): Observable<DonationCategoryList | undefined> {
+  getDonationCategory(idDonationCategory: number): Observable<IDonationCategory | undefined> {
     let url = API_URL + 'donation-category/' + idDonationCategory;
     return this._httpClient.get<IDonationCategoryResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((donationCategoriesResponse) => donationCategoriesResponse.values),
+      map((donationCategoriesResponse) => donationCategoriesResponse.values as IDonationCategory),
       catchError(handleError)
     );
   }

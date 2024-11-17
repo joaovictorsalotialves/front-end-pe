@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 })
 export class CardViewComponent {
   @Input({ required: true }) icon: string = '';
-  @Input({ required: true }) item: { key: string; value: string | null; }[] = [];
+  @Input({ required: true }) item: { key: string; value: string | undefined | null; }[] = [];
   @Input({ required: true }) id: number | undefined;
+  @Input({ required: true }) urlDetail: string = '/home';
 
   private readonly _router = inject(Router);
 
   onClick() {
-    this._router.navigate(['/employees/detail', this.id]);
+    this._router.navigate([this.urlDetail + '/detail/', this.id]);
   }
 }

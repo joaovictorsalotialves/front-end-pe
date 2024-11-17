@@ -1,6 +1,6 @@
 <app-layout-page (checkLogin)="loadingPage($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
-    <app-main-header title="Cadastrar Categoria de Doação"></app-main-header>
+    <app-main-header title="CADASTRAR CATEGORIA DE DOAÇÃO"></app-main-header>
     <form class="m-1" [formGroup]="registrationDonationCategoriesForm">
       <div class="mb-4">
         <label class="font-semibold text-sm" for="nameDonationCategory">Nome da Categoria de
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="text-center">
-        <button appBlueButton (click)="save()">Salvar</button>
+        <button appButton="blue" (click)="save()">Salvar</button>
       </div>
     </form>
   </div>

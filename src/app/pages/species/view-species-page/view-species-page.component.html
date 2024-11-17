@@ -1,0 +1,13 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR ESPÉCIES"></app-main-header>
+    <div class="m-1">
+      <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
+        placeholder="Nome da Espécie" [icon]="routersIconsMap.search"></app-input-form>
+      <div class="grid xl:grid-cols-2 xl:gap-x-4">
+        <app-card-view *ngFor="let species of speciesList" [icon]="routersIconsMap.wysiwyg"
+          [item]="species.values" [id]="species.id" urlDetail="/species"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

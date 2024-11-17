@@ -1,0 +1,25 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="EDITAR CATEGORIAS DE DOAÇÃO"></app-main-header>
+    <form class="m-1" [formGroup]="detailDonationCategoriesForm">
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameDonationCategory">Nome da Categoria de
+          Doação:</label>
+        <app-input-form #inputNameDonationCategory formControlName="nameDonationCategory"
+          (onInput)="updateFormField(inputNameDonationCategory.id, $event)" type="text"
+          id="nameDonationCategory" placeholder="Categoria de Doação"></app-input-form>
+        <div
+          *ngIf="submitted && detailDonationCategoriesForm.get('nameDonationCategory')?.hasError('required') || detailDonationCategoriesForm.get('nameDonationCategory')?.hasError('required') && detailDonationCategoriesForm.get('nameDonationCategory')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Informe um nome da categoria de doação!
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+      <div class="text-center mt-4">
+        <button appButton="red" (click)="del()">Deletar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

@@ -1,6 +1,6 @@
 <app-layout-page (checkLogin)="loadingPage($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
-    <app-main-header title="Cadastrar Fúncionario"></app-main-header>
+    <app-main-header title="CADASTRAR FÚNCIONARIO"></app-main-header>
     <form class="m-1" [formGroup]="registrationEmployeeForm">
       <app-subheader title="Informações Pessoais"></app-subheader>
       <div appGridContainerSm2>
@@ -130,7 +130,7 @@
       </div>
 
       <div class="text-center">
-        <button appBlueButton (click)="save()">Salvar</button>
+        <button appButton="blue" (click)="save()">Salvar</button>
       </div>
     </form>
   </div>

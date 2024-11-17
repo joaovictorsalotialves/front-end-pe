@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { IEmployee } from '../../../interfaces/employees/employee.interface';
+import { UsersService } from '../../../services/users.service';
+import { ROUTERS_ICONS_MAP } from '../../../utils/routers-icons-map';
 
 @Component({
   selector: 'app-view-user-page',
@@ -6,5 +10,40 @@ import { Component } from '@angular/core';
   styleUrl: './view-user-page.component.scss'
 })
 export class ViewUserPageComponent {
+  userLogged = {} as IEmployee;
 
+  usersList: { id: number; values: { key: string; value: string | undefined | null; }[] }[] = [];
+
+  routersIconsMap = ROUTERS_ICONS_MAP;
+
+  private readonly _router = inject(Router);
+  private readonly _usersService = inject(UsersService);
+
+  loadingPage(user: IEmployee) {
+    this.userLogged = user;
+    this.filterUsersList();
+  }
+
+  filterUsersList(nameUser: string | undefined = undefined) {
+    this._usersService.getUsers(nameUser).pipe().subscribe({
+      next: (usersList) => {
+        const transformedUsersList = usersList?.map((user) => ({
+          id: user.idUser,
+          values: [
+            { key: 'Nome', value: user.nameUser },
+            { key: 'Email', value: user.email },
+            { key: 'Celular', value: user.cellPhoneNumber },
+          ]
+        }))
+        this.usersList = transformedUsersList || [];
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+  }
+
+  search(value: string) {
+    this.filterUsersList(value);
+  }
 }
