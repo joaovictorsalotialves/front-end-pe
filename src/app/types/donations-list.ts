@@ -1,3 +1,3 @@
-import { IDonation } from "../interfaces/donations-response/donation.interface";
+import { IDonation } from "../interfaces/donations/donation.interface";
 
 export type DonationsList = IDonation[];

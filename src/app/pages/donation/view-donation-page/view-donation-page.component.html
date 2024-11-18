@@ -1,1 +1,13 @@
-<p>view-donation-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR CATEGORIAS DE DOAÇÃO"></app-main-header>
+    <div class="m-1">
+      <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
+        placeholder="Nome do Doador" [icon]="routersIconsMap.search"></app-input-form>
+      <div>
+        <app-card-view *ngFor="let donation of donationsList" [icon]="routersIconsMap.wysiwyg"
+          [item]="donation.values" [id]="donation.id" urlDetail="/donations"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

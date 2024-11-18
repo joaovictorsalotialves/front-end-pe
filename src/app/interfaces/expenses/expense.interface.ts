@@ -1,9 +1,9 @@
 export interface IExpense {
   idExpense: number;
   valueExpense: number;
-  description?: string;
+  description: string | null;
   registrationDate: string;
-  paymentDate?: string;
+  paymentDate: string | null;
   dueDate: string;
   statusExpense: string;
   idExpenseCategory: number;

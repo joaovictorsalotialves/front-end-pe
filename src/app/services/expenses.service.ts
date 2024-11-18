@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { IExpense } from '../interfaces/expenses/expense.interface';
 import { IExpenseRequest } from '../interfaces/expenses/expense.interface-request';
 import { IExpensesResponse } from '../interfaces/expenses/expenses-response.interface';
 import { ExpensesList } from '../types/expenses-list';
@@ -25,17 +26,17 @@ export class ExpensesService {
     return this._httpClient.get<IExpensesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((expensesResponse) => expensesResponse.values),
+      map((expensesResponse) => expensesResponse.values as ExpensesList),
       catchError(handleError)
     );
   }
 
-  getExpense(idExpense: number): Observable<ExpensesList | undefined> {
+  getExpense(idExpense: number): Observable<IExpense | undefined> {
     let url = API_URL + 'expense/' + idExpense;
     return this._httpClient.get<IExpensesResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((expensesResponse) => expensesResponse.values),
+      map((expensesResponse) => expensesResponse.values as IExpense),
       catchError(handleError)
     );
   }

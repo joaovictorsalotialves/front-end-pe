@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutocompleteFormComponent } from '../../../components/autocomplete-form/autocomplete-form.component';
+import { IAddressRequest } from '../../../interfaces/address/address-request.interface';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
 import { CitiesService } from '../../../services/cities.service';
 import { EmployeesService } from '../../../services/employees.service';
@@ -37,7 +38,7 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
     this.filterStatesList();
   }
 
-  filterStatesList(nameState: string | undefined = undefined) {
+  filterStatesList(nameState: string | undefined = undefined, inputCity?: AutocompleteFormComponent) {
     this._statesService.getStates(nameState).pipe().subscribe({
       next: (statesList) => {
         const transformedStatesList = statesList?.map((state) => ({
@@ -45,6 +46,13 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
           value: state.nameState
         }))
         this.statesList = transformedStatesList || [];
+
+        this.address_information.patchValue({ 'idState': '' });
+        if (inputCity) {
+          inputCity.reset();
+          this.address_information.patchValue({ 'nameCity': '' });
+          this.address_information.patchValue({ 'idCity': '' });
+        }
       },
       error: (error) => {
         console.error(error.message);
@@ -74,48 +82,63 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
   }
 
   onSelectState(event: { id: string, value: string }, inputCity: AutocompleteFormComponent) {
-    if (this.registrationEmployeeForm.get('idState')?.value != event.id) {
-      this.registrationEmployeeForm.patchValue({ 'nameState': event.value });
-      this.registrationEmployeeForm.patchValue({ 'idState': event.id });
-      inputCity.value = '';
-      this.registrationEmployeeForm.patchValue({ 'nameCity': '' });
-      this.registrationEmployeeForm.patchValue({ 'idCity': '' });
+    if (this.address_information.get('idState')?.value != event.id) {
+      this.address_information.patchValue({ 'nameState': event.value });
+      this.address_information.patchValue({ 'idState': event.id });
+      inputCity.reset();
+      this.address_information.patchValue({ 'nameCity': '' });
+      this.address_information.patchValue({ 'idCity': '' });
       this.idStateSelect = Number(event.id);
       this.filterCitiesList();
     }
   }
 
   onSelectCity(event: { id: string, value: string }) {
-    this.registrationEmployeeForm.patchValue({ 'nameCity': event.value });
-    this.registrationEmployeeForm.patchValue({ 'idCity': event.id });
+    this.address_information.patchValue({ 'nameCity': event.value });
+    this.address_information.patchValue({ 'idCity': event.id });
   }
 
   onSelectPosition(event: { id: string, value: string }) {
-    this.registrationEmployeeForm.patchValue({ 'position': event.value });
+    this.personal_information.patchValue({ 'position': event.value });
   }
 
   save() {
     this.submitted = true;
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    let addressObj: IAddressRequest | undefined = undefined;
+    if (isAddressEmpty) {
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    } else {
+      addressObj = {
+        publicPlace: addressFields.publicPlace,
+        neighborhood: addressFields.neighborhood,
+        number: addressFields.number,
+        complement: addressFields.complement,
+        idState: addressFields.idState,
+        idCity: addressFields.idCity,
+      }
+    }
+
+    console.log(this.registrationEmployeeForm)
+
     if (this.registrationEmployeeForm.invalid) {
       alert('Erro ao enviar formulário de cadastro de fúncionario!');
       return;
     }
 
     this._employeesService.postEmployee({
-      nameEmployee: this.registrationEmployeeForm.value.nameEmployee,
-      email: this.registrationEmployeeForm.value.email,
-      cellPhoneNumber: this.registrationEmployeeForm.value.cellPhoneNumber,
-      password: this.registrationEmployeeForm.value.cellPhoneNumber,
-      passwordCheck: this.registrationEmployeeForm.value.cellPhoneNumber,
-      position: this.registrationEmployeeForm.value.position,
-      address: {
-        publicPlace: this.registrationEmployeeForm.value.publicPlace,
-        neighborhood: this.registrationEmployeeForm.value.neighborhood,
-        number: this.registrationEmployeeForm.value.number,
-        complement: this.registrationEmployeeForm.value.complement,
-        idState: this.registrationEmployeeForm.value.idState,
-        idCity: this.registrationEmployeeForm.value.idCity,
-      },
+      nameEmployee: this.personal_information.value.nameEmployee,
+      email: this.personal_information.value.email,
+      cellPhoneNumber: this.personal_information.value.cellPhoneNumber,
+      password: this.personal_information.value.cellPhoneNumber,
+      passwordCheck: this.personal_information.value.cellPhoneNumber,
+      position: this.personal_information.value.position,
+      address: addressObj ? addressObj : undefined,
     }).pipe().subscribe({
       next: (response) => {
         alert('Fúncionario cadastrado com sucesso!');

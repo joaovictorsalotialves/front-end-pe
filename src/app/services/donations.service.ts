@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { IDonation } from '../interfaces/donations-response/donation.interface';
-import { IDonationsResponse } from '../interfaces/donations-response/donations-response.interface';
+import { catchError, map, Observable } from 'rxjs';
+import { IDonation } from '../interfaces/donations/donation.interface';
+import { IDonationsResponse } from '../interfaces/donations/donations-response.interface';
 import { DonationsList } from '../types/donations-list';
 import { API_URL } from '../utils/api-url';
+import { handleError } from '../utils/handleError';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class DonationsService {
   constructor(
     private readonly _httpClient: HttpClient
   ) { }
+  authToken: string = localStorage.getItem('authToken') as string;
 
   getDonations(
     donationDate: string | undefined = undefined, nameUser: string | undefined = undefined
@@ -22,36 +24,51 @@ export class DonationsService {
       url += '?donationDate=' + donationDate;
       if (nameUser) url += '&nameUser=' + nameUser;
     } else if (nameUser) url += '?nameUser=' + nameUser;
-    return this._httpClient.get<IDonationsResponse>(url).pipe(
-      map((donationsResponse) => donationsResponse.values)
+    return this._httpClient.get<IDonationsResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((donationsResponse) => donationsResponse.values as DonationsList),
+      catchError(handleError)
     );
   }
 
-  getDonation(idDonation: number): Observable<DonationsList | undefined> {
+  getDonation(idDonation: number): Observable<IDonation | undefined> {
     let url = API_URL + 'donation/' + idDonation;
-    return this._httpClient.get<IDonationsResponse>(url).pipe(
-      map((donationsResponse) => donationsResponse.values)
+    return this._httpClient.get<IDonationsResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((donationsResponse) => donationsResponse.values as IDonation),
+      catchError(handleError)
     );
   }
 
   postDonation(objDonation: IDonation): Observable<IDonationsResponse> {
     let url = API_URL + 'donation/';
-    return this._httpClient.post<IDonationsResponse>(url, objDonation).pipe(
-      map((donationsResponse) => donationsResponse)
+    return this._httpClient.post<IDonationsResponse>(url, objDonation, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((donationsResponse) => donationsResponse),
+      catchError(handleError)
     );
   }
 
   putDonation(idDonation: number, objDonation: IDonation): Observable<IDonationsResponse> {
     let url = API_URL + 'donation/' + idDonation;
-    return this._httpClient.put<IDonationsResponse>(url, objDonation).pipe(
-      map((donationsResponse) => donationsResponse)
+    return this._httpClient.put<IDonationsResponse>(url, objDonation, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((donationsResponse) => donationsResponse),
+      catchError(handleError)
     );
   }
 
   deleteDonation(idDonation: number): Observable<IDonationsResponse> {
     let url = API_URL + 'donation/' + idDonation;
-    return this._httpClient.delete<IDonationsResponse>(url).pipe(
-      map((donationsResponse) => donationsResponse)
+    return this._httpClient.delete<IDonationsResponse>(url, {
+      headers: { authorization: `Bearer ${this.authToken}` }
+    }).pipe(
+      map((donationsResponse) => donationsResponse),
+      catchError(handleError)
     );
   }
 }

@@ -29,6 +29,11 @@ export class AutocompleteFormComponent {
     this.onSelectEmitter.emit({ id: id, value: value });
   }
 
+  reset() {
+    this.value = '';
+    this.onInputEmitter.emit('');
+  }
+
   toggleMenu: boolean = false;
   onClickToggleMenu() {
     this.toggleMenu = !this.toggleMenu;

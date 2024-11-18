@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { IAdoptionsResponse } from '../interfaces/adoptions/adoptions-response.interface';
 import { IBaseResponse } from '../interfaces/base-response.interface';
-import { IDonationsResponse } from '../interfaces/donations-response/donations-response.interface';
+import { IDonationsResponse } from '../interfaces/donations/donations-response.interface';
 import { IUserRequest } from '../interfaces/users/user-request.interface';
 import { IUser } from '../interfaces/users/user.interface';
 import { IUsersResponse } from '../interfaces/users/users-reponse';
@@ -58,7 +58,7 @@ export class UsersService {
     return this._httpClient.get<IDonationsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((usersResponse) => usersResponse.values),
+      map((usersResponse) => usersResponse.values as DonationsList),
       catchError(handleError)
     );
   }

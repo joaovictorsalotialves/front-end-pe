@@ -1,1 +1,67 @@
-<p>registration-expense-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR DESPESA"></app-main-header>
+    <form class="m-1" [formGroup]="registrationExpenseForm">
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="valueExpense">Valor da Despesa:</label>
+          <app-input-form #inputValueExpense formControlName="valueExpense"
+            (onInput)="updateFormField(inputValueExpense.id, $event)" type="text" id=" valueExpense"
+            placeholder="Valor da Despesa"></app-input-form>
+          <div
+            *ngIf="submitted && registrationExpenseForm.get('valueExpense')?.hasError('required') || registrationExpenseForm.get('valueExpense')?.hasError('required') && registrationExpenseForm.get('valueExpense')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um valor para a despesa!
+          </div>
+          <div
+            *ngIf="!registrationExpenseForm.get('valueExpense')?.hasError('required') && registrationExpenseForm.get('valueExpense')?.hasError('floatInvalid') && registrationExpenseForm.get('valueExpense')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um valor valido para o valor da despesa, contêndo apenas números e
+            utilizando o ponto para indicar a casa decimal!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="description">Descrição:</label>
+          <app-input-form #inputDescription formControlName="description"
+            (onInput)="updateFormField(inputDescription.id, $event)" type="text" id="description"
+            placeholder="Descrição"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="paymentDate">Data do Pagamento:</label>
+          <app-input-form #inputPaymentDate formControlName="paymentDate"
+            (onInput)="updateFormField(inputPaymentDate.id, $event)" type="date" id="paymentDate"
+            placeholder="Data do Pagamento"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="dueDate">Data do Vencimento:</label>
+          <app-input-form #inputDueDate formControlName="dueDate"
+            (onInput)="updateFormField(inputDueDate.id, $event)" type="date" id="dueDate"
+            placeholder="Data do Vencimento"></app-input-form>
+          <div
+            *ngIf="submitted && registrationExpenseForm.get('dueDate')?.hasError('required') || registrationExpenseForm.get('dueDate')?.hasError('required') && registrationExpenseForm.get('dueDate')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe uma data de vencimento!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameExpenseCategory">Categoria da
+            Despesa:</label>
+          <app-autocomplete-form #inputNameUser formControlName="nameExpenseCategory"
+            (onInput)="filterExpenseCategoriesList(inputNameUser.value)"
+            (onSelect)="onSelectExpenseCategory($event)" id="nameExpenseCategory"
+            placeholder="Categoria da Despesa"
+            [options]="expenseCategoriesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationExpenseForm.get('nameExpenseCategory')?.hasError('required') || registrationExpenseForm.get('nameExpenseCategory')?.hasError('required') && registrationExpenseForm.get('nameExpenseCategory')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma categoria de despesa!
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

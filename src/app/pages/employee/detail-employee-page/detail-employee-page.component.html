@@ -115,12 +115,15 @@
       </div>
 
       <app-subheader title="Informações Profissionais"></app-subheader>
-      <div appGridContainerSm2>
-        <div class="mb-4">
-          <label class="font-semibold text-sm" for="position">Cargo:</label>
-          <app-autocomplete-form #inputPosition (onSelect)="onSelectPosition($event)"
-            formControlName="position" id="position" placeholder="Cargo"
-            [options]="positionsList"></app-autocomplete-form>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="position">Cargo:</label>
+        <app-autocomplete-form #inputPosition (onSelect)="onSelectPosition($event)"
+          formControlName="position" id="position" placeholder="Cargo"
+          [options]="positionsList"></app-autocomplete-form>
+        <div
+          *ngIf="submitted && detailEmployeeForm.get('position')?.hasError('required') || detailEmployeeForm.get('position')?.hasError('required') && detailEmployeeForm.get('position')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Selecione uma cargo para o fúncionario!
         </div>
       </div>
 

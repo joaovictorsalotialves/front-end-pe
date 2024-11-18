@@ -1,1 +1,14 @@
-<p>view-expense-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR DESPESAS"></app-main-header>
+    <div class="m-1">
+      <label for="">Data de Vencimento:</label>
+      <app-input-form #inputSearch (onInput)="search($event)" type="date" id="search"
+        placeholder="Data de Vencimento"></app-input-form>
+      <div>
+        <app-card-view *ngFor="let expense of expensesList" [icon]="routersIconsMap.wysiwyg"
+          [item]="expense.values" [id]="expense.id" urlDetail="/expenses"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>
