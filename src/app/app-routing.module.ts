@@ -1,18 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { DetailAdoptionPageComponent } from './pages/adoption/detail-adoption-page/detail-adoption-page.component';
+import { RegistrationAdoptionPageComponent } from './pages/adoption/registration-adoption-page/registration-adoption-page.component';
+import { ViewAdoptionPageComponent } from './pages/adoption/view-adoption-page/view-adoption-page.component';
 import { LoginPageComponent } from './pages/auth-flow/login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './pages/auth-flow/recover-password-page/recover-password-page.component';
 import { ResetPasswordPageComponent } from './pages/auth-flow/reset-password-page/reset-password-page.component';
 import { DetailDonationCategoryPageComponent } from './pages/donation-category/detail-donation-category-page/detail-donation-category-page.component';
 import { RegistrationDonationCategoryPageComponent } from './pages/donation-category/registration-donation-category-page/registration-donation-category-page.component';
 import { ViewDonationCategoryPageComponent } from './pages/donation-category/view-donation-category-page/view-donation-category-page.component';
+import { DetailDonationPageComponent } from './pages/donation/detail-donation-page/detail-donation-page.component';
+import { RegistrationDonationPageComponent } from './pages/donation/registration-donation-page/registration-donation-page.component';
+import { ViewDonationPageComponent } from './pages/donation/view-donation-page/view-donation-page.component';
 import { DetailEmployeePageComponent } from './pages/employee/detail-employee-page/detail-employee-page.component';
 import { RegistrationEmployeePageComponent } from './pages/employee/registration-employee-page/registration-employee-page.component';
 import { ViewEmployeePageComponent } from './pages/employee/view-employee-page/view-employee-page.component';
 import { DetailExpenseCategoryPageComponent } from './pages/expense-category/detail-expense-category-page/detail-expense-category-page.component';
 import { RegistrationExpenseCategoryPageComponent } from './pages/expense-category/registration-expense-category-page/registration-expense-category-page.component';
 import { ViewExpenseCategoryPageComponent } from './pages/expense-category/view-expense-category-page/view-expense-category-page.component';
+import { DetailExpensePageComponent } from './pages/expense/detail-expense-page/detail-expense-page.component';
+import { RegistrationExpensePageComponent } from './pages/expense/registration-expense-page/registration-expense-page.component';
+import { ViewExpensePageComponent } from './pages/expense/view-expense-page/view-expense-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LogoutPageComponent } from './pages/profile/logout-page/logout-page.component';
 import { ProfilePageComponent } from './pages/profile/profile-page/profile-page.component';
@@ -49,6 +58,10 @@ const routes: Routes = [
   { path: 'users/view', component: ViewUserPageComponent },
   { path: 'users/detail/:idUser', component: DetailUserPageComponent },
 
+  { path: 'donations/create', component: RegistrationDonationPageComponent },
+  { path: 'donations/view', component: ViewDonationPageComponent },
+  { path: 'donations/detail/:idDonation', component: DetailDonationPageComponent },
+
   { path: 'donation-categories/create', component: RegistrationDonationCategoryPageComponent },
   { path: 'donation-categories/view', component: ViewDonationCategoryPageComponent },
   { path: 'donation-categories/detail/:idDonationCategory', component: DetailDonationCategoryPageComponent },
@@ -60,6 +73,14 @@ const routes: Routes = [
   { path: 'races/create', component: RegistrationRacePageComponent },
   { path: 'races/view', component: ViewRacePageComponent },
   { path: 'races/detail/:idRace', component: DetailRacePageComponent },
+
+  { path: 'adoptions/create', component: RegistrationAdoptionPageComponent },
+  { path: 'adoptions/view', component: ViewAdoptionPageComponent },
+  { path: 'adoptions/detail/:idAdoption', component: DetailAdoptionPageComponent },
+
+  { path: 'expenses/create', component: RegistrationExpensePageComponent },
+  { path: 'expenses/view', component: ViewExpensePageComponent },
+  { path: 'expenses/detail/:idExpense', component: DetailExpensePageComponent },
 
   { path: 'expense-categories/create', component: RegistrationExpenseCategoryPageComponent },
   { path: 'expense-categories/view', component: ViewExpenseCategoryPageComponent },

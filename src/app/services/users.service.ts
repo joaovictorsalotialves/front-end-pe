@@ -48,7 +48,7 @@ export class UsersService {
     return this._httpClient.get<IAdoptionsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((usersResponse) => usersResponse.values),
+      map((usersResponse) => usersResponse.values as AdoptionsList),
       catchError(handleError)
     );
   }

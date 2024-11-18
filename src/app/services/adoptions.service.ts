@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { IAdoptionRequest } from '../interfaces/adoptions/adoption-request.interface';
+import { IAdoption } from '../interfaces/adoptions/adoption.interface';
 import { IAdoptionsResponse } from '../interfaces/adoptions/adoptions-response.interface';
 import { AdoptionsList } from '../types/adoptions-list';
 import { API_URL } from '../utils/api-url';
@@ -32,17 +33,17 @@ export class AdoptionsService {
     return this._httpClient.get<IAdoptionsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((adoptionsResponse) => adoptionsResponse.values),
+      map((adoptionsResponse) => adoptionsResponse.values as AdoptionsList),
       catchError(handleError)
     );
   }
 
-  getAdoption(idAdoption: number): Observable<AdoptionsList | undefined> {
+  getAdoption(idAdoption: number): Observable<IAdoption | undefined> {
     let url = API_URL + 'adoption/' + idAdoption;
     return this._httpClient.get<IAdoptionsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((adoptionsResponse) => adoptionsResponse.values),
+      map((adoptionsResponse) => adoptionsResponse.values as IAdoption),
       catchError(handleError)
     );
   }

@@ -4,7 +4,7 @@
     <div class="m-1">
       <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
         placeholder="Nome da Raça" [icon]="routersIconsMap.search"></app-input-form>
-      <div class="grid xl:grid-cols-2 xl:gap-x-4">
+      <div>
         <app-card-view *ngFor="let race of racesList" [icon]="routersIconsMap.wysiwyg"
           [item]="race.values" [id]="race.id" urlDetail="/races"></app-card-view>
       </div>

@@ -4,7 +4,7 @@
     <div class="m-1">
       <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
         placeholder="Nome do Fúncionario" [icon]="routersIconsMap.search"></app-input-form>
-      <div class="grid xl:grid-cols-2 xl:gap-x-4">
+      <div>
         <app-card-view *ngFor="let employee of employeesList" [icon]="routersIconsMap.person"
           [item]="employee.values" [id]="employee.id" urlDetail="/employees"></app-card-view>
       </div>

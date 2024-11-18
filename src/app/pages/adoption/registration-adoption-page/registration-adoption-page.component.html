@@ -1,1 +1,43 @@
-<p>registration-adoption-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR ADOÇÃO"></app-main-header>
+    <form class="m-1" [formGroup]="registrationAdoptionForm">
+      <app-subheader title="Informações do Animal"></app-subheader>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameAnimal">Nome do Animal:</label>
+        <app-autocomplete-form #inputNameAnimal formControlName="nameAnimal"
+          (onInput)="filterAnimalList(inputNameAnimal.value)" (onSelect)="onSelectAnimal($event)"
+          id="nameAnimal" placeholder="Animal" [options]="animalsList"></app-autocomplete-form>
+        <div
+          *ngIf="submitted && registrationAdoptionForm.get('nameAnimal')?.hasError('required') || registrationAdoptionForm.get('nameAnimal')?.hasError('required') && registrationAdoptionForm.get('nameAnimal')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Selecione um animal!
+        </div>
+      </div>
+
+      <app-subheader title="Informações do Adotante"></app-subheader>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameUser">Nome do Usúario:</label>
+        <app-autocomplete-form #inputNameUser formControlName="nameUser"
+          (onInput)="filterUsersList(inputNameUser.value)" (onSelect)="onSelectUser($event)"
+          id="nameUser" placeholder="Usúario" [options]="usersList"></app-autocomplete-form>
+        <div
+          *ngIf="submitted && registrationAdoptionForm.get('nameUser')?.hasError('required') || registrationAdoptionForm.get('nameUser')?.hasError('required') && registrationAdoptionForm.get('nameUser')?.touched"
+          class="text-red-500 text-start ml-4">
+          Por favor! Selecione um usúario!
+        </div>
+      </div>
+
+      <app-subheader title="Informações do Status da Adoção"></app-subheader>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="statusAdoption">Status da Adoção:</label>
+        <app-autocomplete-form #inputStatusAdoption formControlName="statusAdoption"
+          (onSelect)="onSelectStatusAdoption($event)" id="statusAdoption"
+          placeholder="Status da Adoção" [options]="statusAdoptionList"></app-autocomplete-form>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

@@ -38,6 +38,12 @@ import { DetailSupplementCategoryPageComponent } from './supplement-category/det
 import { DetailAdoptionPageComponent } from './adoption/detail-adoption-page/detail-adoption-page.component';
 import { ViewAdoptionPageComponent } from './adoption/view-adoption-page/view-adoption-page.component';
 import { RegistrationAdoptionPageComponent } from './adoption/registration-adoption-page/registration-adoption-page.component';
+import { RegistrationDonationPageComponent } from './donation/registration-donation-page/registration-donation-page.component';
+import { ViewDonationPageComponent } from './donation/view-donation-page/view-donation-page.component';
+import { DetailDonationPageComponent } from './donation/detail-donation-page/detail-donation-page.component';
+import { DetailExpensePageComponent } from './expense/detail-expense-page/detail-expense-page.component';
+import { ViewExpensePageComponent } from './expense/view-expense-page/view-expense-page.component';
+import { RegistrationExpensePageComponent } from './expense/registration-expense-page/registration-expense-page.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +79,12 @@ import { RegistrationAdoptionPageComponent } from './adoption/registration-adopt
     DetailAdoptionPageComponent,
     ViewAdoptionPageComponent,
     RegistrationAdoptionPageComponent,
+    RegistrationDonationPageComponent,
+    ViewDonationPageComponent,
+    DetailDonationPageComponent,
+    DetailExpensePageComponent,
+    ViewExpensePageComponent,
+    RegistrationExpensePageComponent,
   ],
   imports: [
     CommonModule,
@@ -119,6 +131,12 @@ import { RegistrationAdoptionPageComponent } from './adoption/registration-adopt
     DetailAdoptionPageComponent,
     ViewAdoptionPageComponent,
     RegistrationAdoptionPageComponent,
+    RegistrationDonationPageComponent,
+    ViewDonationPageComponent,
+    DetailDonationPageComponent,
+    DetailExpensePageComponent,
+    ViewExpensePageComponent,
+    RegistrationExpensePageComponent,
   ]
 })
 export class PagesModule { }

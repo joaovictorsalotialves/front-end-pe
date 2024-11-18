@@ -7,7 +7,7 @@ export class RegistrationRacesFormController {
   private readonly _fb = inject(FormBuilder);
 
   constructor() {
-    this.createForm()
+    this.createForm();
   }
 
   createForm() {

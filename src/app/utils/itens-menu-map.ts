@@ -49,7 +49,7 @@ export class ItensMenuMap {
     title: 'Cadastrar doação',
     icon: ROUTERS_ICONS_MAP.volunteer_activism,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/donations/create']);
     }
   };
 
@@ -57,7 +57,7 @@ export class ItensMenuMap {
     title: 'Visualizar doação',
     icon: ROUTERS_ICONS_MAP.manage_search,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/donations/view']);
     }
   };
 
@@ -142,10 +142,18 @@ export class ItensMenuMap {
   };
 
   item_menu_registration_adoption = {
-    title: 'Adoção',
+    title: 'Cadastrar Adoção',
     icon: ROUTERS_ICONS_MAP.adoption,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/adoptions/create']);
+    }
+  };
+
+  item_menu_view_adoption = {
+    title: 'Visualizar Adoção',
+    icon: ROUTERS_ICONS_MAP.cruelty_free,
+    redirection: () => {
+      this._router.navigate(['/adoptions/view']);
     }
   };
 
@@ -153,7 +161,7 @@ export class ItensMenuMap {
     title: 'Cadastrar despensa',
     icon: ROUTERS_ICONS_MAP.add_card,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/expenses/create']);
     }
   };
 
@@ -161,7 +169,7 @@ export class ItensMenuMap {
     title: 'Visualizar despensa',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/expenses/view']);
     }
   };
 
