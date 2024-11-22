@@ -51,7 +51,9 @@ export class RegistrationEmployeeFormController {
       publicPlace: [Validators.required],
       neighborhood: [Validators.required],
       number: [Validators.required],
+      idState: [Validators.required],
       nameState: [Validators.required],
+      idCity: [Validators.required],
       nameCity: [Validators.required],
     });
   }

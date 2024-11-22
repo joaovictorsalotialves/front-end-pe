@@ -1,3 +1,3 @@
-import { IAnimal } from "../interfaces/animals-response/animal.interface";
+import { IAnimal } from "../interfaces/animals/animal.interface";
 
 export type AnimalsList = IAnimal[];

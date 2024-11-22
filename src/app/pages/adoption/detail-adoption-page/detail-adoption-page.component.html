@@ -28,12 +28,17 @@
         </div>
       </div>
 
-      <app-subheader title="Informações do Status da Adoção"></app-subheader>
+      <app-subheader title="Informações da Adoção"></app-subheader>
       <div class="mb-4">
         <label class="font-semibold text-sm" for="statusAdoption">Status da Adoção:</label>
         <app-autocomplete-form #inputStatusAdoption formControlName="statusAdoption"
           (onSelect)="onSelectStatusAdoption($event)" id="statusAdoption"
           placeholder="Status da Adoção" [options]="statusAdoptionList"></app-autocomplete-form>
+      </div>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="dateAdoption">Data da Adoção:</label>
+        <app-input-form #inputDateAdoption formControlName="dateAdoption" type="date"
+          id="dateAdoption" placeholder="Data da Adoção"></app-input-form>
       </div>
 
       <div class="text-center">

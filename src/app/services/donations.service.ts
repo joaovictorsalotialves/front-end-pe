@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { IDonationRequest } from '../interfaces/donations/donation-request.interface';
 import { IDonation } from '../interfaces/donations/donation.interface';
 import { IDonationsResponse } from '../interfaces/donations/donations-response.interface';
 import { DonationsList } from '../types/donations-list';
@@ -37,12 +38,13 @@ export class DonationsService {
     return this._httpClient.get<IDonationsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((donationsResponse) => donationsResponse.values as IDonation),
+      map((donationsResponse) => donationsResponse.values as IDonation
+      ),
       catchError(handleError)
     );
   }
 
-  postDonation(objDonation: IDonation): Observable<IDonationsResponse> {
+  postDonation(objDonation: IDonationRequest): Observable<IDonationsResponse> {
     let url = API_URL + 'donation/';
     return this._httpClient.post<IDonationsResponse>(url, objDonation, {
       headers: { authorization: `Bearer ${this.authToken}` }
@@ -52,7 +54,7 @@ export class DonationsService {
     );
   }
 
-  putDonation(idDonation: number, objDonation: IDonation): Observable<IDonationsResponse> {
+  putDonation(idDonation: number, objDonation: IDonationRequest): Observable<IDonationsResponse> {
     let url = API_URL + 'donation/' + idDonation;
     return this._httpClient.put<IDonationsResponse>(url, objDonation, {
       headers: { authorization: `Bearer ${this.authToken}` }

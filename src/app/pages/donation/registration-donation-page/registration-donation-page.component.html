@@ -1,1 +1,80 @@
-<p>registration-donation-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR DOAÇÃO"></app-main-header>
+    <form class="m-1" [formGroup]="registrationDonationForm">
+      <app-subheader title="Informações da Doação"></app-subheader>
+      <div appGridContainerSm2 [formGroup]="donation_information">
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="valueDonation">Valor da Doação:</label>
+          <app-input-form #inputValueDonation formControlName="valueDonation"
+            (onInput)=" updateFormField(inputValueDonation.id, $event)" type="text"
+            id="valueDonation" placeholder="Valor da Doação"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="description">Descrição:</label>
+          <app-input-form #inputDescription formControlName="description"
+            (onInput)="updateFormField(inputDescription.id,$event)" type="description"
+            id="description" placeholder="Descrição"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameUser">Doador:</label>
+          <app-autocomplete-form #inputNameUser (onSelect)="onSelectUser($event)"
+            formControlName="nameUser" (onInput)="filterUsersList(inputNameUser.value)"
+            id="nameUser" placeholder="Doador" [options]="usersList"></app-autocomplete-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameDonationCategory">Categoria da
+            Doação:</label>
+          <app-autocomplete-form #inputNameDonationCategory
+            (onSelect)="onSelectDonationCategory($event)" formControlName="nameDonationCategory"
+            (onInput)="filterDonationCategoriesList(inputNameDonationCategory.value)"
+            id="nameDonationCategory" placeholder="Categoria da Doação"
+            [options]="donationCategoriesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && donation_information.get('nameDonationCategory')?.hasError('required') || donation_information.get('nameDonationCategory')?.hasError('required') && donation_information.get('nameDonationCategory')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma categoria de doação!
+          </div>
+        </div>
+      </div>
+
+      <app-subheader title="Informações de Doação de Insumos"></app-subheader>
+      <div appGridContainerSm2 [formGroup]="supplement_input_information">
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="descriptionSupplementInput">Descrição
+            sobre o insumo:</label>
+          <app-input-form #inputDescriptionSupplementInput
+            formControlName="descriptionSupplementInput"
+            (onInput)="updateFormField(inputDescriptionSupplementInput.id,$event)" type="text"
+            id="descriptionSupplementInput" placeholder="Descrição sobre o insumo"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="amount">Quantidade de Insumo Doada:</label>
+          <app-input-form #inputAmount formControlName="amount"
+            (onInput)="updateFormField(inputAmount.id, $event)" type="text" id="amount"
+            placeholder="Quantidade de Insumo Doada"></app-input-form>
+          <div
+            *ngIf="submitted && supplement_input_information.get('amount')?.hasError('required') || supplement_input_information.get('amount')?.hasError('required') && supplement_input_information.get('amount')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe a quantidade de insumos doada!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSupplement">Insumo:</label>
+          <app-autocomplete-form #inputSupplement (onSelect)="onSelectSupplement($event)"
+            formControlName="nameSupplement" (onInput)="filterSupplementList(inputSupplement.value)"
+            id="nameSupplement" placeholder="Insumo"
+            [options]="supplementList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && supplement_input_information.get('nameSupplement')?.hasError('required') || supplement_input_information.get('nameSupplement')?.hasError('required') && supplement_input_information.get('nameSupplement')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione o Insumo doado!
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

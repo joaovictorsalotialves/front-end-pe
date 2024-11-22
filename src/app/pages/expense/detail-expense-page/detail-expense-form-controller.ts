@@ -15,11 +15,15 @@ export class DetailExpenseFormController {
     this.detailExpenseForm = this._fb.group({
       valueExpense: [null, [Validators.required, this.floatValidator()]],
       description: [''],
+      registrationDate: [''],
       paymentDate: [''],
       dueDate: ['', Validators.required],
+      statusExpense: [''],
       idExpenseCategory: [null, Validators.required],
       nameExpenseCategory: ['', Validators.required],
-    })
+    });
+    this.detailExpenseForm.get('registrationDate')?.disable();
+    this.detailExpenseForm.get('statusExpense')?.disable();
   }
 
   fulfillDetailExpenseForm(expenseDetail: IExpense) {
@@ -29,12 +33,15 @@ export class DetailExpenseFormController {
       formattedPaymentDate = new Date(expenseDetail.paymentDate as string).toISOString().split('T')[0];
     }
     let formattedDueDate = new Date(expenseDetail.dueDate as string).toISOString().split('T')[0];
+    let formattedRegistrationDate = new Date(expenseDetail.registrationDate as string).toISOString().split('T')[0];
 
     this.detailExpenseForm.patchValue({
       valueExpense: expenseDetail.valueExpense,
       description: expenseDetail.description,
+      registrationDate: formattedRegistrationDate,
       paymentDate: formattedPaymentDate,
       dueDate: formattedDueDate,
+      statusExpense: expenseDetail.statusExpense,
       idExpenseCategory: expenseDetail.idExpenseCategory,
       nameExpenseCategory: expenseDetail.nameExpenseCategory,
     });

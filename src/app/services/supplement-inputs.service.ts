@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { ISupplementInput } from '../interfaces/supplement-inputs/supplement-input';
+import { ISupplementInput } from '../interfaces/supplement-inputs/supplement-input.interface';
 import { ISupplementInputsResponse } from '../interfaces/supplement-inputs/supplement-inputs-response';
 import { SupplementInputsList } from '../types/supplement-inputs-list';
 import { API_URL } from '../utils/api-url';

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutocompleteFormComponent } from '../../../components/autocomplete-form/autocomplete-form.component';
+import { IAddressRequest } from '../../../interfaces/address/address-request.interface';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
 import { IUser } from '../../../interfaces/users/user.interface';
 import { CitiesService } from '../../../services/cities.service';
@@ -62,7 +63,26 @@ export class DetailUserPageComponent extends DetailUserFormController {
     }
   }
 
-  filterStatesList(nameState: string | undefined = undefined) {
+  filterStatesList(nameState: string | undefined = undefined, inputCity?: AutocompleteFormComponent) {
+    this.address_information.get('idState')?.reset('');
+    this.idStateSelect = undefined;
+    this.citiesList = [];
+
+    if (inputCity) {
+      this.address_information.get('idCity')?.reset('');
+      this.address_information.get('nameCity')?.reset('');
+      inputCity.reset();
+    }
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    if (isAddressEmpty) {
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    }
+
     this._statesService.getStates(nameState).pipe().subscribe({
       next: (statesList) => {
         const transformedStatesList = statesList?.map((state) => ({
@@ -78,18 +98,22 @@ export class DetailUserPageComponent extends DetailUserFormController {
   }
 
   filterCitiesList(nameCity: string | undefined = undefined) {
-    this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
-      next: (citiesList) => {
-        const transformedCitiesList = citiesList?.map((city) => ({
-          id: city.idCity,
-          value: city.nameCity
-        }))
-        this.citiesList = transformedCitiesList || [];
-      },
-      error: (error) => {
-        console.error(error.message);
-      }
-    });
+    this.address_information.get('idCity')?.reset('');
+
+    if (this.idStateSelect) {
+      this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
+        next: (citiesList) => {
+          const transformedCitiesList = citiesList?.map((city) => ({
+            id: city.idCity,
+            value: city.nameCity
+          }))
+          this.citiesList = transformedCitiesList || [];
+        },
+        error: (error) => {
+          console.error(error.message);
+        }
+      });
+    }
   }
 
   updateFormField(field: string, value: string) {
@@ -97,43 +121,56 @@ export class DetailUserPageComponent extends DetailUserFormController {
   }
 
   onSelectState(event: { id: string, value: string }, inputCity: AutocompleteFormComponent) {
-    if (this.detailUserForm.get('idState')?.value != event.id) {
-      this.detailUserForm.patchValue({ 'nameState': event.value });
-      this.detailUserForm.patchValue({ 'idState': event.id });
-      inputCity.value = '';
-      this.detailUserForm.patchValue({ 'nameCity': '' });
-      this.detailUserForm.patchValue({ 'idCity': '' });
+    if (this.address_information.get('idState')?.value != event.id) {
+      this.address_information.patchValue({ 'nameState': event.value });
+      this.address_information.patchValue({ 'idState': event.id });
+      this.filterStatesList(event.value);
+      inputCity.reset();
+      this.address_information.patchValue({ 'nameCity': '' });
+      this.address_information.patchValue({ 'idCity': '' });
       this.idStateSelect = Number(event.id);
       this.filterCitiesList();
     }
   }
 
   onSelectCity(event: { id: string, value: string }) {
-    this.detailUserForm.patchValue({ 'nameCity': event.value });
-    this.detailUserForm.patchValue({ 'idCity': event.id });
+    this.address_information.patchValue({ 'nameCity': event.value });
+    this.address_information.patchValue({ 'idCity': event.id });
   }
 
   save() {
     this.submitted = true;
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    let addressObj: IAddressRequest | undefined = undefined;
+    if (isAddressEmpty) {
+      this.address_information.reset();
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    } else {
+      addressObj = {
+        publicPlace: addressFields.publicPlace,
+        neighborhood: addressFields.neighborhood,
+        number: addressFields.number,
+        complement: addressFields.complement,
+        idState: addressFields.idState,
+        idCity: addressFields.idCity,
+      }
+    }
+
     if (this.detailUserForm.invalid) {
       alert('Erro ao enviar formulário de edição de fúncionario!');
       return;
     }
 
-    console.log(this.detailUserForm)
-
     this._usersService.putUser(this.userDetail.idUser, {
-      nameUser: this.detailUserForm.value.nameUser,
-      email: this.detailUserForm.value.email,
-      cellPhoneNumber: this.detailUserForm.value.cellPhoneNumber,
-      address: {
-        publicPlace: this.detailUserForm.value.publicPlace,
-        neighborhood: this.detailUserForm.value.neighborhood,
-        number: this.detailUserForm.value.number,
-        complement: this.detailUserForm.value.complement,
-        idState: this.detailUserForm.value.idState,
-        idCity: this.detailUserForm.value.idCity,
-      },
+      nameUser: this.personal_information.value.nameUser,
+      email: this.personal_information.value.email,
+      cellPhoneNumber: this.personal_information.value.cellPhoneNumber,
+      address: addressObj ? addressObj : undefined,
     }).pipe().subscribe({
       next: (response) => {
         alert('Usúario atualizado com sucesso!');

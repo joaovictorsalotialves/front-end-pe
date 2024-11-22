@@ -22,7 +22,7 @@ export class UsersService {
   ) { }
   authToken: string = localStorage.getItem('authToken') as string;
 
-  getUsers(nameUser: string | undefined = undefined): Observable<UsersList | undefined> {
+  getUsers(nameUser: string | null | undefined = undefined): Observable<UsersList | undefined> {
     let url = API_URL + 'user';
     if (nameUser) url += '?nameUser=' + nameUser;
     return this._httpClient.get<IUsersResponse>(url, {

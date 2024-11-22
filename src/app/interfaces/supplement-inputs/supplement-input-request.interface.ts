@@ -1,5 +1,6 @@
 export interface ISupplementInputRequest {
-  description: string | null;
+  descriptionSupplementInput?: string | null;
+  description?: string | null;
   amount: number;
   idSupplement: number;
 }

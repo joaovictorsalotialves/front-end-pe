@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutocompleteFormComponent } from '../../../components/autocomplete-form/autocomplete-form.component';
+import { IAddressRequest } from '../../../interfaces/address/address-request.interface';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
 import { CitiesService } from '../../../services/cities.service';
 import { StatesService } from '../../../services/states.service';
@@ -31,7 +32,26 @@ export class RegistrationUserPageComponent extends RegistrationUserFormControlle
     this.filterStatesList();
   }
 
-  filterStatesList(nameState: string | undefined = undefined) {
+  filterStatesList(nameState: string | undefined = undefined, inputCity?: AutocompleteFormComponent) {
+    this.address_information.get('idState')?.reset('');
+    this.idStateSelect = undefined;
+    this.citiesList = [];
+
+    if (inputCity) {
+      this.address_information.get('idCity')?.reset('');
+      this.address_information.get('nameCity')?.reset('');
+      inputCity.reset();
+    }
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    if (isAddressEmpty) {
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    }
+
     this._statesService.getStates(nameState).pipe().subscribe({
       next: (statesList) => {
         const transformedStatesList = statesList?.map((state) => ({
@@ -47,6 +67,8 @@ export class RegistrationUserPageComponent extends RegistrationUserFormControlle
   }
 
   filterCitiesList(nameCity: string | undefined = undefined) {
+    this.address_information.get('idCity')?.reset('');
+
     if (this.idStateSelect) {
       this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
         next: (citiesList) => {
@@ -68,42 +90,56 @@ export class RegistrationUserPageComponent extends RegistrationUserFormControlle
   }
 
   onSelectState(event: { id: string, value: string }, inputCity: AutocompleteFormComponent) {
-    if (this.registrationUserForm.get('idState')?.value != event.id) {
-      this.registrationUserForm.patchValue({ 'nameState': event.value });
-      this.registrationUserForm.patchValue({ 'idState': event.id });
-      inputCity.value = '';
-      this.registrationUserForm.patchValue({ 'nameCity': '' });
-      this.registrationUserForm.patchValue({ 'idCity': '' });
+    if (this.address_information.get('idState')?.value != event.id) {
+      this.address_information.patchValue({ 'nameState': event.value });
+      this.address_information.patchValue({ 'idState': event.id });
+      this.filterStatesList(event.value);
+      inputCity.reset();
+      this.address_information.patchValue({ 'nameCity': '' });
+      this.address_information.patchValue({ 'idCity': '' });
       this.idStateSelect = Number(event.id);
       this.filterCitiesList();
     }
   }
 
   onSelectCity(event: { id: string, value: string }) {
-    this.registrationUserForm.patchValue({ 'nameCity': event.value });
-    this.registrationUserForm.patchValue({ 'idCity': event.id });
+    this.address_information.patchValue({ 'nameCity': event.value });
+    this.address_information.patchValue({ 'idCity': event.id });
   }
 
   save() {
-    console.log(this.registrationUserForm)
     this.submitted = true;
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    let addressObj: IAddressRequest | undefined = undefined;
+    if (isAddressEmpty) {
+      this.address_information.reset();
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    } else {
+      addressObj = {
+        publicPlace: addressFields.publicPlace,
+        neighborhood: addressFields.neighborhood,
+        number: addressFields.number,
+        complement: addressFields.complement,
+        idState: addressFields.idState,
+        idCity: addressFields.idCity,
+      }
+    }
+
     if (this.registrationUserForm.invalid) {
       alert('Erro ao enviar formulário de cadastro de usuario!');
       return;
     }
 
     this._userService.postUser({
-      nameUser: this.registrationUserForm.value.nameUser,
-      email: this.registrationUserForm.value.email,
-      cellPhoneNumber: this.registrationUserForm.value.cellPhoneNumber,
-      address: {
-        publicPlace: this.registrationUserForm.value.publicPlace,
-        neighborhood: this.registrationUserForm.value.neighborhood,
-        number: this.registrationUserForm.value.number,
-        complement: this.registrationUserForm.value.complement,
-        idState: this.registrationUserForm.value.idState,
-        idCity: this.registrationUserForm.value.idCity,
-      },
+      nameUser: this.personal_information.value.nameUser,
+      email: this.personal_information.value.email,
+      cellPhoneNumber: this.personal_information.value.cellPhoneNumber,
+      address: addressObj ? addressObj : undefined,
     }).pipe().subscribe({
       next: (response) => {
         alert('Usuário cadastrado com sucesso!');

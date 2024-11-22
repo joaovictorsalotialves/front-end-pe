@@ -11,8 +11,9 @@ export class DetailAdoptionFormController {
     this.createForm();
   }
 
-  fulfillDetailDonationCategoryForm(adoptionDetail: IAdoption) {
+  fulfillDetailAdoptionForm(adoptionDetail: IAdoption) {
     this.detailAdoptionForm.reset();
+    let formattedDateAdoption = new Date(adoptionDetail.dateAdoption as string).toISOString().split('T')[0];
 
     this.detailAdoptionForm.patchValue({
       idAnimal: adoptionDetail.idAnimal,
@@ -20,7 +21,7 @@ export class DetailAdoptionFormController {
       idUser: adoptionDetail.idUser,
       nameUser: adoptionDetail.nameUser,
       statusAdoption: adoptionDetail.statusAdoption,
-      dateAdoption: adoptionDetail.dateAdoption,
+      dateAdoption: formattedDateAdoption,
     })
   }
 
@@ -33,6 +34,7 @@ export class DetailAdoptionFormController {
       statusAdoption: ['', Validators.required],
       dateAdoption: [''],
     })
-    this.detailAdoptionForm.get(['dateAdoption'])?.disable();
+
+    this.detailAdoptionForm.get('dateAdoption')?.disable();
   }
 }

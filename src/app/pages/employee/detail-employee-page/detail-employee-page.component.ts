@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutocompleteFormComponent } from '../../../components/autocomplete-form/autocomplete-form.component';
+import { IAddressRequest } from '../../../interfaces/address/address-request.interface';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
 import { CitiesService } from '../../../services/cities.service';
 import { EmployeesService } from '../../../services/employees.service';
@@ -42,6 +43,9 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
       alert('Usuario não possui permissão para acessar esse recurso!');
       this._router.navigate(['/home']);
     }
+    if (Number(this.employeeId) == this.userLogged.idEmployee) {
+      this._router.navigate(['profile']);
+    }
     this.getEmployeeDetail();
   }
 
@@ -67,7 +71,26 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
     }
   }
 
-  filterStatesList(nameState: string | undefined = undefined) {
+  filterStatesList(nameState: string | undefined = undefined, inputCity?: AutocompleteFormComponent) {
+    this.address_information.get('idState')?.reset('');
+    this.idStateSelect = undefined;
+    this.citiesList = [];
+
+    if (inputCity) {
+      this.address_information.get('idCity')?.reset('');
+      this.address_information.get('nameCity')?.reset('');
+      inputCity.reset();
+    }
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    if (isAddressEmpty) {
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    }
+
     this._statesService.getStates(nameState).pipe().subscribe({
       next: (statesList) => {
         const transformedStatesList = statesList?.map((state) => ({
@@ -83,18 +106,22 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
   }
 
   filterCitiesList(nameCity: string | undefined = undefined) {
-    this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
-      next: (citiesList) => {
-        const transformedCitiesList = citiesList?.map((city) => ({
-          id: city.idCity,
-          value: city.nameCity
-        }))
-        this.citiesList = transformedCitiesList || [];
-      },
-      error: (error) => {
-        console.error(error.message);
-      }
-    });
+    this.address_information.get('idCity')?.reset('');
+
+    if (this.idStateSelect) {
+      this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
+        next: (citiesList) => {
+          const transformedCitiesList = citiesList?.map((city) => ({
+            id: city.idCity,
+            value: city.nameCity
+          }))
+          this.citiesList = transformedCitiesList || [];
+        },
+        error: (error) => {
+          console.error(error.message);
+        }
+      });
+    }
   }
 
   updateFormField(field: string, value: string) {
@@ -102,46 +129,61 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
   }
 
   onSelectState(event: { id: string, value: string }, inputCity: AutocompleteFormComponent) {
-    if (this.detailEmployeeForm.get('idState')?.value != event.id) {
-      this.detailEmployeeForm.patchValue({ 'nameState': event.value });
-      this.detailEmployeeForm.patchValue({ 'idState': event.id });
-      inputCity.value = '';
-      this.detailEmployeeForm.patchValue({ 'nameCity': '' });
-      this.detailEmployeeForm.patchValue({ 'idCity': '' });
+    if (this.address_information.get('idState')?.value != event.id) {
+      this.address_information.patchValue({ 'nameState': event.value });
+      this.address_information.patchValue({ 'idState': event.id });
+      this.filterStatesList(event.value);
+      inputCity.reset();
+      this.address_information.patchValue({ 'nameCity': '' });
+      this.address_information.patchValue({ 'idCity': '' });
       this.idStateSelect = Number(event.id);
       this.filterCitiesList();
     }
   }
 
   onSelectCity(event: { id: string, value: string }) {
-    this.detailEmployeeForm.patchValue({ 'nameCity': event.value });
-    this.detailEmployeeForm.patchValue({ 'idCity': event.id });
+    this.address_information.patchValue({ 'nameCity': event.value });
+    this.address_information.patchValue({ 'idCity': event.id });
   }
 
   onSelectPosition(event: { id: string, value: string }) {
-    this.detailEmployeeForm.patchValue({ 'position': event.value });
+    this.personal_information.patchValue({ 'position': event.value });
   }
 
   save() {
     this.submitted = true;
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    let addressObj: IAddressRequest | undefined = undefined;
+    if (isAddressEmpty) {
+      this.address_information.reset();
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    } else {
+      addressObj = {
+        publicPlace: addressFields.publicPlace,
+        neighborhood: addressFields.neighborhood,
+        number: addressFields.number,
+        complement: addressFields.complement,
+        idState: addressFields.idState,
+        idCity: addressFields.idCity,
+      }
+    }
+
     if (this.detailEmployeeForm.invalid) {
       alert('Erro ao enviar formulário de edição de fúncionario!');
       return;
     }
 
     this._employeesService.putEmployee(this.employeeDetail.idEmployee, {
-      nameEmployee: this.detailEmployeeForm.value.nameEmployee,
-      email: this.detailEmployeeForm.value.email,
-      cellPhoneNumber: this.detailEmployeeForm.value.cellPhoneNumber,
-      position: this.detailEmployeeForm.value.position,
-      address: {
-        publicPlace: this.detailEmployeeForm.value.publicPlace,
-        neighborhood: this.detailEmployeeForm.value.neighborhood,
-        number: this.detailEmployeeForm.value.number,
-        complement: this.detailEmployeeForm.value.complement,
-        idState: this.detailEmployeeForm.value.idState,
-        idCity: this.detailEmployeeForm.value.idCity,
-      },
+      nameEmployee: this.personal_information.value.nameEmployee,
+      email: this.personal_information.value.email,
+      cellPhoneNumber: this.personal_information.value.cellPhoneNumber,
+      position: this.personal_information.value.position,
+      address: addressObj ? addressObj : undefined,
     }).pipe().subscribe({
       next: (response) => {
         alert('Fúncionario atualizado com sucesso!');
@@ -162,6 +204,6 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
       error: (error) => {
         alert(error);
       }
-    })
+    });
   }
 }

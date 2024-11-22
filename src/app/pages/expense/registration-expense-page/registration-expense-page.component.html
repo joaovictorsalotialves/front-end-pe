@@ -46,8 +46,8 @@
         <div class="mb-4">
           <label class="font-semibold text-sm" for="nameExpenseCategory">Categoria da
             Despesa:</label>
-          <app-autocomplete-form #inputNameUser formControlName="nameExpenseCategory"
-            (onInput)="filterExpenseCategoriesList(inputNameUser.value)"
+          <app-autocomplete-form #inputNameExpenseCategory formControlName="nameExpenseCategory"
+            (onInput)="filterExpenseCategoriesList(inputNameExpenseCategory.value)"
             (onSelect)="onSelectExpenseCategory($event)" id="nameExpenseCategory"
             placeholder="Categoria da Despesa"
             [options]="expenseCategoriesList"></app-autocomplete-form>

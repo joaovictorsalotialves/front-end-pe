@@ -27,6 +27,12 @@
             placeholder="Descrição"></app-input-form>
         </div>
         <div class="mb-4">
+          <label class="font-semibold text-sm" for="registrationDate">Data de Cadastro:</label>
+          <app-input-form #inputRegistrationDate formControlName="registrationDate"
+            (onInput)="updateFormField(inputRegistrationDate.id, $event)" type="date"
+            id="registrationDate" placeholder="Data de Cadastro"></app-input-form>
+        </div>
+        <div class=" mb-4">
           <label class="font-semibold text-sm" for="paymentDate">Data do Pagamento:</label>
           <app-input-form #inputPaymentDate formControlName="paymentDate"
             (onInput)="updateFormField(inputPaymentDate.id, $event)" type="date" id="paymentDate"
@@ -46,8 +52,8 @@
         <div class="mb-4">
           <label class="font-semibold text-sm" for="nameExpenseCategory">Categoria da
             Despesa:</label>
-          <app-autocomplete-form #inputNameUser formControlName="nameExpenseCategory"
-            (onInput)="filterExpenseCategoriesList(inputNameUser.value)"
+          <app-autocomplete-form #inputNameExpenseCategory formControlName="nameExpenseCategory"
+            (onInput)="filterExpenseCategoriesList(inputNameExpenseCategory.value)"
             (onSelect)="onSelectExpenseCategory($event)" id="nameExpenseCategory"
             placeholder="Categoria da Despesa"
             [options]="expenseCategoriesList"></app-autocomplete-form>
@@ -56,6 +62,13 @@
             class="text-red-500 text-start ml-4">
             Por favor! Selecione uma categoria de despesa!
           </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="statusExpense">Status da
+            Despesa:</label>
+          <app-autocomplete-form #inputNameUser formControlName="statusExpense" id="statusExpense"
+            placeholder="Categoria da Despesa"
+            [options]="statusExpenseList"></app-autocomplete-form>
         </div>
       </div>
 

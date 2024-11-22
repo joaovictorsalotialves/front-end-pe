@@ -35,6 +35,15 @@ import { ViewSpeciesPageComponent } from './pages/species/view-species-page/view
 import { DetailSupplementCategoryPageComponent } from './pages/supplement-category/detail-supplement-category-page/detail-supplement-category-page.component';
 import { RegistrationSupplementCategoryPageComponent } from './pages/supplement-category/registration-supplement-category-page/registration-supplement-category-page.component';
 import { ViewSupplementCategoryPageComponent } from './pages/supplement-category/view-supplement-category-page/view-supplement-category-page.component';
+import { DetailSupplementInputPageComponent } from './pages/supplement-input/detail-supplement-input-page/detail-supplement-input-page.component';
+import { RegistrationSupplementInputPageComponent } from './pages/supplement-input/registration-supplement-input-page/registration-supplement-input-page.component';
+import { ViewSupplementInputPageComponent } from './pages/supplement-input/view-supplement-input-page/view-supplement-input-page.component';
+import { DetailSupplementOutputPageComponent } from './pages/supplement-output/detail-supplement-output-page/detail-supplement-output-page.component';
+import { RegistrationSupplementOutputPageComponent } from './pages/supplement-output/registration-supplement-output-page/registration-supplement-output-page.component';
+import { ViewSupplementOutputPageComponent } from './pages/supplement-output/view-supplement-output-page/view-supplement-output-page.component';
+import { DetailSupplementPageComponent } from './pages/supplement/detail-supplement-page/detail-supplement-page.component';
+import { RegistrationSupplementPageComponent } from './pages/supplement/registration-supplement-page/registration-supplement-page.component';
+import { ViewSupplementPageComponent } from './pages/supplement/view-supplement-page/view-supplement-page.component';
 import { DetailUserPageComponent } from './pages/user/detail-user-page/detail-user-page.component';
 import { RegistrationUserPageComponent } from './pages/user/registration-user-page/registration-user-page.component';
 import { ViewUserPageComponent } from './pages/user/view-user-page/view-user-page.component';
@@ -85,6 +94,18 @@ const routes: Routes = [
   { path: 'expense-categories/create', component: RegistrationExpenseCategoryPageComponent },
   { path: 'expense-categories/view', component: ViewExpenseCategoryPageComponent },
   { path: 'expense-categories/detail/:idExpenseCategory', component: DetailExpenseCategoryPageComponent },
+
+  { path: 'supplements/create', component: RegistrationSupplementPageComponent },
+  { path: 'supplements/view', component: ViewSupplementPageComponent },
+  { path: 'supplements/detail/:idSupplement', component: DetailSupplementPageComponent },
+
+  { path: 'supplement-inputs/create', component: RegistrationSupplementInputPageComponent },
+  { path: 'supplement-inputs/view', component: ViewSupplementInputPageComponent },
+  { path: 'supplement-inputs/detail/:idSupplementCategory', component: DetailSupplementInputPageComponent },
+
+  { path: 'supplement-output/create', component: RegistrationSupplementOutputPageComponent },
+  { path: 'supplement-output/view', component: ViewSupplementOutputPageComponent },
+  { path: 'supplement-output/detail/:idSupplementCategory', component: DetailSupplementOutputPageComponent },
 
   { path: 'supplement-categories/create', component: RegistrationSupplementCategoryPageComponent },
   { path: 'supplement-categories/view', component: ViewSupplementCategoryPageComponent },

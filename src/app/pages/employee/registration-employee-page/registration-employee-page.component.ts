@@ -39,6 +39,25 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
   }
 
   filterStatesList(nameState: string | undefined = undefined, inputCity?: AutocompleteFormComponent) {
+    this.address_information.get('idState')?.reset('');
+    this.idStateSelect = undefined;
+    this.citiesList = [];
+
+    if (inputCity) {
+      this.address_information.get('idCity')?.reset('');
+      this.address_information.get('nameCity')?.reset('');
+      inputCity.reset();
+    }
+
+    const addressFields = this.address_information.value;
+    const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
+      !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;
+
+    if (isAddressEmpty) {
+      this.address_information.markAsPristine();
+      this.address_information.markAsUntouched();
+    }
+
     this._statesService.getStates(nameState).pipe().subscribe({
       next: (statesList) => {
         const transformedStatesList = statesList?.map((state) => ({
@@ -46,13 +65,6 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
           value: state.nameState
         }))
         this.statesList = transformedStatesList || [];
-
-        this.address_information.patchValue({ 'idState': '' });
-        if (inputCity) {
-          inputCity.reset();
-          this.address_information.patchValue({ 'nameCity': '' });
-          this.address_information.patchValue({ 'idCity': '' });
-        }
       },
       error: (error) => {
         console.error(error.message);
@@ -61,6 +73,8 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
   }
 
   filterCitiesList(nameCity: string | undefined = undefined) {
+    this.address_information.get('idCity')?.reset('');
+
     if (this.idStateSelect) {
       this._citiesService.getCitiesForState(this.idStateSelect!, nameCity).pipe().subscribe({
         next: (citiesList) => {
@@ -85,6 +99,7 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
     if (this.address_information.get('idState')?.value != event.id) {
       this.address_information.patchValue({ 'nameState': event.value });
       this.address_information.patchValue({ 'idState': event.id });
+      this.filterStatesList(event.value);
       inputCity.reset();
       this.address_information.patchValue({ 'nameCity': '' });
       this.address_information.patchValue({ 'idCity': '' });
@@ -111,6 +126,7 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
 
     let addressObj: IAddressRequest | undefined = undefined;
     if (isAddressEmpty) {
+      this.address_information.reset();
       this.address_information.markAsPristine();
       this.address_information.markAsUntouched();
     } else {
@@ -123,8 +139,6 @@ export class RegistrationEmployeePageComponent extends RegistrationEmployeeFormC
         idCity: addressFields.idCity,
       }
     }
-
-    console.log(this.registrationEmployeeForm)
 
     if (this.registrationEmployeeForm.invalid) {
       alert('Erro ao enviar formulário de cadastro de fúncionario!');

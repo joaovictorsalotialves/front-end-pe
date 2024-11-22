@@ -1,3 +1,3 @@
-import { ISupplement } from "../interfaces/supplements-response/supplement.interface";
+import { ISupplement } from "../interfaces/supplements/supplement.interface";
 
 export type SupplementsList = ISupplement[];

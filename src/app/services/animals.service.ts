@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { IAnimal } from '../interfaces/animals-response/animal.interface';
-import { IAnimalsResponse } from '../interfaces/animals-response/animals-response.interface';
+import { IAnimal } from '../interfaces/animals/animal.interface';
+import { IAnimalsResponse } from '../interfaces/animals/animals-response.interface';
 import { IClinicalReportsResponse } from '../interfaces/clinical-reports-response/clinical-reports-response.interface';
 import { AnimalsList } from '../types/animals-list';
 import { ClinicalReportsList } from '../types/clinical-reports-list';

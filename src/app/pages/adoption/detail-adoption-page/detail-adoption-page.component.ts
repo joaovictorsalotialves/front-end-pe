@@ -88,7 +88,7 @@ export class DetailAdoptionPageComponent extends DetailAdoptionFormController {
       this._adoptionsService.getAdoption(Number(this.adoptionId)).pipe().subscribe({
         next: (adoption) => {
           this.adoptionDetail = adoption as IAdoption;
-          this.fulfillDetailDonationCategoryForm(this.adoptionDetail);
+          this.fulfillDetailAdoptionForm(this.adoptionDetail);
           this.filterAnimalList(this.adoptionDetail.nameAnimal);
           this.filterUsersList(this.adoptionDetail.nameUser);
         },

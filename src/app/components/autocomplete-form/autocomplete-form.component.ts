@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -22,15 +22,15 @@ export class AutocompleteFormComponent {
   @Output('onBlur') onBlurEmitter = new EventEmitter<void>();
   @Output('onSelect') onSelectEmitter = new EventEmitter<{ id: string, value: string }>();
 
-  onSelect(input: HTMLInputElement, id: string, value: string) {
+  onSelect(id: string, value: string) {
     this.value = value;
     this.onChange(this.value);
-    input.value = value;
+    this.writeValue(this.value);
     this.onSelectEmitter.emit({ id: id, value: value });
   }
 
-  reset() {
-    this.value = '';
+  reset(): void {
+    this.writeValue('');
     this.onInputEmitter.emit('');
   }
 
@@ -45,8 +45,13 @@ export class AutocompleteFormComponent {
   private onChange = (value: string) => { };
   private onTouched = () => { };
 
+  @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
+
   writeValue(value: string): void {
-    this.value = value;
+    this.value = value || '';
+    if (this.inputElement?.nativeElement) {
+      this.inputElement.nativeElement.value = this.value;
+    }
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -62,9 +67,10 @@ export class AutocompleteFormComponent {
   }
 
   handleInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
+    this.toggleMenu = true;
+    this.value = this.inputElement.nativeElement.value;
     this.onChange(this.value);
+    this.writeValue(this.value);
     this.onInputEmitter.emit(this.value);
   }
 
