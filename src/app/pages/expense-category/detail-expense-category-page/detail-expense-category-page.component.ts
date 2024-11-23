@@ -39,11 +39,12 @@ export class DetailExpenseCategoryPageComponent extends DetailExpenseCategoriesF
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/donation-categories/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa categoria de despesa');
-      this._router.navigate(['/donation-categories/view'])
+      this._router.navigate(['/donation-categories/view']);
     }
   }
 
@@ -62,7 +63,7 @@ export class DetailExpenseCategoryPageComponent extends DetailExpenseCategoriesF
     }).pipe().subscribe({
       next: (response) => {
         alert('Categoria de despesa atualizada com sucesso!');
-        this._router.navigate(['/expense-categories/view'])
+        this._router.navigate(['/expense-categories/view']);
       },
       error: (error) => {
         alert(error);

@@ -57,6 +57,7 @@ export class DetailDonationPageComponent extends DetailDonationFormController im
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/donations/view']);
         },
       });
     } else {

@@ -17,9 +17,9 @@ export class RegistrationDonationPageComponent extends RegistrationDoantionFormC
   userLogged = {} as IEmployee;
   submitted = false;
 
-  usersList: { id: number; value: string; }[] = []
-  donationCategoriesList: { id: number; value: string; }[] = []
-  supplementList: { id: number; value: string; }[] = []
+  usersList: { id: number; value: string; }[] = [];
+  donationCategoriesList: { id: number; value: string; }[] = [];
+  supplementList: { id: number; value: string; }[] = [];
 
   private readonly _router = inject(Router);
   private readonly _usersServices = inject(UsersService);

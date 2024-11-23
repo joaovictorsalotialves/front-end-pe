@@ -201,7 +201,7 @@ export class ItensMenuMap {
     title: 'Cadastrar insumo',
     icon: ROUTERS_ICONS_MAP.set_meal,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplements/create']);
     }
   };
 
@@ -209,7 +209,7 @@ export class ItensMenuMap {
     title: 'Visualizar insumos',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplements/view']);
     }
   };
 
@@ -241,7 +241,7 @@ export class ItensMenuMap {
     title: 'Cadastrar entrada de insumos',
     icon: ROUTERS_ICONS_MAP.input,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-inputs/create']);
     }
   };
 
@@ -249,7 +249,7 @@ export class ItensMenuMap {
     title: 'Visualizar entrada de insumos',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-inputs/view']);
     }
   };
 
@@ -257,7 +257,7 @@ export class ItensMenuMap {
     title: 'Cadastrar saída de insumos',
     icon: ROUTERS_ICONS_MAP.output,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-outputs/create']);
     }
   };
 
@@ -265,7 +265,7 @@ export class ItensMenuMap {
     title: 'Visualizar saídas de insumos',
     icon: ROUTERS_ICONS_MAP.wysiwyg,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplement-outputs/view']);
     }
   };
 

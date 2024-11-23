@@ -50,11 +50,12 @@ export class DetailExpensePageComponent extends DetailExpenseFormController impl
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/expense/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa despesa');
-      this._router.navigate(['/expense/view'])
+      this._router.navigate(['/expense/view']);
     }
   }
 

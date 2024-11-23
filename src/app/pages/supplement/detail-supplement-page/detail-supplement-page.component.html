@@ -1,1 +1,49 @@
-<p>detail-supplement-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="EDITAR INSUMO"></app-main-header>
+    <form class="m-1" [formGroup]="detailSupplementForm">
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSupplement">Nome do Insumo:</label>
+          <app-input-form #inputNameSupplement formControlName="nameSupplement"
+            (onInput)="updateFormField(inputNameSupplement.id,$event)" type="text"
+            id="nameSupplement" placeholder="Nome do Insumo"></app-input-form>
+          <div
+            *ngIf="submitted && detailSupplementForm.get('nameSupplement')?.hasError('required') || detailSupplementForm.get('nameSupplement')?.hasError('required') && detailSupplementForm.get('nameSupplement')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um nome para o insumo!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="stock">Quantidade de Insumo em Estoque:</label>
+          <app-input-form #inputStock formControlName="stock"
+            (onInput)="updateFormField(inputStock.id,$event)" type="text" id="stock"
+            placeholder="Quantidade de Insumo em Estoque"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="typeMensure">Tipo de Medida:</label>
+          <app-autocomplete-form #inputTypeMensure (onSelect)="onSelectTypeMensure($event)"
+            formControlName="typeMensure" id="typeMensure" placeholder="Tipo de Medida"
+            [options]="tipeMensureMap"></app-autocomplete-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSupplementCategory">Categoria de
+            Insumo:</label>
+          <app-autocomplete-form #inputNameDonationCategory
+            (onSelect)="onSelectSupplementCategory($event)" formControlName="nameSupplementCategory"
+            (onInput)="filterSupplementCategoriesList(inputNameDonationCategory.value)"
+            id="nameSupplementCategory" placeholder="Categoria de Insumo"
+            [options]="supplementCategoriesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailSupplementForm.get('nameSupplementCategory')?.hasError('required') || detailSupplementForm.get('nameSupplementCategory')?.hasError('required') && detailSupplementForm.get('nameSupplementCategory')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma categoria de insumo!
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

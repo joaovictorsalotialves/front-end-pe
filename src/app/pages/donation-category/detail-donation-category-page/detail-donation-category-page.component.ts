@@ -39,11 +39,12 @@ export class DetailDonationCategoryPageComponent extends DetailDonationCategorie
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/donation-categories/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa categoria de doação!');
-      this._router.navigate(['/donation-categories/view'])
+      this._router.navigate(['/donation-categories/view']);
     }
   }
 

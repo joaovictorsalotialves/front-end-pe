@@ -39,11 +39,12 @@ export class DetailSupplementCategoryPageComponent extends DetailSupplementCateg
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/supplement-categories/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa categoria de insumo!');
-      this._router.navigate(['/supplement-categories/view'])
+      this._router.navigate(['/supplement-categories/view']);
     }
   }
 

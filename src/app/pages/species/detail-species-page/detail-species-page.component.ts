@@ -39,11 +39,12 @@ export class DetailSpeciesPageComponent extends DetailSpeciesFormController {
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/species/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa espécie!');
-      this._router.navigate(['/species/view'])
+      this._router.navigate(['/species/view']);
     }
   }
 

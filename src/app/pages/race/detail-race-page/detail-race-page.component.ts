@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
 import { IRace } from '../../../interfaces/race/race.interface';
@@ -10,7 +10,7 @@ import { DetailRacesFormController } from './detail-race-form-controller';
   templateUrl: './detail-race-page.component.html',
   styleUrl: './detail-race-page.component.scss'
 })
-export class DetailRacePageComponent extends DetailRacesFormController {
+export class DetailRacePageComponent extends DetailRacesFormController implements OnInit {
   userLogged = {} as IEmployee;
   submitted = false;
 
@@ -39,11 +39,12 @@ export class DetailRacePageComponent extends DetailRacesFormController {
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/races/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa raça!');
-      this._router.navigate(['/races/view'])
+      this._router.navigate(['/races/view']);
     }
   }
 

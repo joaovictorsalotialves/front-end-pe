@@ -94,11 +94,12 @@ export class DetailAdoptionPageComponent extends DetailAdoptionFormController {
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/adoptions/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar essa adoção!');
-      this._router.navigate(['/adoptions/view'])
+      this._router.navigate(['/adoptions/view']);
     }
   }
 

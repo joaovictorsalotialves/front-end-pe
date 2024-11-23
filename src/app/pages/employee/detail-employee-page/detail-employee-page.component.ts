@@ -63,11 +63,12 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
         },
         error: (error) => {
           alert(error);
+          this._router.navigate(['/employees/view']);
         },
       });
     } else {
       alert('Não foi possivel visualizar esse fúncionario');
-      this._router.navigate(['/employees/view'])
+      this._router.navigate(['/employees/view']);
     }
   }
 

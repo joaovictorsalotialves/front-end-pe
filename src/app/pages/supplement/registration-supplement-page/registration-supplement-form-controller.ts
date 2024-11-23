@@ -13,10 +13,10 @@ export class RegistrationSupplementFormController {
   createForm() {
     this.registrationSupplementForm = this._fb.group({
       nameSupplement: ['', Validators.required],
-      stock: [''],
+      stock: [0],
       typeMensure: ['', Validators.required],
-      idSuppplementCategory: ['', Validators.required],
-      nameSuppplementCategory: ['', Validators.required],
+      idSupplementCategory: ['', Validators.required],
+      nameSupplementCategory: ['', Validators.required],
     })
   }
 }
