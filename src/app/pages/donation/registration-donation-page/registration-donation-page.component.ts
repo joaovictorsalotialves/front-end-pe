@@ -25,7 +25,7 @@ export class RegistrationDonationPageComponent extends RegistrationDoantionFormC
   private readonly _usersServices = inject(UsersService);
   private readonly _donationsServices = inject(DonationsService);
   private readonly _donationCategoriessServices = inject(DonationCategoriesService);
-  private readonly _suppllementsServices = inject(SupplementsService);
+  private readonly _supplementsServices = inject(SupplementsService);
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
@@ -80,11 +80,11 @@ export class RegistrationDonationPageComponent extends RegistrationDoantionFormC
       this.supplement_input_information.markAsUntouched();
     }
 
-    this._suppllementsServices.getSupplements(nameSupplement).pipe().subscribe({
+    this._supplementsServices.getSupplements(nameSupplement).pipe().subscribe({
       next: (supplementList) => {
         const transformedSupplementList = supplementList?.map((supplement) => ({
           id: supplement.idSupplement,
-          value: supplement.nameSupplement,
+          value: supplement.nameSupplement + ' - ' + supplement.typeMensure,
         }))
         this.supplementList = transformedSupplementList || [];
       },

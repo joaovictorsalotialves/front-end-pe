@@ -1,1 +1,41 @@
-<p>registration-supplement-input-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR ENTRADA DE INSUMO"></app-main-header>
+    <form class="m-1" [formGroup]="registrationSupplementInputForm">
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="description">Descrição:</label>
+          <app-input-form #inputDescription formControlName="description"
+            (onInput)="updateFormField(inputDescription.id,$event)" type="text" id="description"
+            placeholder="Descrição"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="amount">Quantidade de Insumo:</label>
+          <app-input-form #inputAmount formControlName="amount"
+            (onInput)="updateFormField(inputAmount.id, $event)" type="text" id="amount"
+            placeholder="Quantidade de Insumo"></app-input-form>
+          <div
+            *ngIf="submitted && registrationSupplementInputForm.get('amount')?.hasError('required') || registrationSupplementInputForm.get('amount')?.hasError('required') && registrationSupplementInputForm.get('amount')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe a quantidade de insumos!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSupplement">Insumo:</label>
+          <app-autocomplete-form #inputSupplement (onSelect)="onSelectSupplement($event)"
+            formControlName="nameSupplement" (onInput)="filterSupplementList(inputSupplement.value)"
+            id="nameSupplement" placeholder="Insumo"
+            [options]="supplementList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationSupplementInputForm.get('nameSupplement')?.hasError('required') || registrationSupplementInputForm.get('nameSupplement')?.hasError('required') && registrationSupplementInputForm.get('nameSupplement')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione o Insumo!
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

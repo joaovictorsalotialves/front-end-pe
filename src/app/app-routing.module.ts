@@ -101,11 +101,11 @@ const routes: Routes = [
 
   { path: 'supplement-inputs/create', component: RegistrationSupplementInputPageComponent },
   { path: 'supplement-inputs/view', component: ViewSupplementInputPageComponent },
-  { path: 'supplement-inputs/detail/:idSupplementCategory', component: DetailSupplementInputPageComponent },
+  { path: 'supplement-inputs/detail/:idSupplementInput', component: DetailSupplementInputPageComponent },
 
-  { path: 'supplement-output/create', component: RegistrationSupplementOutputPageComponent },
-  { path: 'supplement-output/view', component: ViewSupplementOutputPageComponent },
-  { path: 'supplement-output/detail/:idSupplementCategory', component: DetailSupplementOutputPageComponent },
+  { path: 'supplement-outputs/create', component: RegistrationSupplementOutputPageComponent },
+  { path: 'supplement-outputs/view', component: ViewSupplementOutputPageComponent },
+  { path: 'supplement-outputs/detail/:idSupplementOutput', component: DetailSupplementOutputPageComponent },
 
   { path: 'supplement-categories/create', component: RegistrationSupplementCategoryPageComponent },
   { path: 'supplement-categories/view', component: ViewSupplementCategoryPageComponent },

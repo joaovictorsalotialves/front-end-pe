@@ -1,1 +1,14 @@
-<p>view-supplement-input-page works!</p>
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR ENTRADAS DE INSUMOS"></app-main-header>
+    <div class="m-1">
+      <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
+        placeholder="Nome do Insumo" [icon]="routersIconsMap.search"></app-input-form>
+      <div>
+        <app-card-view *ngFor="let supplementInput of supplementInputsList"
+          [icon]="routersIconsMap.wysiwyg" [item]="supplementInput.values" [id]="supplementInput.id"
+          urlDetail="/supplement-inputs"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

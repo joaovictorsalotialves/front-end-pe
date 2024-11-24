@@ -105,4 +105,16 @@ export class DetailSupplementPageComponent extends DetailSupplementFormControlle
       }
     })
   }
+
+  del() {
+    this._supplementsServices.deleteSupplement(Number(this.supplementId)).pipe().subscribe({
+      next: (response) => {
+        alert('Insumo deletada com sucesso!');
+        this._router.navigate(['/supplements/view']);
+      },
+      error: (error) => {
+        alert(error);
+      }
+    })
+  }
 }

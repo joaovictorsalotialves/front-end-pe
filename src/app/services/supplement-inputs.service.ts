@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { ISupplementInputRequest } from '../interfaces/supplement-inputs/supplement-input-request.interface';
 import { ISupplementInput } from '../interfaces/supplement-inputs/supplement-input.interface';
 import { ISupplementInputsResponse } from '../interfaces/supplement-inputs/supplement-inputs-response';
 import { SupplementInputsList } from '../types/supplement-inputs-list';
@@ -49,7 +50,7 @@ export class SupplementInputsService {
     );
   }
 
-  postSupplementInput(objSupplementInput: ISupplementInput): Observable<ISupplementInputsResponse> {
+  postSupplementInput(objSupplementInput: ISupplementInputRequest): Observable<ISupplementInputsResponse> {
     let url = API_URL + 'supplement-input';
     return this._httpClient.post<ISupplementInputsResponse>(url, objSupplementInput, {
       headers: { authorization: `Bearer ${this.authToken}` }
@@ -59,7 +60,7 @@ export class SupplementInputsService {
     );
   }
 
-  putSupplementInput(idSupplementInput: number, objSupplementInput: ISupplementInput): Observable<ISupplementInputsResponse> {
+  putSupplementInput(idSupplementInput: number, objSupplementInput: ISupplementInputRequest): Observable<ISupplementInputsResponse> {
     let url = API_URL + 'supplement-input/' + idSupplementInput;
     return this._httpClient.put<ISupplementInputsResponse>(url, objSupplementInput, {
       headers: { authorization: `Bearer ${this.authToken}` }

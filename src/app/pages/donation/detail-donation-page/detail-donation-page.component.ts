@@ -116,7 +116,7 @@ export class DetailDonationPageComponent extends DetailDonationFormController im
       next: (supplementList) => {
         const transformedSupplementList = supplementList?.map((supplement) => ({
           id: supplement.idSupplement,
-          value: supplement.nameSupplement,
+          value: supplement.nameSupplement + ' - ' + supplement.typeMensure,
         }))
         this.supplementList = transformedSupplementList || [];
       },

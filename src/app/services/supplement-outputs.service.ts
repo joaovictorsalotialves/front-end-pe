@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { ISupplementOutputRequest } from '../interfaces/supplement-outputs/supplement-output-request.interface';
 import { ISupplementOutput } from '../interfaces/supplement-outputs/supplement-output.interface';
 import { ISupplementOutputsResponse } from '../interfaces/supplement-outputs/supplement-outputs-response';
 import { SupplementOutputsList } from '../types/supplement-outputs-list';
@@ -49,7 +50,7 @@ export class SupplementOutputsService {
     );
   }
 
-  postSupplementOutput(objSupplementOutput: ISupplementOutput): Observable<ISupplementOutputsResponse> {
+  postSupplementOutput(objSupplementOutput: ISupplementOutputRequest): Observable<ISupplementOutputsResponse> {
     let url = API_URL + 'supplement-output';
     return this._httpClient.post<ISupplementOutputsResponse>(url, objSupplementOutput, {
       headers: { authorization: `Bearer ${this.authToken}` }
@@ -59,7 +60,7 @@ export class SupplementOutputsService {
     );
   }
 
-  putSupplementOutput(idSupplementOutput: number, objSupplementOutput: ISupplementOutput): Observable<ISupplementOutputsResponse> {
+  putSupplementOutput(idSupplementOutput: number, objSupplementOutput: ISupplementOutputRequest): Observable<ISupplementOutputsResponse> {
     let url = API_URL + 'supplement-output/' + idSupplementOutput;
     return this._httpClient.put<ISupplementOutputsResponse>(url, objSupplementOutput, {
       headers: { authorization: `Bearer ${this.authToken}` }

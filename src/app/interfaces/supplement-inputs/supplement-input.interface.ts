@@ -5,4 +5,7 @@ export interface ISupplementInput {
   inputDate: string;
   idSupplement: number;
   nameSupplement: string;
+  idSupplementCategory: number;
+  nameSupplementCategory: string;
+  typeMensure: string;
 }

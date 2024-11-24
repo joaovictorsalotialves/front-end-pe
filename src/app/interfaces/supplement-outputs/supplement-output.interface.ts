@@ -5,4 +5,6 @@ export interface ISupplementOutput {
   outputDate: string;
   idSupplement: number;
   nameSupplement: string;
+  typeMensure: string;
+  nameSupplementCategory: string;
 }

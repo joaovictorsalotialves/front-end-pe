@@ -46,6 +46,7 @@ import { RegistrationSupplementInputPageComponent } from './supplement-input/reg
 import { ViewSupplementInputPageComponent } from './supplement-input/view-supplement-input-page/view-supplement-input-page.component';
 import { DetailSupplementOutputPageComponent } from './supplement-output/detail-supplement-output-page/detail-supplement-output-page.component';
 import { RegistrationSupplementOutputPageComponent } from './supplement-output/registration-supplement-output-page/registration-supplement-output-page.component';
+import { ViewSupplementOutputPageComponent } from './supplement-output/view-supplement-output-page/view-supplement-output-page.component';
 import { DetailSupplementPageComponent } from './supplement/detail-supplement-page/detail-supplement-page.component';
 import { RegistrationSupplementPageComponent } from './supplement/registration-supplement-page/registration-supplement-page.component';
 import { ViewSupplementPageComponent } from './supplement/view-supplement-page/view-supplement-page.component';
@@ -101,6 +102,7 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     RegistrationSupplementInputPageComponent,
     RegistrationSupplementOutputPageComponent,
     DetailSupplementOutputPageComponent,
+    ViewSupplementOutputPageComponent,
   ],
   imports: [
     CommonModule,
@@ -161,6 +163,7 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     RegistrationSupplementInputPageComponent,
     RegistrationSupplementOutputPageComponent,
     DetailSupplementOutputPageComponent,
+    ViewSupplementOutputPageComponent,
   ]
 })
 export class PagesModule { }
