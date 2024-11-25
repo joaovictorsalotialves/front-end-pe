@@ -1,0 +1,11 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="VISUALIZAR RELATORIOS MÉDICOS"></app-main-header>
+    <div class="m-1">
+      <div>
+        <app-card-view *ngFor="let animal of clinicalReportsList" [icon]="routersIconsMap.person"
+          [item]="animal.values" [id]="animal.id" [urlDetail]="urlDetail"></app-card-view>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

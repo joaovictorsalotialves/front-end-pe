@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
+import { IAnimalRequest } from '../interfaces/animals/animal-request.interface';
 import { IAnimal } from '../interfaces/animals/animal.interface';
 import { IAnimalsResponse } from '../interfaces/animals/animals-response.interface';
 import { IClinicalReportsResponse } from '../interfaces/clinical-reports-response/clinical-reports-response.interface';
@@ -68,12 +69,12 @@ export class AnimalsService {
     return this._httpClient.get<IClinicalReportsResponse>(url, {
       headers: { authorization: `Bearer ${this.authToken}` }
     }).pipe(
-      map((animalsResponse) => animalsResponse.values),
+      map((animalsResponse) => animalsResponse.values as ClinicalReportsList),
       catchError(handleError)
     );
   }
 
-  postAnimal(objAnimal: IAnimal): Observable<IAnimalsResponse> {
+  postAnimal(objAnimal: IAnimalRequest): Observable<IAnimalsResponse> {
     let url = API_URL + 'animal/';
     return this._httpClient.post<IAnimalsResponse>(url, objAnimal, {
       headers: { authorization: `Bearer ${this.authToken}` }
@@ -83,7 +84,7 @@ export class AnimalsService {
     );
   }
 
-  putAnimal(idAnimal: number, objAnimal: IAnimal): Observable<IAnimalsResponse> {
+  putAnimal(idAnimal: number, objAnimal: IAnimalRequest): Observable<IAnimalsResponse> {
     let url = API_URL + 'animal/' + idAnimal;
     return this._httpClient.put<IAnimalsResponse>(url, objAnimal, {
       headers: { authorization: `Bearer ${this.authToken}` }

@@ -1,5 +1,4 @@
-export interface IAnimal {
-  idAnimal: number,
+export interface IAnimalRequest {
   nameAnimal: string,
   size: string,
   statusAnimal: string,

@@ -1,0 +1,90 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="EDITAR ANIMAL"></app-main-header>
+    <form class="m-1" [formGroup]="detailAnimalForm">
+      <app-subheader title="Informações do Animal"></app-subheader>
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameAnimal">Nome do Animal:</label>
+          <app-input-form #inputNameAnimal formControlName="nameAnimal"
+            (onInput)=" updateFormField(inputNameAnimal.id, $event)" type="text" id="nameAnimal"
+            placeholder="Nome do Animal"></app-input-form>
+          <div
+            *ngIf="submitted && detailAnimalForm.get('nameAnimal')?.hasError('required') || detailAnimalForm.get('nameAnimal')?.hasError('required') && detailAnimalForm.get('nameAnimal')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um nome completo!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="description">Descrição:</label>
+          <app-input-form #inputDescription formControlName="description"
+            (onInput)=" updateFormField(inputDescription.id, $event)" type="text" id="description"
+            placeholder="Descrição"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="size">Porte:</label>
+          <app-autocomplete-form #inputSize formControlName="size" (onSelect)="onSelectSize($event)"
+            id="size" placeholder="Porte" [options]="sizeAnimalList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailAnimalForm.get('size')?.hasError('required') || detailAnimalForm.get('size')?.hasError('required') && detailAnimalForm.get('size')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione um porte!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="statusAnimal">Status:</label>
+          <app-autocomplete-form #inputStatusAnimal formControlName="statusAnimal"
+            (onSelect)="onSelectStatusAnimal($event)" id="statusAnimal" placeholder="Status"
+            [options]="statusAnimalList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailAnimalForm.get('statusAnimal')?.hasError('required') || detailAnimalForm.get('statusAnimal')?.hasError('required') && detailAnimalForm.get('statusAnimal')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione um status!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSpecies">Espécie:</label>
+          <app-autocomplete-form #inputNameSpecies formControlName="nameSpecies"
+            (onInput)="filterSpeciesList(inputNameSpecies.value)"
+            (onSelect)="onSelectSpecies($event)" id="nameSpecies" placeholder="Espécie"
+            [options]="speciesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailAnimalForm.get('nameSpecies')?.hasError('required') || detailAnimalForm.get('nameSpecies')?.hasError('required') && detailAnimalForm.get('nameSpecies')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma espécie!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameRace">Raça:</label>
+          <app-autocomplete-form #inputNameRace formControlName="nameRace"
+            (onInput)="filterRacesList(inputNameRace.value)" (onSelect)="onSelectRace($event)"
+            id="nameRace" placeholder="Raça" [options]="racesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && detailAnimalForm.get('nameRace')?.hasError('required') || detailAnimalForm.get('nameRace')?.hasError('required') && detailAnimalForm.get('nameRace')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma raça!
+          </div>
+        </div>
+      </div>
+      <app-subheader title="Relatorios Médicos"></app-subheader>
+      <div class="flex flex-col justify-center items-start mb-4 pl-4">
+        <div (click)="redirectToClinicalReportsView()"
+          class="flex justify-end items-center tracking-widest cursor-pointer border _border_blue p-4 rounded-3xl">
+          <a class="_text-blue font-semibold text-base mr-2">Visualizar Relatorios Médicos</a>
+          <img class="h-6 w-6" src="../../../assets/icons/icon_arrow_forward_blue.png">
+        </div>
+        <div (click)="redirectToClinicalReportsCreate()"
+          class="flex justify-end items-center tracking-widest mt-4 cursor-pointer border _border_blue p-4 rounded-3xl">
+          <a class="_text-blue font-semibold text-base mr-2">Criar Relatorios Médicos</a>
+          <img class="h-6 w-6" src="../../../assets/icons/icon_add_circle.png">
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+      <div class="text-center mt-4">
+        <button appButton="red" (click)="del()">Deletar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

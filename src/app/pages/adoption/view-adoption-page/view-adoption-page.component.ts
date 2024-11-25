@@ -27,7 +27,7 @@ export class ViewAdoptionPageComponent {
   filterAdoptionsList(nameAdoption: string | undefined = undefined) {
     this._adoptionsService.getAdoptions(nameAdoption).pipe().subscribe({
       next: (adoptionsList) => {
-        const transformedEmployeesList = adoptionsList?.map((adoption) => ({
+        const transformedAdoptionsList = adoptionsList?.map((adoption) => ({
           id: adoption.idAdoption,
           values: [
             { key: 'Nome do animal', value: adoption.nameAnimal },
@@ -36,7 +36,7 @@ export class ViewAdoptionPageComponent {
             { key: 'Status da adoção', value: adoption.statusAdoption },
           ]
         }))
-        this.adoptionsList = transformedEmployeesList || [];
+        this.adoptionsList = transformedAdoptionsList || [];
       },
       error: (error) => {
         console.error(error.message);

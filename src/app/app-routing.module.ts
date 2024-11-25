@@ -4,9 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetailAdoptionPageComponent } from './pages/adoption/detail-adoption-page/detail-adoption-page.component';
 import { RegistrationAdoptionPageComponent } from './pages/adoption/registration-adoption-page/registration-adoption-page.component';
 import { ViewAdoptionPageComponent } from './pages/adoption/view-adoption-page/view-adoption-page.component';
+import { DetailAnimalPageComponent } from './pages/animal/detail-animal-page/detail-animal-page.component';
+import { RegistrationAnimalPageComponent } from './pages/animal/registration-animal-page/registration-animal-page.component';
+import { ViewAnimalPageComponent } from './pages/animal/view-animal-page/view-animal-page.component';
 import { LoginPageComponent } from './pages/auth-flow/login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './pages/auth-flow/recover-password-page/recover-password-page.component';
 import { ResetPasswordPageComponent } from './pages/auth-flow/reset-password-page/reset-password-page.component';
+import { DetailClinicalReportPageComponent } from './pages/clinical-report/detail-clinical-report-page/detail-clinical-report-page.component';
+import { RegistrationClinicalReportPageComponent } from './pages/clinical-report/registration-clinical-report-page/registration-clinical-report-page.component';
+import { ViewClinicalReportPageComponent } from './pages/clinical-report/view-clinical-report-page/view-clinical-report-page.component';
 import { DetailDonationCategoryPageComponent } from './pages/donation-category/detail-donation-category-page/detail-donation-category-page.component';
 import { RegistrationDonationCategoryPageComponent } from './pages/donation-category/registration-donation-category-page/registration-donation-category-page.component';
 import { ViewDonationCategoryPageComponent } from './pages/donation-category/view-donation-category-page/view-donation-category-page.component';
@@ -74,6 +80,14 @@ const routes: Routes = [
   { path: 'donation-categories/create', component: RegistrationDonationCategoryPageComponent },
   { path: 'donation-categories/view', component: ViewDonationCategoryPageComponent },
   { path: 'donation-categories/detail/:idDonationCategory', component: DetailDonationCategoryPageComponent },
+
+  { path: 'animals/create', component: RegistrationAnimalPageComponent },
+  { path: 'animals/view', component: ViewAnimalPageComponent },
+  { path: 'animals/detail/:idAnimal', component: DetailAnimalPageComponent },
+
+  { path: 'animals/:idAnimal/clinical-reports/create', component: RegistrationClinicalReportPageComponent },
+  { path: 'animals/:idAnimal/clinical-reports/view', component: ViewClinicalReportPageComponent },
+  { path: 'animals/:idAnimal/clinical-reports/detail/:idClinicalReport', component: DetailClinicalReportPageComponent },
 
   { path: 'species/create', component: RegistrationSpeciesPageComponent },
   { path: 'species/view', component: ViewSpeciesPageComponent },

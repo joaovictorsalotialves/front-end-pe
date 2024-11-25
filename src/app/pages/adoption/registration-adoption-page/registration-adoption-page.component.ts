@@ -16,8 +16,8 @@ export class RegistrationAdoptionPageComponent extends RegistrationAdoptionFormC
   userLogged = {} as IEmployee;
   submitted = false;
 
-  animalsList: { id: number; value: string; }[] = []
-  usersList: { id: number; value: string; }[] = []
+  animalsList: { id: number; value: string; }[] = [];
+  usersList: { id: number; value: string; }[] = [];
   statusAdoptionList = STATUS_ADOPTION_MAP;
 
   private readonly _router = inject(Router);

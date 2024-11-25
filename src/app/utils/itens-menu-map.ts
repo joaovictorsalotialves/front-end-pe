@@ -89,7 +89,7 @@ export class ItensMenuMap {
     title: 'Cadastrar animal',
     icon: ROUTERS_ICONS_MAP.pets,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/animals/create']);
     }
   };
 
@@ -97,7 +97,7 @@ export class ItensMenuMap {
     title: 'Visualizar animais',
     icon: ROUTERS_ICONS_MAP.sound_detection_dog_barking,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/animals/view']);
     }
   };
 

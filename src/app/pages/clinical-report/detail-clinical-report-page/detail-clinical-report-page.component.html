@@ -1,0 +1,29 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR RELATORIO MÉDICO"></app-main-header>
+    <form class="m-1" [formGroup]="detailClinicalReportForm">
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameAnimal">Nome do Animal:</label>
+        <app-autocomplete-form #inputNameAnimal formControlName="nameAnimal" id="nameAnimal"
+          placeholder="Animal" [options]="[]"></app-autocomplete-form>
+      </div>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="nameEmployee">Nome do Usúario:</label>
+        <app-autocomplete-form #inputNameEmployee formControlName="nameEmployee" id="nameEmployee"
+          placeholder="Veterinário" [options]="[]"></app-autocomplete-form>
+      </div>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="descriptionClinicalReport">Relatorio
+          Médico:</label>
+        <textarea appTextArea #inputDescriptionClinicalReport
+          formControlName="descriptionClinicalReport" placeholder="Relatorio Médico"></textarea>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+      <div class="text-center mt-4">
+        <button appButton="red" (click)="del()">Deletar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

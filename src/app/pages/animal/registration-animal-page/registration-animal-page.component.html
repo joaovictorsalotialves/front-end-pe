@@ -1,0 +1,73 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="CADASTRAR ANIMAL"></app-main-header>
+    <form class="m-1" [formGroup]="registrationAnimalForm">
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameAnimal">Nome do Animal:</label>
+          <app-input-form #inputNameAnimal formControlName="nameAnimal"
+            (onInput)=" updateFormField(inputNameAnimal.id, $event)" type="text" id="nameAnimal"
+            placeholder="Nome do Animal"></app-input-form>
+          <div
+            *ngIf="submitted && registrationAnimalForm.get('nameAnimal')?.hasError('required') || registrationAnimalForm.get('nameAnimal')?.hasError('required') && registrationAnimalForm.get('nameAnimal')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Informe um nome completo!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="description">Descrição:</label>
+          <app-input-form #inputDescription formControlName="description"
+            (onInput)=" updateFormField(inputDescription.id, $event)" type="text" id="description"
+            placeholder="Descrição"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="size">Porte:</label>
+          <app-autocomplete-form #inputSize formControlName="size" (onSelect)="onSelectSize($event)"
+            id="size" placeholder="Porte" [options]="sizeAnimalList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationAnimalForm.get('size')?.hasError('required') || registrationAnimalForm.get('size')?.hasError('required') && registrationAnimalForm.get('size')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione um porte!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="statusAnimal">Status:</label>
+          <app-autocomplete-form #inputStatusAnimal formControlName="statusAnimal"
+            (onSelect)="onSelectStatusAnimal($event)" id="statusAnimal" placeholder="Status"
+            [options]="statusAnimalList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationAnimalForm.get('statusAnimal')?.hasError('required') || registrationAnimalForm.get('statusAnimal')?.hasError('required') && registrationAnimalForm.get('statusAnimal')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione um status!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameSpecies">Espécie:</label>
+          <app-autocomplete-form #inputNameSpecies formControlName="nameSpecies"
+            (onInput)="filterSpeciesList(inputNameSpecies.value)"
+            (onSelect)="onSelectSpecies($event)" id="nameSpecies" placeholder="Espécie"
+            [options]="speciesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationAnimalForm.get('nameSpecies')?.hasError('required') || registrationAnimalForm.get('nameSpecies')?.hasError('required') && registrationAnimalForm.get('nameSpecies')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma espécie!
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="nameRace">Raça:</label>
+          <app-autocomplete-form #inputNameRace formControlName="nameRace"
+            (onInput)="filterRacesList(inputNameRace.value)" (onSelect)="onSelectRace($event)"
+            id="nameRace" placeholder="Raça" [options]="racesList"></app-autocomplete-form>
+          <div
+            *ngIf="submitted && registrationAnimalForm.get('nameRace')?.hasError('required') || registrationAnimalForm.get('nameRace')?.hasError('required') && registrationAnimalForm.get('nameRace')?.touched"
+            class="text-red-500 text-start ml-4">
+            Por favor! Selecione uma raça!
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button appButton="blue" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</app-layout-page>

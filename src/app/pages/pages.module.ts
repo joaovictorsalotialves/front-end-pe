@@ -3,15 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { DetailAdoptionPageComponent } from './adoption/detail-adoption-page/detail-adoption-page.component';
 import { RegistrationAdoptionPageComponent } from './adoption/registration-adoption-page/registration-adoption-page.component';
 import { ViewAdoptionPageComponent } from './adoption/view-adoption-page/view-adoption-page.component';
+import { DetailAnimalPageComponent } from './animal/detail-animal-page/detail-animal-page.component';
+import { RegistrationAnimalPageComponent } from './animal/registration-animal-page/registration-animal-page.component';
+import { ViewAnimalPageComponent } from './animal/view-animal-page/view-animal-page.component';
 import { LoginPageComponent } from './auth-flow/login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './auth-flow/recover-password-page/recover-password-page.component';
 import { ResetPasswordPageComponent } from './auth-flow/reset-password-page/reset-password-page.component';
+import { DetailClinicalReportPageComponent } from './clinical-report/detail-clinical-report-page/detail-clinical-report-page.component';
+import { RegistrationClinicalReportPageComponent } from './clinical-report/registration-clinical-report-page/registration-clinical-report-page.component';
+import { ViewClinicalReportPageComponent } from './clinical-report/view-clinical-report-page/view-clinical-report-page.component';
 import { DetailDonationCategoryPageComponent } from './donation-category/detail-donation-category-page/detail-donation-category-page.component';
 import { RegistrationDonationCategoryPageComponent } from './donation-category/registration-donation-category-page/registration-donation-category-page.component';
 import { ViewDonationCategoryPageComponent } from './donation-category/view-donation-category-page/view-donation-category-page.component';
@@ -103,19 +108,23 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     RegistrationSupplementOutputPageComponent,
     DetailSupplementOutputPageComponent,
     ViewSupplementOutputPageComponent,
+    ViewAnimalPageComponent,
+    RegistrationAnimalPageComponent,
+    DetailAnimalPageComponent,
+    DetailClinicalReportPageComponent,
+    ViewClinicalReportPageComponent,
+    RegistrationClinicalReportPageComponent,
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     DirectivesModule,
-    AngularMaterialModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
   exports: [
     ComponentsModule,
     DirectivesModule,
-    AngularMaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
     LoginPageComponent,
@@ -164,6 +173,12 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     RegistrationSupplementOutputPageComponent,
     DetailSupplementOutputPageComponent,
     ViewSupplementOutputPageComponent,
+    ViewAnimalPageComponent,
+    RegistrationAnimalPageComponent,
+    DetailAnimalPageComponent,
+    DetailClinicalReportPageComponent,
+    ViewClinicalReportPageComponent,
+    RegistrationClinicalReportPageComponent,
   ]
 })
 export class PagesModule { }
