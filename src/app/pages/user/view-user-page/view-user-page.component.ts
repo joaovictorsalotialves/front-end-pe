@@ -1,13 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
+import { PhonePipe } from '../../../pipes/phone.pipe';
 import { UsersService } from '../../../services/users.service';
 import { ROUTERS_ICONS_MAP } from '../../../utils/routers-icons-map';
 
 @Component({
   selector: 'app-view-user-page',
   templateUrl: './view-user-page.component.html',
-  styleUrl: './view-user-page.component.scss'
+  styleUrl: './view-user-page.component.scss',
+  providers: [PhonePipe]
 })
 export class ViewUserPageComponent {
   userLogged = {} as IEmployee;
@@ -18,6 +20,8 @@ export class ViewUserPageComponent {
 
   private readonly _router = inject(Router);
   private readonly _usersService = inject(UsersService);
+
+  constructor(private phonePipe: PhonePipe) { }
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
@@ -32,7 +36,7 @@ export class ViewUserPageComponent {
           values: [
             { key: 'Nome', value: user.nameUser },
             { key: 'Email', value: user.email },
-            { key: 'Celular', value: user.cellPhoneNumber },
+            { key: 'Celular', value: this.phonePipe.transform(user.cellPhoneNumber) },
           ]
         }))
         this.usersList = transformedUsersList || [];

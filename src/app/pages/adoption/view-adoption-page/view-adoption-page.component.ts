@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
@@ -7,7 +8,8 @@ import { ROUTERS_ICONS_MAP } from '../../../utils/routers-icons-map';
 @Component({
   selector: 'app-view-adoption-page',
   templateUrl: './view-adoption-page.component.html',
-  styleUrl: './view-adoption-page.component.scss'
+  styleUrl: './view-adoption-page.component.scss',
+  providers: [DatePipe]
 })
 export class ViewAdoptionPageComponent {
   userLogged = {} as IEmployee;
@@ -18,6 +20,8 @@ export class ViewAdoptionPageComponent {
 
   private readonly _router = inject(Router);
   private readonly _adoptionsService = inject(AdoptionsService);
+
+  constructor(private datePipe: DatePipe) { }
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
@@ -32,7 +36,7 @@ export class ViewAdoptionPageComponent {
           values: [
             { key: 'Nome do animal', value: adoption.nameAnimal },
             { key: 'Nome do adotante', value: adoption.nameUser },
-            { key: 'Data da adoção', value: adoption.dateAdoption },
+            { key: 'Data da adoção', value: this.datePipe.transform(adoption.dateAdoption) },
             { key: 'Status da adoção', value: adoption.statusAdoption },
           ]
         }))

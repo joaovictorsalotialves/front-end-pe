@@ -10,7 +10,7 @@ export class DetailEmployeeFormController {
   private readonly _fb = inject(FormBuilder);
 
   private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  private cellPhonePattern = /^(0[1-9]{2})[1-9][0-9]{7,8}$/;
+  private cellPhonePattern = /^(\d{2})9?\d{8}$/;
 
   constructor() {
     this.createForm();

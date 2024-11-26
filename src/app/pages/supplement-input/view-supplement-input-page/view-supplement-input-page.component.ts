@@ -1,12 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { IEmployee } from '../../../interfaces/employees/employee.interface';
+import { DatePipe } from '../../../pipes/date.pipe';
 import { SupplementInputsService } from '../../../services/supplement-inputs.service';
 import { ROUTERS_ICONS_MAP } from '../../../utils/routers-icons-map';
 
 @Component({
   selector: 'app-view-supplement-input-page',
   templateUrl: './view-supplement-input-page.component.html',
-  styleUrl: './view-supplement-input-page.component.scss'
+  styleUrl: './view-supplement-input-page.component.scss',
+  providers: [DatePipe]
 })
 export class ViewSupplementInputPageComponent {
   userLogged = {} as IEmployee;
@@ -16,6 +18,8 @@ export class ViewSupplementInputPageComponent {
   routersIconsMap = ROUTERS_ICONS_MAP;
 
   private readonly _supplementInputssService = inject(SupplementInputsService);
+
+  constructor(private datePipe: DatePipe) { }
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
@@ -31,7 +35,7 @@ export class ViewSupplementInputPageComponent {
             { key: 'Nome do Insumo', value: supplementInput.nameSupplement },
             { key: 'Categoria do Insumo', value: supplementInput.nameSupplementCategory },
             { key: 'Tipo de Medida', value: supplementInput.typeMensure },
-            { key: 'Data da Entrada', value: supplementInput.inputDate },
+            { key: 'Data da Entrada', value: this.datePipe.transform(supplementInput.inputDate) },
           ]
         }))
         this.supplementInputsList = transformedSupplemnetsList || [];

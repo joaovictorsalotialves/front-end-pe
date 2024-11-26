@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { AuthFlowContentComponent } from './auth-flow-content/auth-flow-content.component';
@@ -40,10 +41,13 @@ import { SubheaderComponent } from './subheader/subheader.component';
   imports: [
     CommonModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    NgxMaskDirective,
   ],
   exports: [
     PipesModule,
+    NgxMaskDirective,
+
     AuthFlowHeaderComponent,
     AuthFlowContentComponent,
     InputFormComponent,
@@ -57,6 +61,9 @@ import { SubheaderComponent } from './subheader/subheader.component';
     AutocompleteFormComponent,
     CardViewComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    provideNgxMask()
+  ]
 })
 export class ComponentsModule { }
