@@ -1,0 +1,21 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="RELATÓRIO DE DOAÇÃO"></app-main-header>
+    <div appGridContainerSm2>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="startDate">Data Inicial:</label>
+        <app-input-form #inputStartDate (onInput)="onDateRangeChange()" type="date" id="startDate"
+          placeholder="Data Inicial"></app-input-form>
+      </div>
+      <div class="mb-4">
+        <label class="font-semibold text-sm" for="endDate">Data Final:</label>
+        <app-input-form #inputEndDate (onInput)="onDateRangeChange()" type="date" id="endDate"
+          placeholder="Data Final"></app-input-form>
+      </div>
+    </div>
+    <div class="grid w-full">
+      <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+        class="w-full block"></highcharts-chart>
+    </div>
+  </div>
+</app-layout-page>

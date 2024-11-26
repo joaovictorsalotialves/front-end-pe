@@ -18,6 +18,7 @@ import { RegistrationDonationCategoryPageComponent } from './pages/donation-cate
 import { ViewDonationCategoryPageComponent } from './pages/donation-category/view-donation-category-page/view-donation-category-page.component';
 import { DetailDonationPageComponent } from './pages/donation/detail-donation-page/detail-donation-page.component';
 import { RegistrationDonationPageComponent } from './pages/donation/registration-donation-page/registration-donation-page.component';
+import { ReportDonationPageComponent } from './pages/donation/report-donation-page/report-donation-page.component';
 import { ViewDonationPageComponent } from './pages/donation/view-donation-page/view-donation-page.component';
 import { DetailEmployeePageComponent } from './pages/employee/detail-employee-page/detail-employee-page.component';
 import { RegistrationEmployeePageComponent } from './pages/employee/registration-employee-page/registration-employee-page.component';
@@ -75,6 +76,7 @@ const routes: Routes = [
 
   { path: 'donations/create', component: RegistrationDonationPageComponent },
   { path: 'donations/view', component: ViewDonationPageComponent },
+  { path: 'donations/report', component: ReportDonationPageComponent },
   { path: 'donations/detail/:idDonation', component: DetailDonationPageComponent },
 
   { path: 'donation-categories/create', component: RegistrationDonationCategoryPageComponent },

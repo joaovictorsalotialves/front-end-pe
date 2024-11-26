@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { DetailAdoptionPageComponent } from './adoption/detail-adoption-page/detail-adoption-page.component';
@@ -22,6 +23,7 @@ import { RegistrationDonationCategoryPageComponent } from './donation-category/r
 import { ViewDonationCategoryPageComponent } from './donation-category/view-donation-category-page/view-donation-category-page.component';
 import { DetailDonationPageComponent } from './donation/detail-donation-page/detail-donation-page.component';
 import { RegistrationDonationPageComponent } from './donation/registration-donation-page/registration-donation-page.component';
+import { ReportDonationPageComponent } from './donation/report-donation-page/report-donation-page.component';
 import { ViewDonationPageComponent } from './donation/view-donation-page/view-donation-page.component';
 import { DetailEmployeePageComponent } from './employee/detail-employee-page/detail-employee-page.component';
 import { RegistrationEmployeePageComponent } from './employee/registration-employee-page/registration-employee-page.component';
@@ -114,19 +116,22 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     DetailClinicalReportPageComponent,
     ViewClinicalReportPageComponent,
     RegistrationClinicalReportPageComponent,
+    ReportDonationPageComponent,
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     DirectivesModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighchartsChartModule
   ],
   exports: [
     ComponentsModule,
     DirectivesModule,
     HttpClientModule,
     ReactiveFormsModule,
+    HighchartsChartModule,
     LoginPageComponent,
     RecoverPasswordPageComponent,
     ResetPasswordPageComponent,
@@ -179,6 +184,7 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     DetailClinicalReportPageComponent,
     ViewClinicalReportPageComponent,
     RegistrationClinicalReportPageComponent,
+    ReportDonationPageComponent,
   ]
 })
 export class PagesModule { }

@@ -65,7 +65,7 @@ export class ItensMenuMap {
     title: 'Relatório de doações',
     icon: ROUTERS_ICONS_MAP.monitoring,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/donations/report']);
     }
   };
 
