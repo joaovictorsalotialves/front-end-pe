@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { NgxEchartsModule } from 'ngx-echarts';
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { DetailAdoptionPageComponent } from './adoption/detail-adoption-page/detail-adoption-page.component';
@@ -60,6 +61,7 @@ import { ViewSupplementPageComponent } from './supplement/view-supplement-page/v
 import { DetailUserPageComponent } from './user/detail-user-page/detail-user-page.component';
 import { RegistrationUserPageComponent } from './user/registration-user-page/registration-user-page.component';
 import { ViewUserPageComponent } from './user/view-user-page/view-user-page.component';
+import { ReportExpensePageComponent } from './expense/report-expense-page/report-expense-page.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +119,7 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     ViewClinicalReportPageComponent,
     RegistrationClinicalReportPageComponent,
     ReportDonationPageComponent,
+    ReportExpensePageComponent,
   ],
   imports: [
     CommonModule,
@@ -124,14 +127,16 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     DirectivesModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
   ],
   exports: [
     ComponentsModule,
     DirectivesModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HighchartsChartModule,
     LoginPageComponent,
     RecoverPasswordPageComponent,
     ResetPasswordPageComponent,
@@ -185,6 +190,7 @@ import { ViewUserPageComponent } from './user/view-user-page/view-user-page.comp
     ViewClinicalReportPageComponent,
     RegistrationClinicalReportPageComponent,
     ReportDonationPageComponent,
+    ReportExpensePageComponent,
   ]
 })
 export class PagesModule { }

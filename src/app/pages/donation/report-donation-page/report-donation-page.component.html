@@ -1,21 +1,51 @@
 <app-layout-page (checkLogin)="loadingPage($event)">
   <div class="flex-1 h-full overflow-y-auto scrollbar">
     <app-main-header title="RELATÓRIO DE DOAÇÃO"></app-main-header>
-    <div appGridContainerSm2>
-      <div class="mb-4">
-        <label class="font-semibold text-sm" for="startDate">Data Inicial:</label>
-        <app-input-form #inputStartDate (onInput)="onDateRangeChange()" type="date" id="startDate"
-          placeholder="Data Inicial"></app-input-form>
+    <div class="m-1">
+      <div appGridContainerSm2>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="startDate">Data Inicial:</label>
+          <app-input-form #inputStartDate (onInput)="onDateRangeChange()" type="date" id="startDate"
+            placeholder="Data Inicial"></app-input-form>
+        </div>
+        <div class="mb-4">
+          <label class="font-semibold text-sm" for="endDate">Data Final:</label>
+          <app-input-form #inputEndDate (onInput)="onDateRangeChange()" type="date" id="endDate"
+            placeholder="Data Final"></app-input-form>
+        </div>
       </div>
-      <div class="mb-4">
-        <label class="font-semibold text-sm" for="endDate">Data Final:</label>
-        <app-input-form #inputEndDate (onInput)="onDateRangeChange()" type="date" id="endDate"
-          placeholder="Data Final"></app-input-form>
+
+      <app-subheader title="RELATÓRIO DE DOAÇÕES MONETARIAS"></app-subheader>
+      <div class="grid sm:grid-cols-2 mb-4 gap-4">
+        <app-card-report currencyBr [value]="valueDonationTotal.toString()"
+          legend="TOTAL ARRECADADO"></app-card-report>
+        <app-card-report [value]="donationCount.toString()"
+          legend="QUANTIDADE DE DOAÇÕES"></app-card-report>
       </div>
-    </div>
-    <div class="grid w-full">
-      <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
-        class="w-full block"></highcharts-chart>
+
+      <div class="grid w-full">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsDonations" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
+
+      <app-subheader title="RELATÓRIO DE DOAÇÕES DE INSUMOS"></app-subheader>
+      <div class="grid sm:grid-cols-2 mb-4 gap-4">
+        <app-card-report [value]="donationCountSupplement.toString()"
+          legend="QUANTIDADE DE DOAÇÕES"></app-card-report>
+      </div>
+
+      <div class="grid w-full">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsSupplements" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
     </div>
   </div>
 </app-layout-page>

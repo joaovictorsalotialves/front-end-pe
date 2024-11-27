@@ -1,0 +1,5 @@
+<div class="flex flex-col justify-center items-center py-6 px-4 bg-blue-100 rounded-3xl h-full">
+  <span *ngIf="!isCurrencyBr" class="font-bold text-lg text-center">{{ value }}</span>
+  <span *ngIf="isCurrencyBr" class="font-bold text-lg text-center">{{ value | currencyBR }}</span>
+  <span class="font-bold text-sm text-center">{{ legend }}</span>
+</div>

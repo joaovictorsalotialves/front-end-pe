@@ -28,6 +28,7 @@ import { RegistrationExpenseCategoryPageComponent } from './pages/expense-catego
 import { ViewExpenseCategoryPageComponent } from './pages/expense-category/view-expense-category-page/view-expense-category-page.component';
 import { DetailExpensePageComponent } from './pages/expense/detail-expense-page/detail-expense-page.component';
 import { RegistrationExpensePageComponent } from './pages/expense/registration-expense-page/registration-expense-page.component';
+import { ReportExpensePageComponent } from './pages/expense/report-expense-page/report-expense-page.component';
 import { ViewExpensePageComponent } from './pages/expense/view-expense-page/view-expense-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LogoutPageComponent } from './pages/profile/logout-page/logout-page.component';
@@ -105,6 +106,7 @@ const routes: Routes = [
 
   { path: 'expenses/create', component: RegistrationExpensePageComponent },
   { path: 'expenses/view', component: ViewExpensePageComponent },
+  { path: 'expenses/report', component: ReportExpensePageComponent },
   { path: 'expenses/detail/:idExpense', component: DetailExpensePageComponent },
 
   { path: 'expense-categories/create', component: RegistrationExpenseCategoryPageComponent },

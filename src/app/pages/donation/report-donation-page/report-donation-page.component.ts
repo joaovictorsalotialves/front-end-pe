@@ -1,10 +1,8 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import { InputFormComponent } from '../../../components/input-form/input-form.component';
-import { IDonation } from '../../../interfaces/donations/donation.interface';
-import { IEmployee } from '../../../interfaces/employees/employee.interface';
-import { DonationsService } from '../../../services/donations.service';
-import { DonationsList } from '../../../types/donations-list';
+import { Component, OnInit, ViewChild, inject } from "@angular/core";
+import { InputFormComponent } from "../../../components/input-form/input-form.component";
+import { IEmployee } from "../../../interfaces/employees/employee.interface";
+import { DonationsService } from "../../../services/donations.service";
+import { DonationsList } from "../../../types/donations-list";
 
 @Component({
   selector: 'app-report-donation-page',
@@ -12,69 +10,96 @@ import { DonationsList } from '../../../types/donations-list';
   styleUrls: ['./report-donation-page.component.scss']
 })
 export class ReportDonationPageComponent implements OnInit {
-  userLogged = {} as IEmployee;
-
-  donationsList: DonationsList = [];
-  donationsByMonth: { [key: string]: number } = {};
-
   @ViewChild('inputStartDate') inputStartDate!: InputFormComponent;
   @ViewChild('inputEndDate') inputEndDate!: InputFormComponent;
 
-  Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {
-    title: { text: 'Doações Por Mês' },
-    series: [{
-      type: 'line',
-      data: []
-    }]
-  };
+  userLogged = {} as IEmployee;
+
+  supplementsData: { [key: string]: { [supplementName: string]: number } } = {};
+  donationsByMonth: { [key: string]: number } = {};
+
+  valueDonationTotal: number = 0;
+  donationCount: number = 0;
+
+  donationCountSupplement: number = 0;
+
+  chartOptionsSupplements: any;
+  chartOptionsDonations: any;
+
+  isLoading = true;
 
   private readonly _donationsService = inject(DonationsService);
 
   ngOnInit() {
-    this.loadLast12MonthsData(); // Carregar dados dos últimos 12 meses inicialmente
+    this.loadLast12MonthsData();
   }
 
   loadingPage(user: IEmployee) {
     this.userLogged = user;
   }
 
-  // Carregar as doações dos últimos 12 meses
   loadLast12MonthsData(): void {
     const currentDate = new Date();
-    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 12, 1); // 12 meses atrás
-    const endDate = new Date(currentDate); // Hoje
+    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 12, 1);
+    const endDate = new Date(currentDate);
 
-    this.filterDonationList(startDate, endDate); // Filtra com o intervalo de 12 meses
+    this.loadFilteredData(startDate, endDate);
   }
 
-  filterDonationList(startDate?: Date, endDate?: Date): void {
-    this._donationsService.getDonations().pipe().subscribe({
-      next: (donationsList) => {
-        if (donationsList) {
-          const donationsByMonth: { [key: string]: number } = {};
+  onDateRangeChange(): void {
+    const startDate = this.inputStartDate.value ? new Date(this.inputStartDate.value) : undefined;
+    const endDate = this.inputEndDate.value ? new Date(this.inputEndDate.value) : undefined;
 
-          donationsList.forEach((donation: IDonation) => {
-            if (donation.donationDate) {
-              const donationDate = new Date(donation.donationDate);
-              const monthKey = this.getMonthKey(donation.donationDate);
+    if (startDate && endDate) {
+      this.isLoading = true;
+      this.loadFilteredData(startDate, endDate);
+    }
+  }
 
-              // Filtra as doações dentro do intervalo de datas
-              if (
-                (!startDate || donationDate >= startDate) &&
-                (!endDate || donationDate <= endDate)
-              ) {
-                donationsByMonth[monthKey] = (donationsByMonth[monthKey] || 0) + (donation.valueDonation || 0);
-              }
-            }
-          });
-
-          this.donationsByMonth = donationsByMonth;
-          this.updateChart();
-        }
+  private loadFilteredData(startDate: Date, endDate: Date): void {
+    this._donationsService.getDonations().subscribe({
+      next: (donations) => {
+        this.processDonations(donations as DonationsList, startDate, endDate);
+        this.updateCharts();
+        this.isLoading = false;
       },
-      error: (error) => {
-        console.error(error.message);
+      error: (err) => {
+        console.error('Error loading donations:', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private processDonations(donationsList: DonationsList, startDate: Date, endDate: Date): void {
+    this.supplementsData = {};
+    this.donationsByMonth = {};
+
+    this.valueDonationTotal = 0;
+    this.donationCount = 0;
+    this.donationCountSupplement = 0;
+
+    donationsList.forEach(donation => {
+      if (donation.donationDate) {
+        const donationDate = new Date(donation.donationDate);
+        const monthKey = this.getMonthKey(donation.donationDate);
+
+        if (donationDate >= startDate && donationDate <= endDate) {
+          if (donation.nameSupplement && donation.amount) {
+            if (!this.supplementsData[monthKey]) {
+              this.supplementsData[monthKey] = {};
+            }
+            this.supplementsData[monthKey][donation.nameSupplement] =
+              (this.supplementsData[monthKey][donation.nameSupplement] || 0) + donation.amount;
+            this.donationCountSupplement += 1;
+          }
+
+          if (donation.valueDonation) {
+            this.donationsByMonth[monthKey] =
+              (this.donationsByMonth[monthKey] || 0) + donation.valueDonation;
+            this.valueDonationTotal += donation.valueDonation;
+            this.donationCount++;
+          }
+        }
       }
     });
   }
@@ -86,43 +111,104 @@ export class ReportDonationPageComponent implements OnInit {
     return `${year}-${month}`;
   }
 
-  private updateChart(): void {
-    const months = Object.keys(this.donationsByMonth).sort();
+  private updateCharts(): void {
+    this.updateSupplementsChart();
+    this.updateDonationsChart();
+  }
 
-    const chartData = months.map(month => ({
-      name: month,
-      y: this.donationsByMonth[month]
-    }));
+  private updateSupplementsChart(): void {
+    const months = Object.keys(this.supplementsData).sort();
+    const supplementNames = Array.from(
+      new Set(
+        months.flatMap(month => Object.keys(this.supplementsData[month]))
+      )
+    );
+
+    const seriesData = supplementNames.map(supplementName => {
+      return {
+        name: supplementName,
+        type: 'line',
+        data: months.map(month => this.supplementsData[month][supplementName] || 0)
+      };
+    });
 
     const monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
     ];
 
     const categories = months.map(monthKey => {
       const [year, month] = monthKey.split('-');
-      return monthNames[parseInt(month, 10) - 1] + ' ' + year;
+      return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
     });
 
-    this.chartOptions = {
-      title: { text: 'Doações Por Mês' },
-      xAxis: {
-        categories: categories,
-        crosshair: true
+    this.chartOptionsSupplements = {
+      title: {
+        text: 'Entradas de Insumos por Mês',
+        left: 'center'
       },
-      series: [{
-        type: 'line',
-        data: chartData,
-        name: 'Total de Doações'
-      }]
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'line' }
+      },
+      legend: {
+        bottom: '0%',
+        data: supplementNames
+      },
+      xAxis: {
+        type: 'category',
+        data: categories,
+        name: 'Mês'
+      },
+      yAxis: {
+        type: 'value',
+        name: 'Quantidade'
+      },
+      series: seriesData
     };
   }
 
-  // Método para atualizar o gráfico com base nas datas selecionadas
-  onDateRangeChange(): void {
-    const startDate = this.inputStartDate.value ? new Date(this.inputStartDate.value) : undefined;
-    const endDate = this.inputEndDate.value ? new Date(this.inputEndDate.value) : undefined;
+  private updateDonationsChart(): void {
+    const months = Object.keys(this.donationsByMonth).sort();
 
-    this.filterDonationList(startDate, endDate);
+    const donationsData = months.map(month => this.donationsByMonth[month] || 0);
+
+    const monthNames = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    const categories = months.map(monthKey => {
+      const [year, month] = monthKey.split('-');
+      return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
+    });
+
+    this.chartOptionsDonations = {
+      title: {
+        text: 'Valores de Doações Por Mês',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' }
+      },
+      xAxis: {
+        type: 'category',
+        data: categories,
+        name: 'Mês'
+      },
+      yAxis: {
+        type: 'value',
+        name: 'Valor (R$)'
+      },
+      series: [
+        {
+          name: 'Doações',
+          type: 'bar',
+          data: donationsData,
+          color: '#003366'
+        }
+      ]
+    };
   }
 }

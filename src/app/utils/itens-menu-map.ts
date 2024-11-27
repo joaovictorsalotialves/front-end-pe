@@ -177,7 +177,7 @@ export class ItensMenuMap {
     title: 'Relatório de despensa',
     icon: ROUTERS_ICONS_MAP.payments,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/expenses/report']);
     }
   };
 
