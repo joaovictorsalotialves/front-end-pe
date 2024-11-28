@@ -6,5 +6,6 @@ export interface ISupplementOutput {
   idSupplement: number;
   nameSupplement: string;
   typeMensure: string;
+  idSupplementCategory: number;
   nameSupplementCategory: string;
 }

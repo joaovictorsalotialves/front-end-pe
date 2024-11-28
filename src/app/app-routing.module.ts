@@ -6,6 +6,7 @@ import { RegistrationAdoptionPageComponent } from './pages/adoption/registration
 import { ViewAdoptionPageComponent } from './pages/adoption/view-adoption-page/view-adoption-page.component';
 import { DetailAnimalPageComponent } from './pages/animal/detail-animal-page/detail-animal-page.component';
 import { RegistrationAnimalPageComponent } from './pages/animal/registration-animal-page/registration-animal-page.component';
+import { ReportAnimalPageComponent } from './pages/animal/report-animal-page/report-animal-page.component';
 import { ViewAnimalPageComponent } from './pages/animal/view-animal-page/view-animal-page.component';
 import { LoginPageComponent } from './pages/auth-flow/login-page/login-page.component';
 import { RecoverPasswordPageComponent } from './pages/auth-flow/recover-password-page/recover-password-page.component';
@@ -51,6 +52,7 @@ import { RegistrationSupplementOutputPageComponent } from './pages/supplement-ou
 import { ViewSupplementOutputPageComponent } from './pages/supplement-output/view-supplement-output-page/view-supplement-output-page.component';
 import { DetailSupplementPageComponent } from './pages/supplement/detail-supplement-page/detail-supplement-page.component';
 import { RegistrationSupplementPageComponent } from './pages/supplement/registration-supplement-page/registration-supplement-page.component';
+import { ReportSupplementPageComponent } from './pages/supplement/report-supplement-page/report-supplement-page.component';
 import { ViewSupplementPageComponent } from './pages/supplement/view-supplement-page/view-supplement-page.component';
 import { DetailUserPageComponent } from './pages/user/detail-user-page/detail-user-page.component';
 import { RegistrationUserPageComponent } from './pages/user/registration-user-page/registration-user-page.component';
@@ -86,6 +88,7 @@ const routes: Routes = [
 
   { path: 'animals/create', component: RegistrationAnimalPageComponent },
   { path: 'animals/view', component: ViewAnimalPageComponent },
+  { path: 'animals/report', component: ReportAnimalPageComponent },
   { path: 'animals/detail/:idAnimal', component: DetailAnimalPageComponent },
 
   { path: 'animals/:idAnimal/clinical-reports/create', component: RegistrationClinicalReportPageComponent },
@@ -115,6 +118,7 @@ const routes: Routes = [
 
   { path: 'supplements/create', component: RegistrationSupplementPageComponent },
   { path: 'supplements/view', component: ViewSupplementPageComponent },
+  { path: 'supplements/report', component: ReportSupplementPageComponent },
   { path: 'supplements/detail/:idSupplement', component: DetailSupplementPageComponent },
 
   { path: 'supplement-inputs/create', component: RegistrationSupplementInputPageComponent },

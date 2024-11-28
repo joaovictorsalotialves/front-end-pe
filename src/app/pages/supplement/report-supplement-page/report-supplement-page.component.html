@@ -1,0 +1,45 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="RELATÓRIO DE INSUMOS"></app-main-header>
+    <div class="m-1">
+      <div class="m-4">
+        <label class="font-semibold text-sm" for="nameSupplementCategory">
+          Categoria de Insumo:
+        </label>
+        <app-autocomplete-form #inputNameDonationCategory
+          (onSelect)="onSelectSupplementCategory($event)"
+          (onInput)="filterSupplementCategoriesList(inputNameDonationCategory.value)"
+          id="nameSupplementCategory" placeholder="Categoria de Insumo"
+          [options]="supplementCategoriesList">
+        </app-autocomplete-form>
+      </div>
+
+      <div class="grid w-full">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsSupplements" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
+
+      <div class="grid w-full">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsInputs" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
+
+      <div class="grid w-full mt-4">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsOutputs" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout-page>

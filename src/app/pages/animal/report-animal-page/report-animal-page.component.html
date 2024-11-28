@@ -1,0 +1,27 @@
+<app-layout-page (checkLogin)="loadingPage($event)">
+  <div class="flex-1 h-full overflow-y-auto scrollbar">
+    <app-main-header title="RELATÓRIO DE ANIMAIS"></app-main-header>
+    <div class="m-1">
+      <div class="grid sm:grid-cols-2 mb-4 gap-4">
+        <app-card-report [value]="rescuedCount.toString()"
+          legend="TOTAL RESGATADO"></app-card-report>
+        <app-card-report [value]="adoptedCount.toString()" legend="ADOTADOS"></app-card-report>
+        <app-card-report [value]="awaitingAdoptionCount.toString()"
+          legend="AGUARDADO ADOÇÃO"></app-card-report>
+        <app-card-report [value]="inTreatmentCount.toString()"
+          legend="EM RECUPERAÇÃO"></app-card-report>
+        <app-card-report [value]="inactiveCount.toString()" legend="INATIVO"></app-card-report>
+      </div>
+
+      <div class="grid w-full">
+        <div *ngIf="!isLoading">
+          <div echarts [options]="chartOptionsAnimals" class="chart"></div>
+        </div>
+        <div *ngIf="isLoading">
+          Carregando dados...
+        </div>
+      </div>
+
+    </div>
+  </div>
+</app-layout-page>

@@ -105,7 +105,7 @@ export class ItensMenuMap {
     title: 'Relatório de animais',
     icon: ROUTERS_ICONS_MAP.monitor_heart,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/animals/report']);
     }
   };
 
@@ -217,7 +217,7 @@ export class ItensMenuMap {
     title: 'Relatório de insumos',
     icon: ROUTERS_ICONS_MAP.inventory,
     redirection: () => {
-      this._router.navigate(['/home']);
+      this._router.navigate(['/supplements/report']);
     }
   };
 

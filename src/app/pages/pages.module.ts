@@ -62,6 +62,8 @@ import { DetailUserPageComponent } from './user/detail-user-page/detail-user-pag
 import { RegistrationUserPageComponent } from './user/registration-user-page/registration-user-page.component';
 import { ViewUserPageComponent } from './user/view-user-page/view-user-page.component';
 import { ReportExpensePageComponent } from './expense/report-expense-page/report-expense-page.component';
+import { ReportAnimalPageComponent } from './animal/report-animal-page/report-animal-page.component';
+import { ReportSupplementPageComponent } from './supplement/report-supplement-page/report-supplement-page.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +122,8 @@ import { ReportExpensePageComponent } from './expense/report-expense-page/report
     RegistrationClinicalReportPageComponent,
     ReportDonationPageComponent,
     ReportExpensePageComponent,
+    ReportAnimalPageComponent,
+    ReportSupplementPageComponent,
   ],
   imports: [
     CommonModule,
@@ -191,6 +195,8 @@ import { ReportExpensePageComponent } from './expense/report-expense-page/report
     RegistrationClinicalReportPageComponent,
     ReportDonationPageComponent,
     ReportExpensePageComponent,
+    ReportAnimalPageComponent,
+    ReportSupplementPageComponent,
   ]
 })
 export class PagesModule { }
