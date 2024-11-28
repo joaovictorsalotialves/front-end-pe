@@ -142,6 +142,8 @@ export class DetailUserPageComponent extends DetailUserFormController {
   save() {
     this.submitted = true;
 
+    console.log(this.detailUserForm)
+
     const addressFields = this.address_information.value;
     const isAddressEmpty = !addressFields.publicPlace && !addressFields.neighborhood && !addressFields.number &&
       !addressFields.complement && !addressFields.nameState && !addressFields.nameCity;

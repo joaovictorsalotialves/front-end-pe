@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { IDonation } from "../../../interfaces/donations/donation.interface";
 import { DynamicValidationManager } from "../../../utils/dynamic-validation-manager";
 
@@ -47,18 +47,18 @@ export class DetailDonationFormController {
   private createForm() {
     this.detailDonationForm = this._fb.group({
       donation_information: this._fb.group({
-        valueDonation: ['', this.floatValidator()],
+        valueDonation: [''],
         description: [''],
-        idUser: [''],
+        idUser: [null],
         nameUser: [''],
-        idDonationCategory: ['', Validators.required],
+        idDonationCategory: [null, Validators.required],
         nameDonationCategory: ['', Validators.required],
         donationDate: [''],
       }),
       supplement_input_information: this._fb.group({
-        amount: [''],
+        amount: [null],
         descriptionSupplementInput: [''],
-        idSupplement: [''],
+        idSupplement: [null],
         nameSupplement: [''],
       }),
     });
@@ -72,18 +72,5 @@ export class DetailDonationFormController {
       nameSupplement: [Validators.required],
       idSupplement: [Validators.required],
     });
-  }
-
-  private floatValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let value = String(control.value)?.trim();
-      let floatRegex = /^[+]?\d+(\.\d+)?$/;
-
-      if (value === '' || value === null) {
-        return null;
-      }
-
-      return floatRegex.test(value) ? null : { floatInvalid: true };
-    };
   }
 }
