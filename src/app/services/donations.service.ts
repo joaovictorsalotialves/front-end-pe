@@ -18,7 +18,7 @@ export class DonationsService {
   authToken: string = localStorage.getItem('authToken') as string;
 
   getDonations(
-    donationDate: string | undefined = undefined, nameUser: string | undefined = undefined
+    nameUser: string | undefined = undefined, donationDate: string | undefined = undefined
   ): Observable<DonationsList | undefined> {
     let url = API_URL + 'donation';
     if (donationDate) {

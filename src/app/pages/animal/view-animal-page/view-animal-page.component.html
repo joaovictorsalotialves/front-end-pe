@@ -3,10 +3,11 @@
     <app-main-header title="VISUALIZAR ANIMAIS"></app-main-header>
     <div class="m-1">
       <app-input-form #inputSearch (onInput)="search($event)" type="text" id="search"
-        placeholder="Nome do animal" [icon]=" routersIconsMap.search"></app-input-form>
+        placeholder="Nome do Animal" [icon]=" routersIconsMap.search"></app-input-form>
       <div>
-        <app-card-view *ngFor="let animal of animalsList" [icon]="routersIconsMap.person"
-          [item]="animal.values" [id]="animal.id" urlDetail="/animals"></app-card-view>
+        <app-card-view *ngFor="let animal of animalsList"
+          [icon]="routersIconsMap.sound_detection_dog_barking" [item]="animal.values"
+          [id]="animal.id" urlDetail="/animals"></app-card-view>
       </div>
     </div>
   </div>

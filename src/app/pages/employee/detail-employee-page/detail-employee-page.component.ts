@@ -41,7 +41,7 @@ export class DetailEmployeePageComponent extends DetailEmployeeFormController im
     this.userLogged = user;
     if (this.userLogged.position != 'Administrador') {
       alert('Usuario não possui permissão para acessar esse recurso!');
-      this._router.navigate(['/home']);
+      this._router.navigate(['/employees/view']);
     }
     if (Number(this.employeeId) == this.userLogged.idEmployee) {
       this._router.navigate(['profile']);

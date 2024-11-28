@@ -151,10 +151,6 @@ export class ReportDonationPageComponent implements OnInit {
         trigger: 'axis',
         axisPointer: { type: 'line' }
       },
-      legend: {
-        bottom: '0%',
-        data: supplementNames
-      },
       xAxis: {
         type: 'category',
         data: categories,
